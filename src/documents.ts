@@ -15,7 +15,10 @@ export function registerDocument(state: CaseState, input: unknown, extractor: Te
   const data = documentInput.parse(input);
   const sha256 = createHash('sha256').update(data.text).digest('hex');
   const existing = state.documents.find(d => d.sha256 === sha256 && d.kind === data.kind);
-  if (existing) return existing;
+  if (existing) {
+    if (existing.purgedAt) { existing.text = data.text; existing.pages = extractor.extract(data.text); delete existing.purgedAt; }
+    return existing;
+  }
   if (state.documents.length >= 10) throw new DomainError('Limite de 10 documentos por caso.');
   const document = { ...data, id: randomUUID(), sha256, pages: extractor.extract(data.text), createdAt: new Date().toISOString() };
   state.documents.push(document);

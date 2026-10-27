@@ -1,0 +1,494 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "IA Previdenciária — infraestrutura demonstrativa",
+    "version": "0.2.0",
+    "description": "Contrato para protótipo de front-end. Somente dados fictícios; sem conclusão jurídica real."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "security": [],
+        "summary": "Verifica processo HTTP",
+        "responses": {
+          "200": {
+            "description": "Ativo, modo demonstrativo"
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "security": [],
+        "summary": "Verifica banco e armazenamento",
+        "responses": {
+          "200": {
+            "description": "Disponível"
+          },
+          "503": {
+            "description": "Dependência indisponível"
+          }
+        }
+      }
+    },
+    "/capabilities": {
+      "get": {
+        "summary": "Informa limitações antes de iniciar atendimento",
+        "responses": {
+          "200": {
+            "description": "syntheticDataOnly, queuedAnalysis e estado de upload"
+          }
+        }
+      }
+    },
+    "/cases": {
+      "post": {
+        "summary": "Cria caso fictício",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "benefit",
+                  "uf",
+                  "syntheticData",
+                  "consent"
+                ],
+                "properties": {
+                  "benefit": {
+                    "type": "string",
+                    "enum": [
+                      "bpc",
+                      "incapacidade",
+                      "aposentadoria_rgps",
+                      "rpps"
+                    ]
+                  },
+                  "uf": {
+                    "type": "string",
+                    "example": "MG"
+                  },
+                  "syntheticData": {
+                    "type": "boolean",
+                    "enum": [
+                      true
+                    ]
+                  },
+                  "consent": {
+                    "type": "boolean",
+                    "enum": [
+                      true
+                    ]
+                  },
+                  "subtype": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "der": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date"
+                  },
+                  "noticeDate": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date"
+                  },
+                  "denialReason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Caso criado"
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Sessão inválida"
+          },
+          "429": {
+            "description": "Limite atingido"
+          }
+        }
+      }
+    },
+    "/cases/{id}": {
+      "get": {
+        "summary": "Consulta caso do proprietário",
+        "responses": {
+          "200": {
+            "description": "Caso, fatos e metadados; texto pode estar descartado"
+          },
+          "404": {
+            "description": "Não encontrado"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Atualiza subtype, der, noticeDate ou denialReason",
+        "responses": {
+          "200": {
+            "description": "Atualizado; relatório anterior invalidado"
+          },
+          "409": {
+            "description": "Conflito; recarregue antes de tentar novamente"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/documents": {
+      "post": {
+        "summary": "Recebe texto sintético, não PDF real",
+        "responses": {
+          "201": {
+            "description": "Documento recebido e candidatos a fatos"
+          },
+          "200": {
+            "description": "Documento idêntico reaproveitado"
+          },
+          "413": {
+            "description": "Corpo excedido"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/uploads": {
+      "post": {
+        "summary": "Em S3, emite PUT temporário somente para quarentena",
+        "responses": {
+          "201": {
+            "description": "url, method, expiresInSeconds=300, bytes, contentType, status=quarantine"
+          },
+          "404": {
+            "description": "Recurso não habilitado no modo local"
+          },
+          "429": {
+            "description": "Limite de anexos"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/interview": {
+      "get": {
+        "summary": "Próxima pergunta contextual",
+        "responses": {
+          "200": {
+            "description": "nextQuestion ou null"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/interview/messages": {
+      "post": {
+        "summary": "Registra resposta declarada",
+        "responses": {
+          "200": {
+            "description": "Próxima pergunta e aviso de declaração"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/analyze": {
+      "post": {
+        "summary": "Enfileira análise por caso e revisão, sem duplicar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "mode": {
+                    "type": "string",
+                    "enum": [
+                      "demonstracao"
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Job existente ou novo. Acompanhe status; falha existente não é reiniciada automaticamente.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Já existem três análises ativas deste usuário"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/jobs/{id}": {
+      "get": {
+        "summary": "Acompanha processamento do próprio usuário",
+        "responses": {
+          "200": {
+            "description": "Estado atual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não encontrado ou pertence a outra pessoa"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/analysis": {
+      "get": {
+        "summary": "Análise estruturada demonstrativa",
+        "responses": {
+          "200": {
+            "description": "Resultado indeterminado, evidências, fontes e limites"
+          },
+          "404": {
+            "description": "Ainda indisponível ou desatualizado"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/cases/{id}/report": {
+      "get": {
+        "summary": "Baixa PDF temporário autenticado",
+        "responses": {
+          "200": {
+            "description": "PDF sem cache público",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ainda não gerado, invalidado ou expirado"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/library/resources": {
+      "get": {
+        "summary": "Diretório de fontes de pesquisa",
+        "responses": {
+          "200": {
+            "description": "Fontes descobertas; conectores não ativados"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "caseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "revision": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "running",
+              "completed",
+              "failed",
+              "cancelled"
+            ]
+          },
+          "attempts": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "integer",
+            "description": "Unix milissegundos"
+          },
+          "updatedAt": {
+            "type": "integer"
+          },
+          "reportExpiresAt": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Expiração em Unix milissegundos"
+          },
+          "pollAfterMs": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "errorCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
