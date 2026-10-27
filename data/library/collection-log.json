@@ -1,0 +1,92 @@
+[
+  {
+    "source_id": "cf-1988",
+    "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+    "checked_at": "2026-10-27T20:18:51.409254+00:00",
+    "status": "not_collected",
+    "reason": "Robots indisponível; nenhuma coleta realizada"
+  },
+  {
+    "source_id": "ec-103-2019",
+    "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm",
+    "checked_at": "2026-10-27T20:18:53.154053+00:00",
+    "status": "not_collected",
+    "reason": "Robots indisponível; nenhuma coleta realizada"
+  },
+  {
+    "source_id": "lei-8212-1991",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm",
+    "checked_at": "2026-10-27T20:18:53.154124+00:00",
+    "status": "not_collected",
+    "reason": "Robots indisponível; nenhuma coleta realizada"
+  },
+  {
+    "source_id": "lei-8213-1991",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+    "checked_at": "2026-10-27T20:18:53.154143+00:00",
+    "status": "not_collected",
+    "reason": "Robots indisponível; nenhuma coleta realizada"
+  },
+  {
+    "source_id": "loas-8742-1993",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm",
+    "checked_at": "2026-10-27T20:18:53.154157+00:00",
+    "status": "not_collected",
+    "reason": "Robots indisponível; nenhuma coleta realizada"
+  },
+  {
+    "source_id": "decreto-3048-1999",
+    "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm",
+    "checked_at": "2026-10-27T20:18:53.154170+00:00",
+    "status": "not_collected",
+    "reason": "Robots indisponível; nenhuma coleta realizada"
+  },
+  {
+    "source_id": "camara-cf-1988",
+    "url": "https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-normaatualizada-pl.html",
+    "checked_at": "2026-10-27T20:21:27.317363+00:00",
+    "status": "archived_draft",
+    "sha256": "a8de1643589cf9fb199bb58a0cf4a6acd63c35ed377843d8240ca500b7e1f2c1",
+    "bytes": 1730139
+  },
+  {
+    "source_id": "camara-ec-103-2019",
+    "url": "https://www2.camara.leg.br/legin/fed/emecon/2019/emendaconstitucional-103-12-novembro-2019-789412-publicacaooriginal-159409-pl.html",
+    "checked_at": "2026-10-27T20:21:33.060521+00:00",
+    "status": "archived_draft",
+    "sha256": "a65df7b0740553915827b19163e6bd8ee52e0126983cbd150259b9a79ce03128",
+    "bytes": 144732
+  },
+  {
+    "source_id": "camara-lei-8212-1991",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/1991/lei-8212-24-julho-1991-363647-normaatualizada-pl.html",
+    "checked_at": "2026-10-27T20:21:36.887831+00:00",
+    "status": "archived_draft",
+    "sha256": "e595af04a59bb8f95ecff6acc80bd15536047c2aed5d780a83eff9e40ccfa36b",
+    "bytes": 409834
+  },
+  {
+    "source_id": "camara-lei-8213-1991",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/1991/lei-8213-24-julho-1991-363650-normaatualizada-pl.html",
+    "checked_at": "2026-10-27T20:21:40.496200+00:00",
+    "status": "archived_draft",
+    "sha256": "c9279283248694d6c7cbe3659e3d540a18b9e5f78473c4457c01dcd173b71ae3",
+    "bytes": 512035
+  },
+  {
+    "source_id": "camara-loas-8742-1993",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/1993/lei-8742-7-dezembro-1993-363163-normaatualizada-pl.html",
+    "checked_at": "2026-10-27T20:21:44.146582+00:00",
+    "status": "archived_draft",
+    "sha256": "377c145094b39beb678974012c7c6e1f961f4a91daf61bfa7b1bb6f0d0890466",
+    "bytes": 202630
+  },
+  {
+    "source_id": "camara-decreto-3048-1999",
+    "url": "https://www2.camara.leg.br/legin/fed/decret/1999/decreto-3048-6-maio-1999-368532-normaatualizada-pe.html",
+    "checked_at": "2026-10-27T20:21:47.343047+00:00",
+    "status": "archived_draft",
+    "sha256": "05ac349e3c3b408c2d66bf2c34789f880e02147d82f5c9916565d7348f2af042",
+    "bytes": 3715075
+  }
+]

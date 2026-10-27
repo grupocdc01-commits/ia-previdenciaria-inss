@@ -1,0 +1,873 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-itunes-app" content="app-id=1049343067" />
+    <meta name="google-play-app" content="app-id=br.leg.camara.infolegmovel" />
+    <script>
+      (function () {
+        let initialized = false;
+        let loading = false;
+
+        function ensureBody(callback) {
+          if (document.body) {
+            callback();
+          } else {
+            setTimeout(() => ensureBody(callback), 50);
+          }
+        }
+
+        function loadScript() {
+          if (loading || window.VLibras) return;
+          loading = true;
+
+          ensureBody(() => {
+            const s = document.createElement("script");
+            s.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
+            s.onload = initVLibras;
+            document.body.appendChild(s);
+          });
+        }
+
+        function initVLibras() {
+          if (initialized || !window.VLibras) return;
+
+          ensureBody(() => {
+            if (!document.querySelector("[vw]")) {
+              const container = document.createElement("div");
+              container.innerHTML = `
+              <div vw class="enabled">
+                <div vw-access-button class="active"></div>
+                <div vw-plugin-wrapper>
+                  <div class="vw-plugin-top-wrapper"></div>
+                </div>
+              </div>
+            `;
+              document.body.appendChild(container);
+            }
+
+            (new window.VLibras.Widget(
+              "https://vlibras.gov.br/app",
+              "https://vlibras.gov.br/config/camara.json",
+            ),
+              $("body").append(
+                '<aside><div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div></aside>',
+              ));
+            initialized = true;
+
+            injectCSS();
+            if (!window.location.pathname.includes("/comissoes")) {
+              bindButton();
+            }
+          });
+        }
+
+        function injectCSS() {
+          if (document.getElementById("vlibras-style")) return;
+          const style = document.createElement("style");
+          style.id = "vlibras-style";
+          style.innerHTML = `
+          [vw-access-button] { display: none !important; }
+          div[vw] { z-index: 999999 !important; }
+        `;
+          document.head.appendChild(style);
+        }
+
+        function bindButton() {
+          const btn = document.getElementById("meu-botao-vlibras");
+          if (!btn) {
+            setTimeout(bindButton, 300);
+            return;
+          }
+
+          btn.onclick = function (e) {
+            e.preventDefault();
+            const original = document.querySelector("[vw-access-button]");
+            if (original) original.click();
+          };
+        }
+
+        // OBSERVA MUTA&#199;&#213;ES DO DOM (ESSENCIAL NO PLONE)
+        const observer = new MutationObserver(() => {
+          if (!document.querySelector("[vw]") && !initialized) {
+            loadScript();
+          }
+        });
+
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+
+        window.addEventListener("load", loadScript);
+      })();
+    </script>
+
+    <title>Portal da Câmara dos Deputados</title>
+  <style type="text/css">@import url(https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/member-cachekey-46bb2e0fc9968a457e63f356c0ff3900.css);</style><style type="text/css">@import url(https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/portlets-cachekey-8a45f49b338591ae0c9c8a91f261dc78.css);</style><style type="text/css" media="screen">@import url(https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/deprecated-cachekey-32595b622b36f2eee9478f07796d4f67.css);</style><style type="text/css" media="screen">@import url(https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/resourceplone.app.discussion.stylesheetsdiscussion-cachekey-5b23f388acd88bdb65020b51a5a278fb.css);</style><style type="text/css">@import url(https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/elements-cachekey-57e40a70bd8192a6f63782abff5c2748.css);</style><style type="text/css" media="all">@import url(https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/ploneCustom-cachekey-7fb44e17264e070fccf4e31d9f2ada1c.css);</style><link rel="stylesheet" type="text/css" href="https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/themecamara.leg.viradadigitalcsslibsbootstrap-datetimepicker.min-cachekey-ab2d257c1b49d2d194633e2ecb4564a2.css" /><link rel="stylesheet" type="text/css" href="https://www.camara.leg.br/tema/global/camara-custom.css" /><link rel="stylesheet" type="text/css" href="https://www2.camara.leg.br/portal_css/camara_leg_viradadigital/++theme++camara.leg.viradadigital/css/all.min.css" /><link rel="apple-touch-icon" sizes="180x180" href="https://www.camara.leg.br/tema/apple-touch-icon.png" /><link rel="icon" type="image/png" sizes="32x32" href="https://www.camara.leg.br/tema/favicon-32x32.png" /><link rel="icon" type="image/png" sizes="16x16" href="https://www.camara.leg.br/tema/favicon-16x16.png" /><link rel="manifest" href="https://www.camara.leg.br/tema/site.webmanifest" /><link rel="mask-icon" href="https://www.camara.leg.br/tema/safari-pinned-tab.svg" color="#009e49" /><link rel="search" href="http://www2.camara.leg.br/busca-geral" title="Buscar neste site" /><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/resourceplone.app.jquery-cachekey-3fa72abea58e1799bd3b0bc237335d45.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/styleswitcher-cachekey-9178d2d1bc80488214ac8d40a46c7bdf.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/impressaoIframes-cachekey-7de901cf3c737563606c12fa53b7a321.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/GoogleAnalyticsTracker.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/kss-bbb-cachekey-df10a37e7aa4176c3b122c2e3b0ee128.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/inline_validation-cachekey-35d4d75a94cdb17b403a636871dd92cb.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljsbootstrap.min-cachekey-c15df71e2ec454087fe4c4eab0ce9d3e.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljslibsmoment.min-cachekey-860514b918ea422f7e82fa48125015c4.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljslibsmoment-pt-br-cachekey-0aafba4fb000126f1ed0f6701186de00.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljslibsbootstrap-datetimepicker.min-cachekey-fac2884b384d9c99236b26d0746facc4.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljslibsjquery.maskedinput.min-cachekey-e2f8b2523378532cc132594675b6dc6f.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljsacoes-tema-cachekey-a0084cf69f1785571a18f6a58a4986ac.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitaljscorrecoes-bootstrap-tema-cachekey-bd4c19550531506aa59d8b0aa7e8d6c5.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitalviradadigitalvendorjquery.mmenu.all-cachekey-f0e297313e30d6b2b2c2588ef23b5ef2.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitalviradadigitaljsvd_correcoes-cachekey-52a3614631388ad9e07bf35264bc73d5.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitalviradadigitaljsmmenu-correcoes-cachekey-8e45cc1e451978774afbfe2f5f1e95cf.js"></script><script type="text/javascript" src="https://www2.camara.leg.br/portal_javascripts/camara_leg_viradadigital/themecamara.leg.viradadigitalviradadigitaljsselecao-idioma-cachekey-998dbb210e1353a5d7f94011740ee16c.js"></script><meta name="msapplication-TileColor" content="#00a300" /><meta name="msapplication-TileImage" content="https://www.camara.leg.br/tema/mstile-144x144.png" /><meta name="theme-color" content="#009e49" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><link rel="canonical" href="" /><script type="text/javascript">
+          $("link[rel='canonical']").attr("href", window.location.href);
+        </script>
+
+
+
+
+
+
+
+<title>EMENDA CONSTITUCIONAL Nº 103, DE 2019 - Publicação Original - Portal Câmara dos Deputados</title>
+
+<meta name="description" content="Publicação de Emenda Constitucional: Altera o sistema de previdência social e estabelece regras de transição e disposições transitórias. " />
+
+<!-- Coloque aqui sua referência ao CSS local -->
+<link rel="stylesheet" type="text/css" href="../../../_css/legislacao-v1.css" />
+
+<!-- CSS do portal-tema: necessário para o botão de compartilhamento -->
+<link rel="stylesheet" type="text/css" href="https://www.camara.leg.br/tema/global/camara-custom.css" />
+
+<!-- Coloque aqui seu javascript -->
+<!-- script type="text/javascript" src="caminho-e-nome-do-arquivo.js"></script -->
+
+</head>
+<body>
+    <header class="l-cabecalho-portal" role="banner" id="portal-header">
+        <ul aria-label="Acesso direto" class="acesso-direto">
+          <!-- Links para saltar diretamente para &#225;reas importantes da p&#225;gina accesskey 2 = conte&#250;do e 3 = navega&#231;&#227;o -->
+          <li>
+            <a class="acesso-direto__link" href="#main-content" accesskey="2">Ir ao conteúdo</a>
+          </li>
+          <li>
+            <a class="acesso-direto__link" href="#main-nav" accesskey="3">Ir à navegação principal</a>
+          </li>
+        </ul>
+
+        <!--[if lte IE 9]>
+          <p class="browserupgrade">
+            Voc&#234; est&#225; usando um navegador <strong>defasado</strong>. Por favor,
+            <a href="https://browsehappy.com/">atualize seu navegador</a> para
+            melhorar sua experi&#234;ncia e sua seguran&#231;a.
+          </p>
+        <![endif]-->
+
+        <div class="nav-top">
+          <div class="container nav-top--container">
+            <a href="https://www2.camara.leg.br" class="logo-camara" accesskey="1"><span class="sr-only">Página inicial</span></a>
+
+            <div class="nav-top__palacio"></div>
+
+            <div class="nav-top__menu-superior">
+              <ul aria-label="Ferramentas de apoio" class="links-apoio">
+                <li class="links-apoio__item links-apoio__item--vlibras">
+                  <a id="meu-botao-vlibras" href="javascript:void(0);">
+                    <span>
+                      <img src="https://www.camara.leg.br/tema/assets/images/ico-vlibras-branco.png" alt="Ativar VLibras" width="28px" height="30px" />
+                    </span>
+                  </a>
+                </li>
+                <li class="links-apoio__item links-apoio__item--acessibilidade">
+                  <a href="https://www2.camara.leg.br/acessibilidade/recursos-de-acessibilidade" accesskey="0">Acessibilidade</a>
+                </li>
+                <li class="links-apoio__item links-apoio__item--faleconosco">
+                  <a href="https://www.camara.leg.br/fale-conosco" accesskey="9">Fale Conosco</a>
+                </li>
+              </ul>
+
+              <ul class="orgaos-parceiros" aria-label="Órgãos parceiros">
+                <li class="orgaos-parceiros__item orgaos-parceiros__item--congresso">
+                  <a href="http://www.congressonacional.leg.br"><span>Congresso</span></a>
+                </li>
+                <li class="orgaos-parceiros__item orgaos-parceiros__item--senado">
+                  <a href="http://www.senado.leg.br"><span>Senado</span></a>
+                </li>
+              </ul>
+
+              <div class="lista-idiomas">
+                <button class="botao-idioma-topo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="4,0">
+                  <span class="botao-idioma-topo__sigla">PT</span>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-right l-lista-idiomas" aria-label="Idioma">
+                  <li class="l-lista-idiomas__item">
+                    <a href="https://www2.camara.leg.br/english" class="idioma-topo">
+                      <span class="idioma-topo__bandeira idioma-topo__bandeira--ingles" aria-hidden="true"></span>
+                      <span class="idioma-topo__nome">English</span>
+                      <span class="idioma-topo__sigla">EN</span>
+                    </a>
+                  </li>
+                  <li class="l-lista-idiomas__item">
+                    <a href="https://www2.camara.leg.br/espanol" class="idioma-topo">
+                      <span class="idioma-topo__bandeira idioma-topo__bandeira--espanhol" aria-hidden="true"></span>
+                      <span class="idioma-topo__nome">Español</span>
+                      <span class="idioma-topo__sigla">ES</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="home-camara-menu">
+    <nav class="menu-global navbar navbar-expand-lg" role="navigation" aria-label="Navegação principal" id="menuglobal">
+      <div class="container menu-global--container">
+      
+
+        <a href="https://www.camara.leg.br" class="logo-camara" accesskey="1">
+          <span class="sr-only">Página inicial</span>
+        </a>
+
+      
+        
+        <!-- icone menu -->
+        <button class="menu-global--btnmenu navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarportal" aria-controls="navbarportal" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="menu-global--icon"></span>
+        </button>
+
+        <!-- icone busca -->
+        <button class="menu-global--btnsearch" type="button" data-toggle="collapse" data-target="#buscaportal" aria-controls="buscaportal" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="fa fa-search"></span>
+        </button>
+
+        <div class="navbar-collapse hidden-sm hidden-md hidden-xs" id="navbarportal">
+          <ul title="Navegação Principal" id="main-nav" class="navbar-nav">
+            
+              
+                <li class="nav-item dropdown">
+                  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="menu-global__item-temas nav-link dropdown-toggle" id="temas">Assuntos</a>
+
+                  
+                    <ul class="dropdown-menu" aria-labelledby="temas">
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/agropecuaria">Agropecuária</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/cidades-e-transportes">Cidades e transportes</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/ciencia-tecnologia-e-comunicacoes">Ciência, tecnologia e comunicações</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/consumidor">Consumidor</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/direitos-humanos">Direitos humanos</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/economia">Economia</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/educacao-cultura-e-esportes">Educação, cultura e esportes</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/meio-ambiente-e-energia">Meio ambiente e energia</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/politica-e-administracao-publica">Política e administração pública</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/relacoes-exteriores">Relações exteriores</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/saude">Saúde</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/seguranca">Segurança</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assuntos/trabalho-previdencia-e-assistencia">Trabalho, previdência e assistência</a>
+                      </li>
+                    </ul>
+                  
+                </li>
+              
+            
+            
+              
+                <li class="nav-item dropdown">
+                  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="menu-global__item-institucional nav-link dropdown-toggle" id="institucional">Institucional</a>
+
+                  
+                    <ul class="dropdown-menu" aria-labelledby="institucional">
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/agenda">Agenda</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/transparencia/servicos-ao-cidadao">Serviços</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/a-camara/estruturaadm/mesa/presidencia">Presidência</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/biblioteca-e-publicacoes/">Biblioteca e publicações</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/escola-da-camara/">Escola da Câmara</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/papel-e-estrutura/">Papel e estrutura</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/historia-e-arquivo/">História e arquivo</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/a-camara/visiteacamara">Visite</a>
+                      </li>
+                    </ul>
+                  
+                </li>
+              
+            
+            
+              
+                <li class="nav-item dropdown">
+                  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="menu-global__item-deputados nav-link dropdown-toggle" id="deputados">Deputados</a>
+
+                  
+                    <ul class="dropdown-menu" aria-labelledby="deputados">
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/deputados/quem-sao">Quem são</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/deputados/liderancas-e-bancadas-partidarias">Lideranças e bancadas</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/deputados/frentes-e-grupos-parlamentares">Frentes e grupos parlamentares</a>
+                      </li>
+                    </ul>
+                  
+                </li>
+              
+            
+            
+              
+                <li class="nav-item dropdown">
+                  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="menu-global__item-atvlegislativa nav-link dropdown-toggle" id="atvlegislativa">Atividade Legislativa</a>
+
+                  
+                    <ul class="dropdown-menu" aria-labelledby="atvlegislativa">
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/busca-portal/proposicoes/pesquisa-simplificada">Propostas legislativas</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/plenario">Plenário</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/comissoes">Comissões</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/sessoesereunioes">Sessões e reuniões</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/atividade-legislativa/estudos-e-notas-tecnicas">Estudos legislativos</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/atividade-legislativa/orcamento-da-uniao">Orçamento da União</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/legislacao">Legislação</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/entenda-o-processo-legislativo/">Entenda o processo legislativo</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/atividade-legislativa/participe">Participe</a>
+                      </li>
+                    </ul>
+                  
+                </li>
+              
+            
+            
+              
+                <li class="nav-item dropdown">
+                  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="menu-global__item-comunicacao nav-link dropdown-toggle" id="comunicacao">Comunicação</a>
+
+                  
+                    <ul class="dropdown-menu" aria-labelledby="comunicacao">
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/noticias">Agência Câmara de Notícias</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/radio">Rádio Câmara</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/tv">TV Câmara</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/banco-imagens">Banco de Imagens</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/assessoria-de-imprensa">Assessoria de Imprensa</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/comprove">Comprove uma notícia</a>
+                      </li>
+                    </ul>
+                  
+                </li>
+              
+            
+            
+              
+                <li class="nav-item dropdown">
+                  <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="menu-global__item-transprestcontas nav-link dropdown-toggle" id="transprestcontas">Transparência e prestação de contas</a>
+
+                  
+                    <ul class="dropdown-menu" aria-labelledby="transprestcontas">
+                      <li class="dropdown-item">
+                        <a href="https://www.camara.leg.br/transparencia/">Transparência</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://www2.camara.leg.br/transparencia/prestacao-de-contas">Prestação de contas</a>
+                      </li>
+                      <li class="dropdown-item">
+                        <a href="https://dadosabertos.camara.leg.br/">Dados abertos</a>
+                      </li>
+                    </ul>
+                  
+                </li>
+              
+            
+          </ul>
+          <div class="outras-opcoes-menu-usuario hidden-md hidden-lg">
+            <ul aria-label="Ferramentas de apoio" class="links-apoio links-apoio--menu-mobile">
+              <li class="links-apoio__item links-apoio__item--acessibilidade">
+                <a href="https://www2.camara.leg.br/acessibilidade/recursos-de-acessibilidade" accesskey="0">Acessibilidade</a>
+              </li>
+              <li class="links-apoio__item links-apoio__item--faleconosco">
+                <a href="https://www.camara.leg.br/fale-conosco" accesskey="9">Fale Conosco</a>
+              </li>
+            </ul>
+          </div>
+          <div class="lista-idiomas hidden-md hidden-lg">
+            <button id="botao-idioma-topo" class="botao-idioma-topo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="4,0">
+                <span class="botao-idioma-topo__sigla">PT</span>
+            </button>
+        
+            <ul class="dropdown-menu-right l-lista-idiomas " aria-label="Idioma">
+                <li class="l-lista-idiomas__item">
+                    <a href="https://www2.camara.leg.br/english" class="idioma-topo">
+                        <span class="idioma-topo__bandeira idioma-topo__bandeira--ingles" aria-hidden="true"></span>
+                        <span class="idioma-topo__nome">English</span>
+                        <span class="idioma-topo__sigla">EN</span>
+                    </a>
+                </li>
+                <li class="l-lista-idiomas__item">
+                    <a href="https://www2.camara.leg.br/espanol" class="idioma-topo">
+                        <span class="idioma-topo__bandeira idioma-topo__bandeira--espanhol" aria-hidden="true"></span>
+                        <span class="idioma-topo__nome">Español</span>
+                        <span class="idioma-topo__sigla">ES</span>            
+                    </a>
+                </li>
+            </ul>
+        </div>
+        </div>
+
+
+        <div class="collapse box-search" id="buscaportal">
+          <form role="search" accesskey="4" class="box-search__busca form-inline" action="https://www.camara.leg.br/busca-geral">
+            <label for="termo" class="sr-only box-search__label">Pesquise no Portal da Câmara</label>
+            <input class="form-control box-search__campo" type="search" name="termo" id="termo" placeholder="Buscar" aria-label="Search" />
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+      </header>
+
+    <div class="breadcrumbs-marcacao">
+        <div class="container">
+            <nav aria-label="Onde estou">
+                <ol class="breadcrumb portal-breadcrumbs">
+                    <li class="breadcrumb-item"><a href="//www.camara.leg.br">Início</a></li>
+                    
+	<li class='breadcrumb-item'><a href='http://www2.camara.gov.br/atividade-legislativa'>Atividade Legislativa</a></li>
+    <li class='breadcrumb-item'><a href='http://www2.camara.gov.br/atividade-legislativa/legislacao'>Legislação</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Esta página</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <div class="container-fluid p-0">
+            <div id="menu-secoes-internas" class="menu-secoes-internass">
+                <div id="portal-mainsection">
+                    <div class="l-identificacao-landing">
+                        <div class="container">
+                            <h1 class="titulo-landing">Legislação</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="marcacao-conteudo-portal" class="conteudo-portal container nopadding-right nopadding-left">
+        <div class="coluna-centro col-md-12">
+
+
+<div id="portal-column-content">
+	<div id="portal-content-wrapper">
+		<div class="documentContent">
+			<div id="content">
+	
+				<h2 class="documentFirstHeading">Legislação Informatizada - EMENDA CONSTITUCIONAL Nº 103, DE 2019 - Publicação Original</h2>
+
+			<div class="g-contexto-compartilhamento g-contexto-compartilhamento--extendido g-impressao">
+				<!-- Elemento propositalmente vazio, preenchido pelo JS de compartilhamento do portal -->
+			</div>
+				<div class="vejaTambem">
+			    	<p>Veja também:</p>
+			    	<ul>
+                                        <li>
+                                            <a href="http://www.camara.gov.br/sileg/Prop_Detalhe.asp?id=2192459">Proposição Originária</a>
+                                        </li>
+                                    <li>
+                                        <a href="emendaconstitucional-103-12-novembro-2019-789412-norma-pl.html">Dados da Norma</a>
+                                    </li>
+                                </ul>
+			    </div>	
+                                
+
+					<h1>EMENDA CONSTITUCIONAL Nº 103, DE 2019</h1>
+				
+				<div class="textoNorma">
+				
+						<p class="ementa">
+							Altera o sistema de previdência social e estabelece regras de transição e disposições transitórias. 
+						</p>
+				
+						<div class="texto">
+							&nbsp;&nbsp;&nbsp;&nbsp; As Mesas da Câmara dos Deputados e do Senado Federal, nos termos do § 3º do art. 60 da Constituição Federal, promulgam a seguinte Emenda ao texto constitucional: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 1º&nbsp;A Constituição Federal passa a vigorar com as seguintes alterações: <BR><BR>
+<DIR>"Art. 22.&nbsp;..................................................................................................................<BR>................................................................................................................................. <BR><BR>XXI - normas gerais de organização, efetivos, material bélico, garantias, convocação, mobilização, inatividades e pensões das polícias militares e dos corpos de bombeiros militares; <BR>................................................................................................................................." (NR)</DIR>
+<DIR>"Art. 37.&nbsp;.................................................................................................................. <BR>.................................................................................................................................. <BR><BR>§ 13. O servidor público titular de cargo efetivo poderá ser readaptado para exercício de cargo cujas atribuições e responsabilidades sejam compatíveis com a limitação que tenha sofrido em sua capacidade física ou mental, enquanto permanecer nesta condição, desde que possua a habilitação e o nível de escolaridade exigidos para o cargo de destino, mantida a remuneração do cargo de origem. <BR><BR>§ 14. A aposentadoria concedida com a utilização de tempo de contribuição decorrente de cargo, emprego ou função pública, inclusive do Regime Geral de Previdência Social, acarretará o rompimento do vínculo que gerou o referido tempo de contribuição. <BR><BR>§ 15. É vedada a complementação de aposentadorias de servidores públicos e de pensões por morte a seus dependentes que não seja decorrente do disposto nos §§ 14 a 16 do art. 40 ou que não seja prevista em lei que extinga regime próprio de previdência social." (NR)</DIR>
+<DIR>"Art. 38.&nbsp;..................................................................................................................<BR>................................................................................................................................... <BR><BR>V - na hipótese de ser segurado de regime próprio de previdência social, permanecerá filiado a esse regime, no ente federativo de origem." (NR)</DIR>
+<DIR>"Art. 39.&nbsp;.................................................................................................................. <BR>................................................................................................................................... <BR><BR>§ 9º É vedada a incorporação de vantagens de caráter temporário ou vinculadas ao exercício de função de confiança ou de cargo em comissão à remuneração do cargo efetivo." (NR)</DIR>
+<DIR>"Art. 40.&nbsp;O regime próprio de previdência social dos servidores titulares de cargos efetivos terá caráter contributivo e solidário, mediante contribuição do respectivo ente federativo, de servidores ativos, de aposentados e de pensionistas, observados critérios que preservem o equilíbrio financeiro e atuarial. <BR><BR>§ 1º O servidor abrangido por regime próprio de previdência social será aposentado: <BR><BR>I - por incapacidade permanente para o trabalho, no cargo em que estiver investido, quando insuscetível de readaptação, hipótese em que será obrigatória a realização de avaliações periódicas para verificação da continuidade das condições que ensejaram a concessão da aposentadoria, na forma de lei do respectivo ente federativo;<BR>........................................................................................................................................ <BR><BR>III - no âmbito da União, aos 62 (sessenta e dois) anos de idade, se mulher, e aos 65 (sessenta e cinco) anos de idade, se homem, e, no âmbito dos Estados, do Distrito Federal e dos Municípios, na idade mínima estabelecida mediante emenda às respectivas Constituições e Leis Orgânicas, observados o tempo de contribuição e os demais requisitos estabelecidos em lei complementar do respectivo ente federativo. <BR><BR>§ 2º Os proventos de aposentadoria não poderão ser inferiores ao valor mínimo a que se refere o § 2º do art. 201 ou superiores ao limite máximo estabelecido para o Regime Geral de Previdência Social, observado o disposto nos §§ 14 a 16. <BR><BR>§ 3º As regras para cálculo de proventos de aposentadoria serão disciplinadas em lei do respectivo ente federativo. <BR><BR>§ 4º É vedada a adoção de requisitos ou critérios diferenciados para concessão de benefícios em regime próprio de previdência social, ressalvado o disposto nos §§ 4º-A, 4º-B, 4º-C e 5º. <BR><BR>§ 4º-A. Poderão ser estabelecidos por lei complementar do respectivo ente federativo idade e tempo de contribuição diferenciados para aposentadoria de servidores com deficiência, previamente submetidos a avaliação biopsicossocial realizada por equipe multiprofissional e interdisciplinar. <BR><BR>§ 4º-B. Poderão ser estabelecidos por lei complementar do respectivo ente federativo idade e tempo de contribuição diferenciados para aposentadoria de ocupantes do cargo de agente penitenciário, de agente socioeducativo ou de policial dos órgãos de que tratam o inciso IV do <I>caput</I> do art. 51, o inciso XIII do <I>caput</I> do art. 52 e os incisos I a IV do <I>caput</I> do art. 144. <BR><BR>§ 4º-C. Poderão ser estabelecidos por lei complementar do respectivo ente federativo idade e tempo de contribuição diferenciados para aposentadoria de servidores cujas atividades sejam exercidas com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação. <BR><BR>§ 5º Os ocupantes do cargo de professor terão idade mínima reduzida em 5 (cinco) anos em relação às idades decorrentes da aplicação do disposto no inciso III do § 1º, desde que comprovem tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio fixado em lei complementar do respectivo ente federativo. <BR><BR>§ 6º Ressalvadas as aposentadorias decorrentes dos cargos acumuláveis na forma desta Constituição, é vedada a percepção de mais de uma aposentadoria à conta de regime próprio de previdência social, aplicando-se outras vedações, regras e condições para a acumulação de benefícios previdenciários estabelecidas no Regime Geral de Previdência Social. <BR><BR>§ 7º Observado o disposto no § 2º do art. 201, quando se tratar da única fonte de renda formal auferida pelo dependente, o benefício de pensão por morte será concedido nos termos de lei do respectivo ente federativo, a qual tratará de forma diferenciada a hipótese de morte dos servidores de que trata o § 4º-B decorrente de agressão sofrida no exercício ou em razão da função. <BR>....................................................................................................................................... <BR><BR>§ 9º O tempo de contribuição federal, estadual, distrital ou municipal será contado para fins de aposentadoria, observado o disposto nos §§ 9º e 9º-A do art. 201, e o tempo de serviço correspondente será contado para fins de disponibilidade. <BR>........................................................................................................................................... <BR><BR>§ 12. Além do disposto neste artigo, serão observados, em regime próprio de previdência social, no que couber, os requisitos e critérios fixados para o Regime Geral de Previdência Social. <BR><BR>§ 13. Aplica-se ao agente público ocupante, exclusivamente, de cargo em comissão declarado em lei de livre nomeação e exoneração, de outro cargo temporário, inclusive mandato eletivo, ou de emprego público, o Regime Geral de Previdência Social. <BR><BR>§ 14. A União, os Estados, o Distrito Federal e os Municípios instituirão, por lei de iniciativa do respectivo Poder Executivo, regime de previdência complementar para servidores públicos ocupantes de cargo efetivo, observado o limite máximo dos benefícios do Regime Geral de Previdência Social para o valor das aposentadorias e das pensões em regime próprio de previdência social, ressalvado o disposto no § 16. <BR><BR>§ 15. O regime de previdência complementar de que trata o § 14 oferecerá plano de benefícios somente na modalidade contribuição definida, observará o disposto no art. 202 e será efetivado por intermédio de entidade fechada de previdência complementar ou de entidade aberta de previdência complementar. <BR>......................................................................................................................................... <BR><BR>§ 19. Observados critérios a serem estabelecidos em lei do respectivo ente federativo, o servidor titular de cargo efetivo que tenha completado as exigências para a aposentadoria voluntária e que opte por permanecer em atividade poderá fazer jus a um abono de permanência equivalente, no máximo, ao valor da sua contribuição previdenciária, até completar a idade para aposentadoria compulsória. <BR><BR>§ 20. É vedada a existência de mais de um regime próprio de previdência social e de mais de um órgão ou entidade gestora desse regime em cada ente federativo, abrangidos todos os poderes, órgãos e entidades autárquicas e fundacionais, que serão responsáveis pelo seu financiamento, observados os critérios, os parâmetros e a natureza jurídica definidos na lei complementar de que trata o § 22. <BR><BR>§ 21. (Revogado). <BR><BR>§ 22. Vedada a instituição de novos regimes próprios de previdência social, lei complementar federal estabelecerá, para os que já existam, normas gerais de organização, de funcionamento e de responsabilidade em sua gestão, dispondo, entre outros aspectos, sobre: <BR><BR>I - requisitos para sua extinção e consequente migração para o Regime Geral de Previdência Social; <BR><BR>II - modelo de arrecadação, de aplicação e de utilização dos recursos; <BR><BR>III - fiscalização pela União e controle externo e social; <BR><BR>IV - definição de equilíbrio financeiro e atuarial; <BR><BR>V - condições para instituição do fundo com finalidade previdenciária de que trata o art. 249 e para vinculação a ele dos recursos provenientes de contribuições e dos bens, direitos e ativos de qualquer natureza; <BR><BR>VI - mecanismos de equacionamento do <I>deficit</I> atuarial; <BR><BR>VII - estruturação do órgão ou entidade gestora do regime, observados os princípios relacionados com governança, controle interno e transparência; <BR><BR>VIII - condições e hipóteses para responsabilização daqueles que desempenhem atribuições relacionadas, direta ou indiretamente, com a gestão do regime; <BR><BR>IX - condições para adesão a consórcio público; <BR><BR>X - parâmetros para apuração da base de cálculo e definição de alíquota de contribuições ordinárias e extraordinárias." (NR)</DIR>
+<DIR>"Art. 93.&nbsp;..................................................................................................................<BR>................................................................................................................................. <BR><BR>VIII - o ato de remoção ou de disponibilidade do magistrado, por interesse público, fundar-se-á em decisão por voto da maioria absoluta do respectivo tribunal ou do Conselho Nacional de Justiça, assegurada ampla defesa; <BR>................................................................................................................................" (NR)</DIR>
+<DIR>"Art. 103-B.&nbsp;............................................................................................................<BR>................................................................................................................................. <BR><BR>§ 4º .........................................................................................................................<BR>................................................................................................................................... <BR><BR>III - receber e conhecer das reclamações contra membros ou órgãos do Poder Judiciário, inclusive contra seus serviços auxiliares, serventias e órgãos prestadores de serviços notariais e de registro que atuem por delegação do poder público ou oficializados, sem prejuízo da competência disciplinar e correicional dos tribunais, podendo avocar processos disciplinares em curso, determinar a remoção ou a disponibilidade e aplicar outras sanções administrativas, assegurada ampla defesa;<BR>................................................................................................................................" (NR)</DIR>
+<DIR>"Art. 109.&nbsp;................................................................................................................<BR>................................................................................................................................... <BR><BR>§ 3º Lei poderá autorizar que as causas de competência da Justiça Federal em que forem parte instituição de previdência social e segurado possam ser processadas e julgadas na justiça estadual quando a comarca do domicílio do segurado não for sede de vara federal. <BR>................................................................................................................................" (NR)</DIR>
+<DIR>"Art. 130-A.&nbsp;............................................................................................................<BR>.................................................................................................................................. <BR><BR>§ 2º .........................................................................................................................<BR>................................................................................................................................... <BR><BR>III - receber e conhecer das reclamações contra membros ou órgãos do Ministério Público da União ou dos Estados, inclusive contra seus serviços auxiliares, sem prejuízo da competência disciplinar e correicional da instituição, podendo avocar processos disciplinares em curso, determinar a remoção ou a disponibilidade e aplicar outras sanções administrativas, assegurada ampla defesa; <BR>................................................................................................................................." (NR)</DIR>
+<DIR>"Art. 149.&nbsp;................................................................................................................ <BR><BR>§ 1º A União, os Estados, o Distrito Federal e os Municípios instituirão, por meio de lei, contribuições para custeio de regime próprio de previdência social, cobradas dos servidores ativos, dos aposentados e dos pensionistas, que poderão ter alíquotas progressivas de acordo com o valor da base de contribuição ou dos proventos de aposentadoria e de pensões. <BR><BR>§ 1º-A. Quando houver <I>deficit</I> atuarial, a contribuição ordinária dos aposentados e pensionistas poderá incidir sobre o valor dos proventos de aposentadoria e de pensões que supere o salário-mínimo. <BR><BR>§ 1º-B. Demonstrada a insuficiência da medida prevista no § 1º-A para equacionar o <I>deficit</I> atuarial, é facultada a instituição de contribuição extraordinária, no âmbito da União, dos servidores públicos ativos, dos aposentados e dos pensionistas. <BR><BR>§ 1º-C. A contribuição extraordinária de que trata o § 1º-B deverá ser instituída simultaneamente com outras medidas para equacionamento do <I>deficit</I> e vigorará por período determinado, contado da data de sua instituição. <BR>................................................................................................................................" (NR)</DIR>
+<DIR>"Art. 167.&nbsp;................................................................................................................<BR>.................................................................................................................................. <BR><BR>XII - na forma estabelecida na lei complementar de que trata o § 22 do art. 40, a utilização de recursos de regime próprio de previdência social, incluídos os valores integrantes dos fundos previstos no art. 249, para a realização de despesas distintas do pagamento dos benefícios previdenciários do respectivo fundo vinculado àquele regime e das despesas necessárias à sua organização e ao seu funcionamento; <BR><BR>XIII - a transferência voluntária de recursos, a concessão de avais, as garantias e as subvenções pela União e a concessão de empréstimos e de financiamentos por instituições financeiras federais aos Estados, ao Distrito Federal e aos Municípios na hipótese de descumprimento das regras gerais de organização e de funcionamento de regime próprio de previdência social. <BR>................................................................................................................................" (NR)</DIR>
+<DIR>"Art. 194.&nbsp;................................................................................................................ <BR><BR><I>Parágrafo único. .....................................................................................................<BR></I>...................................................................................................................................... <BR><BR>VI - diversidade da base de financiamento, identificando-se, em rubricas contábeis específicas para cada área, as receitas e as despesas vinculadas a ações de saúde, previdência e assistência social, preservado o caráter contributivo da previdência social; <BR>................................................................................................................................." (NR)</DIR>
+<DIR>"Art. 195.&nbsp;...............................................................................................................<BR>................................................................................................................................. <BR><BR>II - do trabalhador e dos demais segurados da previdência social, podendo ser adotadas alíquotas progressivas de acordo com o valor do salário de contribuição, não incidindo contribuição sobre aposentadoria e pensão concedidas pelo Regime Geral de Previdência Social; <BR>............................................................................................................................................ <BR><BR>§ 9º As contribuições sociais previstas no inciso I do <I>caput</I> deste artigo poderão ter alíquotas diferenciadas em razão da atividade econômica, da utilização intensiva de mão de obra, do porte da empresa ou da condição estrutural do mercado de trabalho, sendo também autorizada a adoção de bases de cálculo diferenciadas apenas no caso das alíneas "<EM>b</EM>" e "<EM>c</EM>" do inciso I do <I>caput</I>. <BR>............................................................................................................................................ <BR><BR>§ 11. São vedados a moratória e o parcelamento em prazo superior a 60 (sessenta) meses e, na forma de lei complementar, a remissão e a anistia das contribuições sociais de que tratam a alínea "<EM>a</EM>" do inciso I e o inciso II do <I>caput</I>. <BR>.......................................................................................................................................... <BR><BR>§ 13. (Revogado). <BR><BR>§ 14. O segurado somente terá reconhecida como tempo de contribuição ao Regime Geral de Previdência Social a competência cuja contribuição seja igual ou superior à contribuição mínima mensal exigida para sua categoria, assegurado o agrupamento de contribuições." (NR)</DIR>
+<DIR>"Art. 201.&nbsp;A previdência social será organizada sob a forma do Regime Geral de Previdência Social, de caráter contributivo e de filiação obrigatória, observados critérios que preservem o equilíbrio financeiro e atuarial, e atenderá, na forma da lei, a: <BR><BR>I - cobertura dos eventos de incapacidade temporária ou permanente para o trabalho e idade avançada; <BR>........................................................................................................................................... <BR><BR>§ 1º É vedada a adoção de requisitos ou critérios diferenciados para concessão de benefícios, ressalvada, nos termos de lei complementar, a possibilidade de previsão de idade e tempo de contribuição distintos da regra geral para concessão de aposentadoria exclusivamente em favor dos segurados: <BR><BR>I - com deficiência, previamente submetidos a avaliação biopsicossocial realizada por equipe multiprofissional e interdisciplinar; <BR><BR>II - cujas atividades sejam exercidas com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação. <BR>..................................................................................................................................... <BR><BR>§ 7º ......................................................................................................................... <BR><BR>I - 65 (sessenta e cinco) anos de idade, se homem, e 62 (sessenta e dois) anos de idade, se mulher, observado tempo mínimo de contribuição; <BR><BR>II - 60 (sessenta) anos de idade, se homem, e 55 (cinquenta e cinco) anos de idade, se mulher, para os trabalhadores rurais e para os que exerçam suas atividades em regime de economia familiar, nestes incluídos o produtor rural, o garimpeiro e o pescador artesanal. <BR><BR>§ 8º O requisito de idade a que se refere o inciso I do § 7º será reduzido em 5 (cinco) anos, para o professor que comprove tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio fixado em lei complementar. <BR><BR>§ 9º Para fins de aposentadoria, será assegurada a contagem recíproca do tempo de contribuição entre o Regime Geral de Previdência Social e os regimes próprios de previdência social, e destes entre si, observada a compensação financeira, de acordo com os critérios estabelecidos em lei. <BR><BR>§ 9º-A. O tempo de serviço militar exercido nas atividades de que tratam os arts. 42, 142 e 143 e o tempo de contribuição ao Regime Geral de Previdência Social ou a regime próprio de previdência social terão contagem recíproca para fins de inativação militar ou aposentadoria, e a compensação financeira será devida entre as receitas de contribuição referentes aos militares e as receitas de contribuição aos demais regimes. <BR><BR>§ 10. Lei complementar poderá disciplinar a cobertura de benefícios não programados, inclusive os decorrentes de acidente do trabalho, a ser atendida concorrentemente pelo Regime Geral de Previdência Social e pelo setor privado.<BR>............................................................................................................................................ <BR><BR>§ 12. Lei instituirá sistema especial de inclusão previdenciária, com alíquotas diferenciadas, para atender aos trabalhadores de baixa renda, inclusive os que se encontram em situação de informalidade, e àqueles sem renda própria que se dediquem exclusivamente ao trabalho doméstico no âmbito de sua residência, desde que pertencentes a famílias de baixa renda. <BR><BR>§ 13. A aposentadoria concedida ao segurado de que trata o § 12 terá valor de 1 (um) salário-mínimo. <BR><BR>§ 14. É vedada a contagem de tempo de contribuição fictício para efeito de concessão dos benefícios previdenciários e de contagem recíproca. <BR><BR>§ 15. Lei complementar estabelecerá vedações, regras e condições para a acumulação de benefícios previdenciários. <BR><BR>§ 16. Os empregados dos consórcios públicos, das empresas públicas, das sociedades de economia mista e das suas subsidiárias serão aposentados compulsoriamente, observado o cumprimento do tempo mínimo de contribuição, ao atingir a idade máxima de que trata o inciso II do § 1º do art. 40, na forma estabelecida em lei." (NR)</DIR>
+<DIR>"Art. 202.&nbsp;................................................................................................................<BR>.................................................................................................................................... <BR><BR>§ 4º Lei complementar disciplinará a relação entre a União, Estados, Distrito Federal ou Municípios, inclusive suas autarquias, fundações, sociedades de economia mista e empresas controladas direta ou indiretamente, enquanto patrocinadores de planos de benefícios previdenciários, e as entidades de previdência complementar. <BR><BR>§ 5º A lei complementar de que trata o § 4º aplicar-se-á, no que couber, às empresas privadas permissionárias ou concessionárias de prestação de serviços públicos, quando patrocinadoras de planos de benefícios em entidades de previdência complementar. <BR><BR>§ 6º Lei complementar estabelecerá os requisitos para a designação dos membros das diretorias das entidades fechadas de previdência complementar instituídas pelos patrocinadores de que trata o § 4º e disciplinará a inserção dos participantes nos colegiados e instâncias de decisão em que seus interesses sejam objeto de discussão e deliberação." (NR)</DIR>
+<DIR>"Art. 239.&nbsp;A arrecadação decorrente das contribuições para o Programa de Integração Social, criado pela Lei Complementar nº 7, de 7 de setembro de 1970, e para o Programa de Formação do Patrimônio do Servidor Público, criado pela Lei Complementar nº 8, de 3 de dezembro de 1970, passa, a partir da promulgação desta Constituição, a financiar, nos termos que a lei dispuser, o programa do seguro-desemprego, outras ações da previdência social e o abono de que trata o § 3º deste artigo. <BR><BR>§ 1º Dos recursos mencionados no <I>caput</I>, no mínimo 28% (vinte e oito por cento) serão destinados para o financiamento de programas de desenvolvimento econômico, por meio do Banco Nacional de Desenvolvimento Econômico e Social, com critérios de remuneração que preservem o seu valor. <BR>................................................................................................................................ <BR><BR>§ 5º Os programas de desenvolvimento econômico financiados na forma do § 1º e seus resultados serão anualmente avaliados e divulgados em meio de comunicação social eletrônico e apresentados em reunião da comissão mista permanente de que trata o § 1º do art. 166." (NR)</DIR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 2º&nbsp;O art. 76 do Ato das Disposições Constitucionais Transitórias passa a vigorar com a seguinte redação: <BR><BR>
+<DIR>"Art. 76.&nbsp;..................................................................................................................<BR>.................................................................................................................................... <BR><BR>§ 4º A desvinculação de que trata o <I>caput</I> não se aplica às receitas das contribuições sociais destinadas ao custeio da seguridade social." (NR)</DIR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 3º&nbsp;A concessão de aposentadoria ao servidor público federal vinculado a regime próprio de previdência social e ao segurado do Regime Geral de Previdência Social e de pensão por morte aos respectivos dependentes será assegurada, a qualquer tempo, desde que tenham sido cumpridos os requisitos para obtenção desses benefícios até a data de entrada em vigor desta Emenda Constitucional, observados os critérios da legislação vigente na data em que foram atendidos os requisitos para a concessão da aposentadoria ou da pensão por morte. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Os proventos de aposentadoria devidos ao servidor público a que se refere o <I>caput</I> e as pensões por morte devidas aos seus dependentes serão calculados e reajustados de acordo com a legislação em vigor à época em que foram atendidos os requisitos nela estabelecidos para a concessão desses benefícios. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Os proventos de aposentadoria devidos ao segurado a que se refere o <I>caput</I> e as pensões por morte devidas aos seus dependentes serão apurados de acordo com a legislação em vigor à época em que foram atendidos os requisitos nela estabelecidos para a concessão desses benefícios. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Até que entre em vigor lei federal de que trata o § 19 do art. 40 da Constituição Federal, o servidor de que trata o <I>caput</I> que tenha cumprido os requisitos para aposentadoria voluntária com base no disposto na alínea "<EM>a</EM>" do inciso III do § 1º do art. 40 da Constituição Federal, na redação vigente até a data de entrada em vigor desta Emenda Constitucional, no art. 2º, no § 1º do art. 3º ou no art. 6º da Emenda Constitucional nº 41, de 19 de dezembro de 2003, ou no art. 3º da Emenda Constitucional nº 47, de 5 de julho de 2005, que optar por permanecer em atividade fará jus a um abono de permanência equivalente ao valor da sua contribuição previdenciária, até completar a idade para aposentadoria compulsória. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 4º&nbsp;O servidor público federal que tenha ingressado no serviço público em cargo efetivo até a data de entrada em vigor desta Emenda Constitucional poderá aposentar-se voluntariamente quando preencher, cumulativamente, os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 56 (cinquenta e seis) anos de idade, se mulher, e 61 (sessenta e um) anos de idade, se homem, observado o disposto no § 1º; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - 20 (vinte) anos de efetivo exercício no serviço público; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - 5 (cinco) anos no cargo efetivo em que se der a aposentadoria; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V - somatório da idade e do tempo de contribuição, incluídas as frações, equivalente a 86 (oitenta e seis) pontos, se mulher, e 96 (noventa e seis) pontos, se homem, observado o disposto nos §§ 2º e 3º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A partir de 1º de janeiro de 2022, a idade mínima a que se refere o inciso I do <I>caput</I> será de 57 (cinquenta e sete) anos de idade, se mulher, e 62 (sessenta e dois) anos de idade, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º A partir de 1º de janeiro de 2020, a pontuação a que se refere o inciso V do <I>caput</I> será acrescida a cada ano de 1 (um) ponto, até atingir o limite de 100 (cem) pontos, se mulher, e de 105 (cento e cinco) pontos, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º A idade e o tempo de contribuição serão apurados em dias para o cálculo do somatório de pontos a que se referem o inciso V do <I>caput</I> e o § 2º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º Para o titular do cargo de professor que comprovar exclusivamente tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio, os requisitos de idade e de tempo de contribuição de que tratam os incisos I e II do <I>caput</I> serão: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 51 (cinquenta e um) anos de idade, se mulher, e 56 (cinquenta e seis) anos de idade, se homem; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - 25 (vinte e cinco) anos de contribuição, se mulher, e 30 (trinta) anos de contribuição, se homem; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - 52 (cinquenta e dois) anos de idade, se mulher, e 57 (cinquenta e sete) anos de idade, se homem, a partir de 1º de janeiro de 2022. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º O somatório da idade e do tempo de contribuição de que trata o inciso V do <I>caput</I> para as pessoas a que se refere o § 4º, incluídas as frações, será de 81 (oitenta e um) pontos, se mulher, e 91 (noventa e um) pontos, se homem, aos quais serão acrescidos, a partir de 1º de janeiro de 2020, 1 (um) ponto a cada ano, até atingir o limite de 92 (noventa e dois) pontos, se mulher, e de 100 (cem) pontos, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 6º Os proventos das aposentadorias concedidas nos termos do disposto neste artigo corresponderão: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - à totalidade da remuneração do servidor público no cargo efetivo em que se der a aposentadoria, observado o disposto no § 8º, para o servidor público que tenha ingressado no serviço público em cargo efetivo até 31 de dezembro de 2003 e que não tenha feito a opção de que trata o § 16 do art. 40 da Constituição Federal, desde que tenha, no mínimo, 62 (sessenta e dois) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem, ou, para os titulares do cargo de professor de que trata o § 4º, 57 (cinquenta e sete) anos de idade, se mulher, e 60 (sessenta) anos de idade, se homem; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - ao valor apurado na forma da lei, para o servidor público não contemplado no inciso I. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 7º Os proventos das aposentadorias concedidas nos termos do disposto neste artigo não serão inferiores ao valor a que se refere o § 2º do art. 201 da Constituição Federal e serão reajustados: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - de acordo com o disposto no art. 7º da Emenda Constitucional nº 41, de 19 de dezembro de 2003, se cumpridos os requisitos previstos no inciso I do § 6º; ou <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - nos termos estabelecidos para o Regime Geral de Previdência Social, na hipótese prevista no inciso II do § 6º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 8º Considera-se remuneração do servidor público no cargo efetivo, para fins de cálculo dos proventos de aposentadoria com fundamento no disposto no inciso I do § 6º ou no inciso I do § 2º do art. 20, o valor constituído pelo subsídio, pelo vencimento e pelas vantagens pecuniárias permanentes do cargo, estabelecidos em lei, acrescidos dos adicionais de caráter individual e das vantagens pessoais permanentes, observados os seguintes critérios: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - se o cargo estiver sujeito a variações na carga horária, o valor das rubricas que refletem essa variação integrará o cálculo do valor da remuneração do servidor público no cargo efetivo em que se deu a aposentadoria, considerando-se a média aritmética simples dessa carga horária proporcional ao número de anos completos de recebimento e contribuição, contínuos ou intercalados, em relação ao tempo total exigido para a aposentadoria; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - se as vantagens pecuniárias permanentes forem variáveis por estarem vinculadas a indicadores de desempenho, produtividade ou situação similar, o valor dessas vantagens integrará o cálculo da remuneração do servidor público no cargo efetivo mediante a aplicação, sobre o valor atual de referência das vantagens pecuniárias permanentes variáveis, da média aritmética simples do indicador, proporcional ao número de anos completos de recebimento e de respectiva contribuição, contínuos ou intercalados, em relação ao tempo total exigido para a aposentadoria ou, se inferior, ao tempo total de percepção da vantagem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 9º Aplicam-se às aposentadorias dos servidores dos Estados, do Distrito Federal e dos Municípios as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 10. Estende-se o disposto no § 9º às normas sobre aposentadoria de servidores públicos incompatíveis com a redação atribuída por esta Emenda Constitucional aos §§ 4º, 4º-A, 4º-B e 4º-C do art. 40 da Constituição Federal.&nbsp;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 5º&nbsp;O policial civil do órgão a que se refere o inciso XIV do <I>caput</I> do art. 21 da Constituição Federal, o policial dos órgãos a que se referem o inciso IV do <I>caput</I> do art. 51, o inciso XIII do <I>caput</I> do art. 52 e os incisos I a III do <I>caput</I> do art. 144 da Constituição Federal e o ocupante de cargo de agente federal penitenciário ou socioeducativo que tenham ingressado na respectiva carreira até a data de entrada em vigor desta Emenda Constitucional poderão aposentar-se, na forma da Lei Complementar nº 51, de 20 de dezembro de 1985, observada a idade mínima de 55 (cinquenta e cinco) anos para ambos os sexos ou o disposto no § 3º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Serão considerados tempo de exercício em cargo de natureza estritamente policial, para os fins do inciso II do art. 1º da Lei Complementar nº 51, de 20 de dezembro de 1985, o tempo de atividade militar nas Forças Armadas, nas polícias militares e nos corpos de bombeiros militares e o tempo de atividade como agente penitenciário ou socioeducativo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Aplicam-se às aposentadorias dos servidores dos Estados de que trata o § 4º-B do art. 40 da Constituição Federal as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Os servidores de que trata o <I>caput</I> poderão aposentar-se aos 52 (cinquenta e dois) anos de idade, se mulher, e aos 53 (cinquenta e três) anos de idade, se homem, desde que cumprido período adicional de contribuição correspondente ao tempo que, na data de entrada em vigor desta Emenda Constitucional, faltaria para atingir o tempo de contribuição previsto na Lei Complementar nº 51, de 20 de dezembro de 1985. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 6º&nbsp;O disposto no § 14 do art. 37 da Constituição Federal não se aplica a aposentadorias concedidas pelo Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 7º&nbsp;O disposto no § 15 do art. 37 da Constituição Federal não se aplica a complementações de aposentadorias e pensões concedidas até a data de entrada em vigor desta Emenda Constitucional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 8º&nbsp;Até que entre em vigor lei federal de que trata o § 19 do art. 40 da Constituição Federal, o servidor público federal que cumprir as exigências para a concessão da aposentadoria voluntária nos termos do disposto nos arts. 4º, 5º, 20, 21 e 22 e que optar por permanecer em atividade fará jus a um abono de permanência equivalente ao valor da sua contribuição previdenciária, até completar a idade para aposentadoria compulsória. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 9º&nbsp;Até que entre em vigor lei complementar que discipline o § 22 do art. 40 da Constituição Federal, aplicam-se aos regimes próprios de previdência social o disposto na Lei nº 9.717, de 27 de novembro de 1998, e o disposto neste artigo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º O equilíbrio financeiro e atuarial do regime próprio de previdência social deverá ser comprovado por meio de garantia de equivalência, a valor presente, entre o fluxo das receitas estimadas e das despesas projetadas, apuradas atuarialmente, que, juntamente com os bens, direitos e ativos vinculados, comparados às obrigações assumidas, evidenciem a solvência e a liquidez do plano de benefícios. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º O rol de benefícios dos regimes próprios de previdência social fica limitado às aposentadorias e à pensão por morte. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Os afastamentos por incapacidade temporária para o trabalho e o salário-maternidade serão pagos diretamente pelo ente federativo e não correrão à conta do regime próprio de previdência social ao qual o servidor se vincula. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º Os Estados, o Distrito Federal e os Municípios não poderão estabelecer alíquota inferior à da contribuição dos servidores da União, exceto se demonstrado que o respectivo regime próprio de previdência social não possui <I>deficit</I> atuarial a ser equacionado, hipótese em que a alíquota não poderá ser inferior às alíquotas aplicáveis ao Regime Geral de Previdência Social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º Para fins do disposto no § 4º, não será considerada como ausência de <I>deficit</I> a implementação de segregação da massa de segurados ou a previsão em lei de plano de equacionamento de <I>deficit</I>. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 6º A instituição do regime de previdência complementar na forma dos §§ 14 a 16 do art. 40 da Constituição Federal e a adequação do órgão ou entidade gestora do regime próprio de previdência social ao § 20 do art. 40 da Constituição Federal deverão ocorrer no prazo máximo de 2 (dois) anos da data de entrada em vigor desta Emenda Constitucional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 7º Os recursos de regime próprio de previdência social poderão ser aplicados na concessão de empréstimos a seus segurados, na modalidade de consignados, observada regulamentação específica estabelecida pelo Conselho Monetário Nacional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 8º Por meio de lei, poderá ser instituída contribuição extraordinária pelo prazo máximo de 20 (vinte) anos, nos termos dos §§ 1º-B e 1º-C do art. 149 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 9º O parcelamento ou a moratória de débitos dos entes federativos com seus regimes próprios de previdência social fica limitado ao prazo a que se refere o § 11 do art. 195 da Constituição. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 10.&nbsp;Até que entre em vigor lei federal que discipline os benefícios do regime próprio de previdência social dos servidores da União, aplica-se o disposto neste artigo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Os servidores públicos federais serão aposentados: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - voluntariamente, observados, cumulativamente, os seguintes requisitos: <BR><BR>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>a)</I></TD>
+<TD>62 (sessenta e dois) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem; e </TD></TR></TBODY></TABLE>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>b)</I></TD>
+<TD>25 (vinte e cinco) anos de contribuição, desde que cumprido o tempo mínimo de 10 (dez) anos de efetivo exercício no serviço público e de 5 (cinco) anos no cargo efetivo em que for concedida a aposentadoria; </TD></TR></TBODY></TABLE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - por incapacidade permanente para o trabalho, no cargo em que estiverem investidos, quando insuscetíveis de readaptação, hipótese em que será obrigatória a realização de avaliações periódicas para verificação da continuidade das condições que ensejaram a concessão da aposentadoria; ou <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - compulsoriamente, na forma do disposto no inciso II do § 1º do art. 40 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Os servidores públicos federais com direito a idade mínima ou tempo de contribuição distintos da regra geral para concessão de aposentadoria na forma dos §§ 4º-B, 4º-C e 5º do art. 40 da Constituição Federal poderão aposentar-se, observados os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - o policial civil do órgão a que se refere o inciso XIV do <I>caput</I> do art. 21 da Constituição Federal, o policial dos órgãos a que se referem o inciso IV do <I>caput</I> do art. 51, o inciso XIII do <I>caput</I> do art. 52 e os incisos I a III do <I>caput</I> do art. 144 da Constituição Federal e o ocupante de cargo de agente federal penitenciário ou socioeducativo, aos 55 (cinquenta e cinco) anos de idade, com 30 (trinta) anos de contribuição e 25 (vinte e cinco) anos de efetivo exercício em cargo dessas carreiras, para ambos os sexos; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - o servidor público federal cujas atividades sejam exercidas com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação, aos 60 (sessenta) anos de idade, com 25 (vinte e cinco) anos de efetiva exposição e contribuição, 10 (dez) anos de efetivo exercício de serviço público e 5 (cinco) anos no cargo efetivo em que for concedida a aposentadoria; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - o titular do cargo federal de professor, aos 60 (sessenta) anos de idade, se homem, aos 57 (cinquenta e sete) anos, se mulher, com 25 (vinte e cinco) anos de contribuição exclusivamente em efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio, 10 (dez) anos de efetivo exercício de serviço público e 5 (cinco) anos no cargo efetivo em que for concedida a aposentadoria, para ambos os sexos. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º A aposentadoria a que se refere o § 4º-C do art. 40 da Constituição Federal observará adicionalmente as condições e os requisitos estabelecidos para o Regime Geral de Previdência Social, naquilo em que não conflitarem com as regras específicas aplicáveis ao regime próprio de previdência social da União, vedada a conversão de tempo especial em comum. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º Os proventos das aposentadorias concedidas nos termos do disposto neste artigo serão apurados na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º Até que entre em vigor lei federal de que trata o § 19 do art. 40 da Constituição Federal, o servidor federal que cumprir as exigências para a concessão da aposentadoria voluntária nos termos do disposto neste artigo e que optar por permanecer em atividade fará jus a um abono de permanência equivalente ao valor da sua contribuição previdenciária, até completar a idade para aposentadoria compulsória. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 6º A pensão por morte devida aos dependentes do policial civil do órgão a que se refere o inciso XIV do <I>caput</I> do art. 21 da Constituição Federal, do policial dos órgãos a que se referem o inciso IV do <I>caput</I> do art. 51, o inciso XIII do <I>caput</I> do art. 52 e os incisos I a III do <I>caput</I> do art. 144 da Constituição Federal e dos ocupantes dos cargos de agente federal penitenciário ou socioeducativo decorrente de agressão sofrida no exercício ou em razão da função será vitalícia para o cônjuge ou companheiro e equivalente à remuneração do cargo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 7º Aplicam-se às aposentadorias dos servidores dos Estados, do Distrito Federal e dos Municípios as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 11.&nbsp;Até que entre em vigor lei que altere a alíquota da contribuição previdenciária de que tratam os arts. 4º, 5º e 6º da Lei nº 10.887, de 18 de junho de 2004, esta será de 14% (quatorze por cento). <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A alíquota prevista no <I>caput</I> será reduzida ou majorada, considerado o valor da base de contribuição ou do benefício recebido, de acordo com os seguintes parâmetros: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - até 1 (um) salário-mínimo, redução de seis inteiros e cinco décimos pontos percentuais; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - acima de 1 (um) salário-mínimo até R$ 2.000,00 (dois mil reais), redução de cinco pontos percentuais; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - de R$ 2.000,01 (dois mil reais e um centavo) até R$ 3.000,00 (três mil reais), redução de dois pontos percentuais; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - de R$ 3.000,01 (três mil reais e um centavo) até R$ 5.839,45 (cinco mil, oitocentos e trinta e nove reais e quarenta e cinco centavos), sem redução ou acréscimo; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V - de R$ 5.839,46 (cinco mil, oitocentos e trinta e nove reais e quarenta e seis centavos) até R$ 10.000,00 (dez mil reais), acréscimo de meio ponto percentual; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VI - de R$ 10.000,01 (dez mil reais e um centavo) até R$ 20.000,00 (vinte mil reais), acréscimo de dois inteiros e cinco décimos pontos percentuais; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VII - de R$ 20.000,01 (vinte mil reais e um centavo) até R$ 39.000,00 (trinta e nove mil reais), acréscimo de cinco pontos percentuais; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIII - acima de R$ 39.000,00 (trinta e nove mil reais), acréscimo de oito pontos percentuais. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º A alíquota, reduzida ou majorada nos termos do disposto no § 1º, será aplicada de forma progressiva sobre a base de contribuição do servidor ativo, incidindo cada alíquota sobre a faixa de valores compreendida nos respectivos limites. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Os valores previstos no § 1º serão reajustados, a partir da data de entrada em vigor desta Emenda Constitucional, na mesma data e com o mesmo índice em que se der o reajuste dos benefícios do Regime Geral de Previdência Social, ressalvados aqueles vinculados ao salário-mínimo, aos quais se aplica a legislação específica. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º A alíquota de contribuição de que trata o <I>caput</I>, com a redução ou a majoração decorrentes do disposto no § 1º, será devida pelos aposentados e pensionistas de quaisquer dos Poderes da União, incluídas suas entidades autárquicas e suas fundações, e incidirá sobre o valor da parcela dos proventos de aposentadoria e de pensões que supere o limite máximo estabelecido para os benefícios do Regime Geral de Previdência Social, hipótese em que será considerada a totalidade do valor do benefício para fins de definição das alíquotas aplicáveis. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 12.&nbsp;A União instituirá sistema integrado de dados relativos às remunerações, proventos e pensões dos segurados dos regimes de previdência de que tratam os arts. 40, 201 e 202 da Constituição Federal, aos benefícios dos programas de assistência social de que trata o art. 203 da Constituição Federal e às remunerações, proventos de inatividade e pensão por morte decorrentes das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal, em interação com outras bases de dados, ferramentas e plataformas, para o fortalecimento de sua gestão, governança e transparência e o cumprimento das disposições estabelecidas nos incisos XI e XVI do art. 37 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A União, os Estados, o Distrito Federal e os Municípios e os órgãos e entidades gestoras dos regimes, dos sistemas e dos programas a que se refere o <I>caput</I> disponibilizarão as informações necessárias para a estruturação do sistema integrado de dados e terão acesso ao compartilhamento das referidas informações, na forma da legislação. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º É vedada a transmissão das informações de que trata este artigo a qualquer pessoa física ou jurídica para a prática de atividade não relacionada à fiscalização dos regimes, dos sistemas e dos programas a que se refere o <I>caput</I>. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 13.&nbsp;Não se aplica o disposto no § 9º do art. 39 da Constituição Federal a parcelas remuneratórias decorrentes de incorporação de vantagens de caráter temporário ou vinculadas ao exercício de função de confiança ou de cargo em comissão efetivada até a data de entrada em vigor desta Emenda Constitucional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 14.&nbsp;Vedadas a adesão de novos segurados e a instituição de novos regimes dessa natureza, os atuais segurados de regime de previdência aplicável a titulares de mandato eletivo da União, dos Estados, do Distrito Federal e dos Municípios poderão, por meio de opção expressa formalizada no prazo de 180 (cento e oitenta) dias, contado da data de entrada em vigor desta Emenda Constitucional, retirar-se dos regimes previdenciários aos quais se encontrem vinculados. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Os segurados, atuais e anteriores, do regime de previdência de que trata a Lei nº 9.506, de 30 de outubro de 1997, que fizerem a opção de permanecer nesse regime previdenciário deverão cumprir período adicional correspondente a 30% (trinta por cento) do tempo de contribuição que faltaria para aquisição do direito à aposentadoria na data de entrada em vigor desta Emenda Constitucional e somente poderão aposentar-se a partir dos 62 (sessenta e dois) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Se for exercida a opção prevista no <I>caput</I>, será assegurada a contagem do tempo de contribuição vertido para o regime de previdência ao qual o segurado se encontrava vinculado, nos termos do disposto no § 9º do art. 201 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º A concessão de aposentadoria aos titulares de mandato eletivo e de pensão por morte aos dependentes de titular de mandato eletivo falecido será assegurada, a qualquer tempo, desde que cumpridos os requisitos para obtenção desses benefícios até a data de entrada em vigor desta Emenda Constitucional, observados os critérios da legislação vigente na data em que foram atendidos os requisitos para a concessão da aposentadoria ou da pensão por morte. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º Observado o disposto nos §§ 9º e 9º-A do art. 201 da Constituição Federal, o tempo de contribuição a regime próprio de previdência social e ao Regime Geral de Previdência Social, assim como o tempo de contribuição decorrente das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal, que tenha sido considerado para a concessão de benefício pelos regimes a que se refere o <I>caput</I> não poderá ser utilizado para obtenção de benefício naqueles regimes. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º Lei específica do Estado, do Distrito Federal ou do Município deverá disciplinar a regra de transição a ser aplicada aos segurados que, na forma do <I>caput</I>, fizerem a opção de permanecer no regime previdenciário de que trata este artigo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 15.&nbsp;Ao segurado filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional, fica assegurado o direito à aposentadoria quando forem preenchidos, cumulativamente, os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - somatório da idade e do tempo de contribuição, incluídas as frações, equivalente a 86 (oitenta e seis) pontos, se mulher, e 96 (noventa e seis) pontos, se homem, observado o disposto nos §§ 1º e 2º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A partir de 1º de janeiro de 2020, a pontuação a que se refere o inciso II do <I>caput</I> será acrescida a cada ano de 1 (um) ponto, até atingir o limite de 100 (cem) pontos, se mulher, e de 105 (cento e cinco) pontos, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º A idade e o tempo de contribuição serão apurados em dias para o cálculo do somatório de pontos a que se referem o inciso II do <I>caput</I> e o § 1º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Para o professor que comprovar exclusivamente 25 (vinte e cinco) anos de contribuição, se mulher, e 30 (trinta) anos de contribuição, se homem, em efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio, o somatório da idade e do tempo de contribuição, incluídas as frações, será equivalente a 81 (oitenta e um) pontos, se mulher, e 91 (noventa e um) pontos, se homem, aos quais serão acrescidos, a partir de 1º de janeiro de 2020, 1 (um) ponto a cada ano para o homem e para a mulher, até atingir o limite de 92 (noventa e dois) pontos, se mulher, e 100 (cem) pontos, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º O valor da aposentadoria concedida nos termos do disposto neste artigo será apurado na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 16.&nbsp;Ao segurado filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional fica assegurado o direito à aposentadoria quando preencher, cumulativamente, os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - idade de 56 (cinquenta e seis) anos, se mulher, e 61 (sessenta e um) anos, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A partir de 1º de janeiro de 2020, a idade a que se refere o inciso II do <I>caput</I> será acrescida de 6 (seis) meses a cada ano, até atingir 62 (sessenta e dois) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Para o professor que comprovar exclusivamente tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio, o tempo de contribuição e a idade de que tratam os incisos I e II do <I>caput</I> deste artigo serão reduzidos em 5 (cinco) anos, sendo, a partir de 1º de janeiro de 2020, acrescidos 6 (seis) meses, a cada ano, às idades previstas no inciso II do <I>caput</I>, até atingirem 57 (cinquenta e sete) anos, se mulher, e 60 (sessenta) anos, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º O valor da aposentadoria concedida nos termos do disposto neste artigo será apurado na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 17.&nbsp;Ao segurado filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional e que na referida data contar com mais de 28 (vinte e oito) anos de contribuição, se mulher, e 33 (trinta e três) anos de contribuição, se homem, fica assegurado o direito à aposentadoria quando preencher, cumulativamente, os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - cumprimento de período adicional correspondente a 50% (cinquenta por cento) do tempo que, na data de entrada em vigor desta Emenda Constitucional, faltaria para atingir 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Parágrafo único. </I>O benefício concedido nos termos deste artigo terá seu valor apurado de acordo com a média aritmética simples dos salários de contribuição e das remunerações calculada na forma da lei, multiplicada pelo fator previdenciário, calculado na forma do disposto nos §§ 7º a 9º do art. 29 da Lei nº 8.213, de 24 de julho de 1991. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 18.&nbsp;O segurado de que trata o inciso I do § 7º do art. 201 da Constituição Federal filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional poderá aposentar-se quando preencher, cumulativamente, os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 60 (sessenta) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - 15 (quinze) anos de contribuição, para ambos os sexos. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A partir de 1º de janeiro de 2020, a idade de 60 (sessenta) anos da mulher, prevista no inciso I do <I>caput</I>, será acrescida em 6 (seis) meses a cada ano, até atingir 62 (sessenta e dois) anos de idade. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º O valor da aposentadoria de que trata este artigo será apurado na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 19.&nbsp;Até que lei disponha sobre o tempo de contribuição a que se refere o inciso I do § 7º do art. 201 da Constituição Federal, o segurado filiado ao Regime Geral de Previdência Social após a data de entrada em vigor desta Emenda Constitucional será aposentado aos 62 (sessenta e dois) anos de idade, se mulher, 65 (sessenta e cinco) anos de idade, se homem, com 15 (quinze) anos de tempo de contribuição, se mulher, e 20 (vinte) anos de tempo de contribuição, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Até que lei complementar disponha sobre a redução de idade mínima ou tempo de contribuição prevista nos §§ 1º e 8º do art. 201 da Constituição Federal, será concedida aposentadoria: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - aos segurados que comprovem o exercício de atividades com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação, durante, no mínimo, 15 (quinze), 20 (vinte) ou 25 (vinte e cinco) anos, nos termos do disposto nos arts. 57 e 58 da Lei nº 8.213, de 24 de julho de 1991, quando cumpridos: <BR><BR>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>a)</I></TD>
+<TD>55 (cinquenta e cinco) anos de idade, quando se tratar de atividade especial de 15 (quinze) anos de contribuição; </TD></TR></TBODY></TABLE>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>b)</I></TD>
+<TD>58 (cinquenta e oito) anos de idade, quando se tratar de atividade especial de 20 (vinte) anos de contribuição; ou </TD></TR></TBODY></TABLE>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>c)</I></TD>
+<TD>60 (sessenta) anos de idade, quando se tratar de atividade especial de 25 (vinte e cinco) anos de contribuição; </TD></TR></TBODY></TABLE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - ao professor que comprove 25 (vinte e cinco) anos de contribuição exclusivamente em efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio e tenha 57 (cinquenta e sete) anos de idade, se mulher, e 60 (sessenta) anos de idade, se homem. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º O valor das aposentadorias de que trata este artigo será apurado na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 20.&nbsp;O segurado ou o servidor público federal que se tenha filiado ao Regime Geral de Previdência Social ou ingressado no serviço público em cargo efetivo até a data de entrada em vigor desta Emenda Constitucional poderá aposentar-se voluntariamente quando preencher, cumulativamente, os seguintes requisitos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 57 (cinquenta e sete) anos de idade, se mulher, e 60 (sessenta) anos de idade, se homem; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - para os servidores públicos, 20 (vinte) anos de efetivo exercício no serviço público e 5 (cinco) anos no cargo efetivo em que se der a aposentadoria; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - período adicional de contribuição correspondente ao tempo que, na data de entrada em vigor desta Emenda Constitucional, faltaria para atingir o tempo mínimo de contribuição referido no inciso II. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Para o professor que comprovar exclusivamente tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio serão reduzidos, para ambos os sexos, os requisitos de idade e de tempo de contribuição em 5 (cinco) anos. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º O valor das aposentadorias concedidas nos termos do disposto neste artigo corresponderá: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - em relação ao servidor público que tenha ingressado no serviço público em cargo efetivo até 31 de dezembro de 2003 e que não tenha feito a opção de que trata o § 16 do art. 40 da Constituição Federal, à totalidade da remuneração no cargo efetivo em que se der a aposentadoria, observado o disposto no § 8º do art. 4º; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - em relação aos demais servidores públicos e aos segurados do Regime Geral de Previdência Social, ao valor apurado na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º O valor das aposentadorias concedidas nos termos do disposto neste artigo não será inferior ao valor a que se refere o § 2º do art. 201 da Constituição Federal e será reajustado: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - de acordo com o disposto no art. 7º da Emenda Constitucional nº 41, de 19 de dezembro de 2003, se cumpridos os requisitos previstos no inciso I do § 2º; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - nos termos estabelecidos para o Regime Geral de Previdência Social, na hipótese prevista no inciso II do § 2º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º Aplicam-se às aposentadorias dos servidores dos Estados, do Distrito Federal e dos Municípios as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 21.&nbsp;O segurado ou o servidor público federal que se tenha filiado ao Regime Geral de Previdência Social ou ingressado no serviço público em cargo efetivo até a data de entrada em vigor desta Emenda Constitucional cujas atividades tenham sido exercidas com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação, desde que cumpridos, no caso do servidor, o tempo mínimo de 20 (vinte) anos de efetivo exercício no serviço público e de 5 (cinco) anos no cargo efetivo em que for concedida a aposentadoria, na forma dos arts. 57 e 58 da Lei nº 8.213, de 24 de julho de 1991, poderão aposentar-se quando o total da soma resultante da sua idade e do tempo de contribuição e o tempo de efetiva exposição forem, respectivamente, de: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 66 (sessenta e seis) pontos e 15 (quinze) anos de efetiva exposição; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - 76 (setenta e seis) pontos e 20 (vinte) anos de efetiva exposição; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - 86 (oitenta e seis) pontos e 25 (vinte e cinco) anos de efetiva exposição. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A idade e o tempo de contribuição serão apurados em dias para o cálculo do somatório de pontos a que se refere o <I>caput</I>. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º O valor da aposentadoria de que trata este artigo será apurado na forma da lei. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Aplicam-se às aposentadorias dos servidores dos Estados, do Distrito Federal e dos Municípios cujas atividades sejam exercidas com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação, na forma do § 4º-C do art. 40 da Constituição Federal, as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 22.&nbsp;Até que lei discipline o § 4º-A do art. 40 e o inciso I do § 1º do art. 201 da Constituição Federal, a aposentadoria da pessoa com deficiência segurada do Regime Geral de Previdência Social ou do servidor público federal com deficiência vinculado a regime próprio de previdência social, desde que cumpridos, no caso do servidor, o tempo mínimo de 10 (dez) anos de efetivo exercício no serviço público e de 5 (cinco) anos no cargo efetivo em que for concedida a aposentadoria, será concedida na forma da Lei Complementar nº 142, de 8 de maio de 2013, inclusive quanto aos critérios de cálculo dos benefícios. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Parágrafo único. </I>Aplicam-se às aposentadorias dos servidores com deficiência dos Estados, do Distrito Federal e dos Municípios as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 23.&nbsp;A pensão por morte concedida a dependente de segurado do Regime Geral de Previdência Social ou de servidor público federal será equivalente a uma cota familiar de 50% (cinquenta por cento) do valor da aposentadoria recebida pelo segurado ou servidor ou daquela a que teria direito se fosse aposentado por incapacidade permanente na data do óbito, acrescida de cotas de 10 (dez) pontos percentuais por dependente, até o máximo de 100% (cem por cento). <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º As cotas por dependente cessarão com a perda dessa qualidade e não serão reversíveis aos demais dependentes, preservado o valor de 100% (cem por cento) da pensão por morte quando o número de dependentes remanescente for igual ou superior a 5 (cinco). <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Na hipótese de existir dependente inválido ou com deficiência intelectual, mental ou grave, o valor da pensão por morte de que trata o <I>caput</I> será equivalente a: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 100% (cem por cento) da aposentadoria recebida pelo segurado ou servidor ou daquela a que teria direito se fosse aposentado por incapacidade permanente na data do óbito, até o limite máximo de benefícios do Regime Geral de Previdência Social; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - uma cota familiar de 50% (cinquenta por cento) acrescida de cotas de 10 (dez) pontos percentuais por dependente, até o máximo de 100% (cem por cento), para o valor que supere o limite máximo de benefícios do Regime Geral de Previdência Social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Quando não houver mais dependente inválido ou com deficiência intelectual, mental ou grave, o valor da pensão será recalculado na forma do disposto no <I>caput</I> e no § 1º. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º O tempo de duração da pensão por morte e das cotas individuais por dependente até a perda dessa qualidade, o rol de dependentes e sua qualificação e as condições necessárias para enquadramento serão aqueles estabelecidos na Lei nº 8.213, de 24 de julho de 1991. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º Para o dependente inválido ou com deficiência intelectual, mental ou grave, sua condição pode ser reconhecida previamente ao óbito do segurado, por meio de avaliação biopsicossocial realizada por equipe multiprofissional e interdisciplinar, observada revisão periódica na forma da legislação. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 6º Equiparam-se a filho, para fins de recebimento da pensão por morte, exclusivamente o enteado e o menor tutelado, desde que comprovada a dependência econômica. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 7º As regras sobre pensão previstas neste artigo e na legislação vigente na data de entrada em vigor desta Emenda Constitucional poderão ser alteradas na forma da lei para o Regime Geral de Previdência Social e para o regime próprio de previdência social da União. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 8º Aplicam-se às pensões concedidas aos dependentes de servidores dos Estados, do Distrito Federal e dos Municípios as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 24.&nbsp;É vedada a acumulação de mais de uma pensão por morte deixada por cônjuge ou companheiro, no âmbito do mesmo regime de previdência social, ressalvadas as pensões do mesmo instituidor decorrentes do exercício de cargos acumuláveis na forma do art. 37 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Será admitida, nos termos do § 2º, a acumulação de: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - pensão por morte deixada por cônjuge ou companheiro de um regime de previdência social com pensão por morte concedida por outro regime de previdência social ou com pensões decorrentes das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - pensão por morte deixada por cônjuge ou companheiro de um regime de previdência social com aposentadoria concedida no âmbito do Regime Geral de Previdência Social ou de regime próprio de previdência social ou com proventos de inatividade decorrentes das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal; ou <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - pensões decorrentes das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal com aposentadoria concedida no âmbito do Regime Geral de Previdência Social ou de regime próprio de previdência social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Nas hipóteses das acumulações previstas no § 1º, é assegurada a percepção do valor integral do benefício mais vantajoso e de uma parte de cada um dos demais benefícios, apurada cumulativamente de acordo com as seguintes faixas: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - 60% (sessenta por cento) do valor que exceder 1 (um) salário-mínimo, até o limite de 2 (dois) salários-mínimos; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - 40% (quarenta por cento) do valor que exceder 2 (dois) salários-mínimos, até o limite de 3 (três) salários-mínimos; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - 20% (vinte por cento) do valor que exceder 3 (três) salários-mínimos, até o limite de 4 (quatro) salários-mínimos; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - 10% (dez por cento) do valor que exceder 4 (quatro) salários-mínimos. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º A aplicação do disposto no § 2º poderá ser revista a qualquer tempo, a pedido do interessado, em razão de alteração de algum dos benefícios. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º As restrições previstas neste artigo não serão aplicadas se o direito aos benefícios houver sido adquirido antes da data de entrada em vigor desta Emenda Constitucional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º As regras sobre acumulação previstas neste artigo e na legislação vigente na data de entrada em vigor desta Emenda Constitucional poderão ser alteradas na forma do § 6º do art. 40 e do § 15 do art. 201 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 25.&nbsp;Será assegurada a contagem de tempo de contribuição fictício no Regime Geral de Previdência Social decorrente de hipóteses descritas na legislação vigente até a data de entrada em vigor desta Emenda Constitucional para fins de concessão de aposentadoria, observando-se, a partir da sua entrada em vigor, o disposto no § 14 do art. 201 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Para fins de comprovação de atividade rural exercida até a data de entrada em vigor desta Emenda Constitucional, o prazo de que tratam os §§ 1º e 2º do art. 38-B da Lei nº 8.213, de 24 de julho de 1991, será prorrogado até a data em que o Cadastro Nacional de Informações Sociais (CNIS) atingir a cobertura mínima de 50% (cinquenta por cento) dos trabalhadores de que trata o § 8º do art. 195 da Constituição Federal, apurada conforme quantitativo da Pesquisa Nacional por Amostra de Domicílios Contínua (Pnad). <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Será reconhecida a conversão de tempo especial em comum, na forma prevista na Lei nº 8.213, de 24 de julho de 1991, ao segurado do Regime Geral de Previdência Social que comprovar tempo de efetivo exercício de atividade sujeita a condições especiais que efetivamente prejudiquem a saúde, cumprido até a data de entrada em vigor desta Emenda Constitucional, vedada a conversão para o tempo cumprido após esta data. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º Considera-se nula a aposentadoria que tenha sido concedida ou que venha a ser concedida por regime próprio de previdência social com contagem recíproca do Regime Geral de Previdência Social mediante o cômputo de tempo de serviço sem o recolhimento da respectiva contribuição ou da correspondente indenização pelo segurado obrigatório responsável, à época do exercício da atividade, pelo recolhimento de suas próprias contribuições previdenciárias. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 26.&nbsp;Até que lei discipline o cálculo dos benefícios do regime próprio de previdência social da União e do Regime Geral de Previdência Social, será utilizada a média aritmética simples dos salários de contribuição e das remunerações adotados como base para contribuições a regime próprio de previdência social e ao Regime Geral de Previdência Social, ou como base para contribuições decorrentes das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal, atualizados monetariamente, correspondentes a 100% (cem por cento) do período contributivo desde a competência julho de 1994 ou desde o início da contribuição, se posterior àquela competência. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º A média a que se refere o <I>caput</I> será limitada ao valor máximo do salário de contribuição do Regime Geral de Previdência Social para os segurados desse regime e para o servidor que ingressou no serviço público em cargo efetivo após a implantação do regime de previdência complementar ou que tenha exercido a opção correspondente, nos termos do disposto nos §§ 14 a 16 do art. 40 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º O valor do benefício de aposentadoria corresponderá a 60% (sessenta por cento) da média aritmética definida na forma prevista no <I>caput</I> e no § 1º, com acréscimo de 2 (dois) pontos percentuais para cada ano de contribuição que exceder o tempo de 20 (vinte) anos de contribuição nos casos: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - do inciso II do § 6º do art. 4º, do § 4º do art. 15, do § 3º do art. 16 e do § 2º do art. 18; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - do § 4º do art. 10, ressalvado o disposto no inciso II do § 3º e no § 4º deste artigo; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - de aposentadoria por incapacidade permanente aos segurados do Regime Geral de Previdência Social, ressalvado o disposto no inciso II do § 3º deste artigo; e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - do § 2º do art. 19 e do § 2º do art. 21, ressalvado o disposto no § 5º deste artigo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 3º O valor do benefício de aposentadoria corresponderá a 100% (cem por cento) da média aritmética definida na forma prevista no <I>caput</I> e no § 1º: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - no caso do inciso II do § 2º do art. 20; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - no caso de aposentadoria por incapacidade permanente, quando decorrer de acidente de trabalho, de doença profissional e de doença do trabalho. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 4º O valor do benefício da aposentadoria de que trata o inciso III do § 1º do art. 10 corresponderá ao resultado do tempo de contribuição dividido por 20 (vinte) anos, limitado a um inteiro, multiplicado pelo valor apurado na forma do <I>caput</I> do § 2º deste artigo, ressalvado o caso de cumprimento de critérios de acesso para aposentadoria voluntária que resulte em situação mais favorável. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 5º O acréscimo a que se refere o <I>caput</I> do § 2º será aplicado para cada ano que exceder 15 (quinze) anos de tempo de contribuição para os segurados de que tratam a alínea "<EM>a</EM>" do inciso I do § 1º do art. 19 e o inciso I do art. 21 e para as mulheres filiadas ao Regime Geral de Previdência Social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 6º Poderão ser excluídas da média as contribuições que resultem em redução do valor do benefício, desde que mantido o tempo mínimo de contribuição exigido, vedada a utilização do tempo excluído para qualquer finalidade, inclusive para o acréscimo a que se referem os §§ 2º e 5º, para a averbação em outro regime previdenciário ou para a obtenção dos proventos de inatividade das atividades de que tratam os arts. 42 e 142 da Constituição Federal. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 7º Os benefícios calculados nos termos do disposto neste artigo serão reajustados nos termos estabelecidos para o Regime Geral de Previdência Social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 27.&nbsp;Até que lei discipline o acesso ao salário-família e ao auxílio-reclusão de que trata o inciso IV do art. 201 da Constituição Federal, esses benefícios serão concedidos apenas àqueles que tenham renda bruta mensal igual ou inferior a R$ 1.364,43 (mil, trezentos e sessenta e quatro reais e quarenta e três centavos), que serão corrigidos pelos mesmos índices aplicados aos benefícios do Regime Geral de Previdência Social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º Até que lei discipline o valor do auxílio-reclusão, de que trata o inciso IV do art. 201 da Constituição Federal, seu cálculo será realizado na forma daquele aplicável à pensão por morte, não podendo exceder o valor de 1 (um) salário-mínimo. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Até que lei discipline o valor do salário-família, de que trata o inciso IV do art. 201 da Constituição Federal, seu valor será de R$ 46,54 (quarenta e seis reais e cinquenta e quatro centavos). <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 28.&nbsp;Até que lei altere as alíquotas da contribuição de que trata a Lei nº 8.212, de 24 de julho de 1991, devidas pelo segurado empregado, inclusive o doméstico, e pelo trabalhador avulso, estas serão de: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - até 1 (um) salário-mínimo, 7,5% (sete inteiros e cinco décimos por cento); <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - acima de 1 (um) salário-mínimo até R$ 2.000,00 (dois mil reais), 9% (nove por cento); <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - de R$ 2.000,01 (dois mil reais e um centavo) até R$ 3.000,00 (três mil reais), 12% (doze por cento); e <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - de R$ 3.000,01 (três mil reais e um centavo) até o limite do salário de contribuição, 14% (quatorze por cento). <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 1º As alíquotas previstas no <I>caput</I> serão aplicadas de forma progressiva sobre o salário de contribuição do segurado, incidindo cada alíquota sobre a faixa de valores compreendida nos respectivos limites. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;§ 2º Os valores previstos no <I>caput</I> serão reajustados, a partir da data de entrada em vigor desta Emenda Constitucional, na mesma data e com o mesmo índice em que se der o reajuste dos benefícios do Regime Geral de Previdência Social, ressalvados aqueles vinculados ao salário-mínimo, aos quais se aplica a legislação específica. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 29.&nbsp;Até que entre em vigor lei que disponha sobre o § 14 do art. 195 da Constituição Federal, o segurado que, no somatório de remunerações auferidas no período de 1 (um) mês, receber remuneração inferior ao limite mínimo mensal do salário de contribuição poderá: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - complementar a sua contribuição, de forma a alcançar o limite mínimo exigido; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - utilizar o valor da contribuição que exceder o limite mínimo de contribuição de uma competência em outra; ou <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - agrupar contribuições inferiores ao limite mínimo de diferentes competências, para aproveitamento em contribuições mínimas mensais. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Parágrafo único. </I>Os ajustes de complementação ou agrupamento de contribuições previstos nos incisos I, II e III do <I>caput</I> somente poderão ser feitos ao longo do mesmo ano civil. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 30.&nbsp;A vedação de diferenciação ou substituição de base de cálculo decorrente do disposto no § 9º do art. 195 da Constituição Federal não se aplica a contribuições que substituam a contribuição de que trata a alínea "<EM>a</EM>" do inciso I do <I>caput</I> do art. 195 da Constituição Federal instituídas antes da data de entrada em vigor desta Emenda Constitucional. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 31.&nbsp;O disposto no § 11 do art. 195 da Constituição Federal não se aplica aos parcelamentos previstos na legislação vigente até a data de entrada em vigor desta Emenda Constitucional, sendo vedadas a reabertura ou a prorrogação de prazo para adesão. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 32.&nbsp;Até que entre em vigor lei que disponha sobre a alíquota da contribuição de que trata a Lei nº 7.689, de 15 de dezembro de 1988, esta será de 20% (vinte por cento) no caso das pessoas jurídicas referidas no inciso I do § 1º do art. 1º da Lei Complementar nº 105, de 10 de janeiro de 2001. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 33.&nbsp;Até que seja disciplinada a relação entre a União, os Estados, o Distrito Federal e os Municípios e entidades abertas de previdência complementar na forma do disposto nos §§ 4º e 5º do art. 202 da Constituição Federal, somente entidades fechadas de previdência complementar estão autorizadas a administrar planos de benefícios patrocinados pela União, Estados, Distrito Federal ou Municípios, inclusive suas autarquias, fundações, sociedades de economia mista e empresas controladas direta ou indiretamente. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 34.&nbsp;Na hipótese de extinção por lei de regime previdenciário e migração dos respectivos segurados para o Regime Geral de Previdência Social, serão observados, até que lei federal disponha sobre a matéria, os seguintes requisitos pelo ente federativo: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - assunção integral da responsabilidade pelo pagamento dos benefícios concedidos durante a vigência do regime extinto, bem como daqueles cujos requisitos já tenham sido implementados antes da sua extinção; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - previsão de mecanismo de ressarcimento ou de complementação de benefícios aos que tenham contribuído acima do limite máximo do Regime Geral de Previdência Social; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - vinculação das reservas existentes no momento da extinção, exclusivamente: <BR><BR>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>a)</I></TD>
+<TD>ao pagamento dos benefícios concedidos e a conceder, ao ressarcimento de contribuições ou à complementação de benefícios, na forma dos incisos I e II; e </TD></TR></TBODY></TABLE>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>b)</I></TD>
+<TD>à compensação financeira com o Regime Geral de Previdência Social. </TD></TR></TBODY></TABLE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Parágrafo único. </I>A existência de <I>superavit</I> atuarial não constitui óbice à extinção de regime próprio de previdência social e à consequente migração para o Regime Geral de Previdência Social. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 35.&nbsp;Revogam-se: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - os seguintes dispositivos da Constituição Federal: <BR><BR>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>a)</I></TD>
+<TD>o § 21 do art. 40; </TD></TR></TBODY></TABLE>
+<TABLE>
+<TBODY>
+<TR>
+<TD width=20></TD>
+<TD vAlign=UP width=30 align=right><I>b)</I></TD>
+<TD>o § 13 do art. 195; </TD></TR></TBODY></TABLE>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - os arts. 9º, 13 e 15 da Emenda Constitucional nº 20, de 15 de dezembro de 1998; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - os arts. 2º, 6º e 6º-A da Emenda Constitucional nº 41, de 19 de dezembro de 2003; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IV - o art. 3º da Emenda Constitucional nº 47, de 5 de julho de 2005. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Art. 36.&nbsp;Esta Emenda Constitucional entra em vigor: <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I - no primeiro dia do quarto mês subsequente ao da data de publicação desta Emenda Constitucional, quanto ao disposto nos arts. 11, 28 e 32; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;II - para os regimes próprios de previdência social dos Estados, do Distrito Federal e dos Municípios, quanto à alteração promovida pelo art. 1º desta Emenda Constitucional no art. 149 da Constituição Federal e às revogações previstas na alínea "<EM>a</EM>" do inciso I e nos incisos III e IV do art. 35, na data de publicação de lei de iniciativa privativa do respectivo Poder Executivo que as referende integralmente; <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;III - nos demais casos, na data de sua publicação. <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Parágrafo único. </I>A lei de que trata o inciso II do <I>caput</I> não produzirá efeitos anteriores à data de sua publicação. </P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp; Brasília, em 12 de novembro de 2019</P>
+<P>
+<TABLE class=MsoTableGrid style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; mso-yfti-tbllook: 1184; mso-padding-alt: 0cm 5.4pt 0cm 5.4pt; mso-border-insideh: none; mso-border-insidev: none" cellSpacing=0 cellPadding=0 border=0>
+<TBODY>
+<TR style="mso-yfti-irow: 0; mso-yfti-firstrow: yes">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Mesa da Câmara dos Deputados</SPAN></B><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'><?xml:namespace prefix = "o" ns = "urn:schemas-microsoft-com:office:office" /><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><B><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Mesa do Senado Federal<o:p></o:p></SPAN></B></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'><o:p>&nbsp;</o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 1">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputado RODRIGO MAIA<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Presidente<BR style="mso-special-character: line-break"><BR style="mso-special-character: line-break"><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador DAVI ALCOLUMBRE<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Presidente<o:p></o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 2">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputado MARCOS PEREIRA<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>1º Vice-Presidente<BR style="mso-special-character: line-break"><BR style="mso-special-character: line-break"><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador ANTONIO ANASTASIA<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>1º Vice-Presidente<o:p></o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 3">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputado LUCIANO BIVAR<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>2º Vice-Presidente<BR style="mso-special-character: line-break"><BR style="mso-special-character: line-break"><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador LASIER MARTINS<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>2º Vice-Presidente<o:p></o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 4">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputada SORAYA SANTOS<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>1ª Secretária<BR style="mso-special-character: line-break"><BR style="mso-special-character: line-break"><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador SÉRGIO PETECÃO<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>1º Secretário<o:p></o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 5">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputado MÁRIO HERINGER<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>2º Secretário<BR style="mso-special-character: line-break"><BR style="mso-special-character: line-break"><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador EDUARDO GOMES<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>2º Secretário<o:p></o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 6">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputado FÁBIO FARIA<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>3º Secretário<BR style="mso-special-character: line-break"><BR style="mso-special-character: line-break"><o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador FLÁVIO BOLSONARO<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>3º Secretário<o:p></o:p></SPAN></P></TD></TR>
+<TR style="mso-yfti-irow: 7; mso-yfti-lastrow: yes">
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Deputado ANDRÉ FUFUCA<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>4º Secretário<o:p></o:p></SPAN></P></TD>
+<TD style="BORDER-TOP: #f0f0f0; BORDER-RIGHT: #f0f0f0; WIDTH: 216.1pt; BORDER-BOTTOM: #f0f0f0; PADDING-BOTTOM: 0cm; PADDING-TOP: 0cm; PADDING-LEFT: 5.4pt; BORDER-LEFT: #f0f0f0; PADDING-RIGHT: 5.4pt; BACKGROUND-COLOR: transparent" vAlign=top width=288>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal; TEXT-AUTOSPACE: ; mso-layout-grid-align: none"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>Senador LUIS CARLOS HEINZE<o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; LINE-HEIGHT: normal"><SPAN style='FONT-SIZE: 12pt; FONT-FAMILY: "Arial","sans-serif"'>4º Secretário<o:p></o:p></SPAN></P></TD></TR></TBODY></TABLE><BR></P>
+						</div>
+					    
+				</div>
+				
+
+                                            <br>
+                                            <div class="rodapeTexto">
+                                                <div class="texto">
+                                                    Este texto não substitui o original publicado no Diário Oficial da União - Seção 1 de 13/11/2019
+                                                </div>
+                                            </div>
+
+					<br><br>
+					<div class="publicacoesTI">
+                                            <strong>Publicação:</strong>
+                                            <ul class="listaMarcada">
+                                                    <li>
+                                                        
+                                                        Diário Oficial da União - Seção 1
+                                                         - 13/11/2019, Página 1 
+                                                        
+                                                        (Publicação Original)
+                                                        
+                                                    </li>
+                                            </ul>
+					</div>
+
+
+
+			</div> <!-- content // -->
+		</div> <!-- documentContent // -->
+	</div> <!-- portal-content-wrapper // -->
+</div> <!-- portal-column-content // --> 
+
+<!-- JS do portal-tema: necessário para o botão de compartilhamento -->
+<script type="text/javascript" src="https://www.camara.leg.br/tema/global/vendor-bundle.js"></script>
+<script type="text/javascript" src="https://www.camara.leg.br/tema/global/camara-bundle.js"></script>
+
+</div></div>
+<div class="js-mmenu-container">
+      
+
+      
+      
+
+      
+
+      <footer role="contentinfo" class="rodape-portal">
+        <!-- Coloque aqui o endere&#231;o e demais informa&#231;&#245;es de assinatura -->
+        <address class="rodape-portal-info">
+          <div class="container">
+            <div class="rodape-portal-info__nome">
+              <p>
+                <strong id="legislaturaRodape">57ª Legislatura - 4ª Sessão Legislativa Ordinária</strong>
+              </p>
+            </div>
+
+            <div class="l-rodape-info">
+              <div class="l-rodape-info__local rodape-portal-info__texto">
+                <span class="rodape-info">Câmara dos Deputados - Palácio do Congresso Nacional - Praça
+                  dos Três Poderes</span>
+                <span class="rodape-info">Brasília - DF - Brasil - CEP 70160-900</span>
+                <span class="rodape-info"><span class="rodape-info__destaque">CNPJ:</span>
+                  00.530.352/0001-59</span>
+              </div>
+
+              <div class="l-rodape-info__telefones rodape-portal-info__texto">
+                <ul class="list-unstyled" aria-label="Número para contato e horário de atendimento">
+                  <li>
+                    <span class="rodape-info__destaque">Disque-Câmara:</span>
+                    <a href="tel:0800-0-619-619">0800-0-619-619</a>, das 8h às
+                    20h
+                  </li>
+                  <li>
+                    <span class="rodape-info__destaque">Atendimento por WhatsApp:</span>
+                    <a href="https://wa.me//556132160000?text">(61) 3216-0000</a>, das 8h às 19h
+                  </li>
+                  <li>
+                    <span class="rodape-info__destaque">Atendimento presencial:</span>
+                    das 9h às 19h
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="acesso-provedor text-right">
+              <a title="Autenticar-se no site" href="/login_form">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </address>
+        <!-- Coloque aqui a lista de redes sociais da C&#226;mara -->
+        <div class="rodape-portal-links rodape-portal-links--redes-sociais">
+          <div class="container">
+            <ul class="rodape-portal-links__lista" aria-label="Câmara nas redes sociais">
+              <li class="rodape-portal-links__item">
+                <a href="https://whatsapp.com/channel/0029Va2fexI3gvWgfMs6Fv31" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--whatsapp" aria-hidden="true"></span>
+                  <span class="sr-only">Whatsapp</span>
+                </a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://t.me/CamaradosDeputados" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--telegram" aria-hidden="true"></span>
+                  <span class="sr-only">Telegram</span>
+                </a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://www.facebook.com/camaradeputados" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--facebook" aria-hidden="true"></span>
+                  <span class="sr-only">Facebook</span>
+                </a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://twitter.com/camaradeputados" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--twitter" aria-hidden="true"></span>
+                  <span class="sr-only">X</span>
+                </a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://www.youtube.com/channel/UC-ZkSRh-7UEuwXJQ9UMCFJA" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--youtube" aria-hidden="true"></span>
+                  <span class="sr-only">Youtube</span>
+                </a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://tiktok.com/@camaradosdeputados" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--tiktok" aria-hidden="true"></span>
+                  <span class="sr-only">Tiktok</span>
+                </a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://www.instagram.com/camaradeputados" class="rodape-portal-links__link">
+                  <span class="g-social-icon-outline g-social-icon-outline--instagram" aria-hidden="true"></span>
+                  <span class="sr-only">Instagram</span>
+                </a>
+              </li>
+              <li class="rodape-portal-links__item">
+                  <a href="https://www.threads.com/@camaradosdeputados" class="rodape-portal-links__link">
+                      <span class="g-social-icon-outline g-social-icon-outline--threads" aria-hidden="true"></span>
+                      <span class="sr-only">Threads</span>
+                  </a>
+              </li>
+              <li class="rodape-portal-links__item">
+                  <a href="https://bsky.app/profile/camara.leg.br" class="rodape-portal-links__link">
+                      <span class="g-social-icon-outline g-social-icon-outline--bluesky" aria-hidden="true"></span>
+                      <span class="sr-only">Bluesky</span>
+                  </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Coloque aqui a lista de links de apoio do rodap&#233; -->
+        <div class="rodape-portal-links rodape-portal-links--apoio">
+          <div class="container">
+            <ul class="rodape-portal-links__lista" aria-label="Links de apoio">
+              <li class="rodape-portal-links__item">
+                <a href="https://www2.camara.leg.br/sobre-o-portal" class="rodape-portal-links__link">Sobre o portal</a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://www2.camara.leg.br/termo-de-uso-e-politica-de-privacidade" class="rodape-portal-links__link">Termos de uso</a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://www2.camara.leg.br/aplicativos/" class="rodape-portal-links__link">Aplicativos</a>
+              </li>
+
+              <li class="rodape-portal-links__item">
+                <a href="https://www.camara.leg.br/extranet" class="rodape-portal-links__link">Extranet</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
+      <div class="barra-carregando" style="display: none">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Carregando</h5>
+            </div>
+            <div class="modal-body">
+              <p>Por favor, aguarde.</p>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                  <span class="sr-only"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

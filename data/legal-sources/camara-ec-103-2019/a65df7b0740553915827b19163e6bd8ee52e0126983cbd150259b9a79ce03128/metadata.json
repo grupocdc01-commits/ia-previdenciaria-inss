@@ -1,0 +1,23 @@
+{
+  "source_id": "camara-ec-103-2019",
+  "title": "Emenda Constitucional 103/2019 — Câmara dos Deputados",
+  "url": "https://www2.camara.leg.br/legin/fed/emecon/2019/emendaconstitucional-103-12-novembro-2019-789412-publicacaooriginal-159409-pl.html",
+  "final_url": "https://www2.camara.leg.br/legin/fed/emecon/2019/emendaconstitucional-103-12-novembro-2019-789412-publicacaooriginal-159409-pl.html",
+  "institution": "Câmara dos Deputados",
+  "type": "emenda",
+  "retrieved_at": "2026-10-27T20:21:36.887513+00:00",
+  "sha256": "a65df7b0740553915827b19163e6bd8ee52e0126983cbd150259b9a79ce03128",
+  "bytes": 144732,
+  "http_status": 200,
+  "media_type": "text/html; charset=UTF-8",
+  "approval_status": "draft",
+  "legal_validity": "nao_verificada",
+  "robots_allowed_for_path": true,
+  "robots_user_agent": "IAPrevidenciariaResearch/0.1",
+  "license_displayed": null,
+  "limitations": [
+    "Coleta pública pontual; termos e vigência exigem revisão.",
+    "Texto consolidado pode conter redações revogadas; não inferir vigência histórica.",
+    "Sem aprovação jurídica; não ativar regras."
+  ]
+}

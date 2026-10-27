@@ -9,13 +9,16 @@
   "scripts": {
     "dev": "node --env-file-if-exists=.env src/server.ts",
     "demo": "node scripts/demo.ts",
+    "library:import": "node --env-file-if-exists=.env scripts/import_library.ts",
+    "library:collect": "python scripts/collect_official_sources.py",
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "start": "node --env-file-if-exists=.env dist/src/server.js",
     "test": "node --test --test-isolation=none tests/*.test.ts",
-    "check": "npm run typecheck && npm test && python scripts/verificar_fontes.py"
+    "check": "npm run typecheck && npm test && python -m unittest discover -s tests -p '*_test.py' && python scripts/verificar_fontes.py"
   },
   "dependencies": {
+    "cheerio": "1.2.0",
     "fastify": "5.12.7",
     "pdfkit": "0.17.2",
     "zod": "4.6.7"

@@ -8,13 +8,15 @@ import { nextQuestion } from './interview.ts';
 import { DemoInvestigator } from './investigation.ts';
 import type { AnalysisProvider } from './investigation.ts';
 import { reportPdf } from './reports.ts';
+import { LegalLibrary } from './library.ts';
 
 declare module 'fastify' { interface FastifyRequest { ownerId: string } }
-export function buildApp(options: { store?: Store; tokens: Record<string, string>; investigator?: AnalysisProvider; logger?: boolean }) {
+export function buildApp(options: { store?: Store; tokens: Record<string, string>; investigator?: AnalysisProvider; logger?: boolean; library?: { catalog: unknown; archiveRoot: string; curators: string[] } }) {
   const tokens = Object.entries(options.tokens);
   if (!tokens.length || tokens.some(([token, owner]) => token.length < 24 || !owner.trim())) throw new Error('Configure tokens locais de pelo menos 24 caracteres e seus proprietários.');
   const store = options.store ?? new Store();
   const investigator = options.investigator ?? new DemoInvestigator();
+  const library = options.library ? new LegalLibrary(store.db, options.library.catalog, options.library.archiveRoot) : null;
   const app = Fastify({ bodyLimit: 150_000, logger: options.logger ? { redact: ['req.headers.authorization'], serializers: { req: req => ({ method: req.method, route: req.routeOptions?.url }) } } : false, logController: new LogController({ disableRequestLogging: true }) });
   app.decorateRequest('ownerId', '');
   app.addHook('onRequest', async (request, reply) => {
@@ -33,6 +35,26 @@ export function buildApp(options: { store?: Store; tokens: Record<string, string
   });
   const params = (raw: unknown) => z.object({ id: z.uuid() }).parse(raw).id;
   app.get('/health', async () => ({ status: 'ok', mode: 'demonstracao', realLegalAnalysisEnabled: false }));
+  if (library) {
+    const curator = (ownerId: string) => {
+      if (!options.library!.curators.includes(ownerId)) throw new DomainError('Curadoria não autorizada.', 403);
+    };
+    app.get('/admin/sources', async request => { curator(request.ownerId); return library.list(); });
+    app.post('/admin/sources/import', async (request, reply) => {
+      curator(request.ownerId);
+      const input = z.object({ sourceId: z.string().regex(/^[a-z0-9-]+$/), sha256: z.string().regex(/^[a-f0-9]{64}$/) }).strict().parse(request.body);
+      const result = library.importArchive(input.sourceId, input.sha256, request.ownerId);
+      return reply.code(result.inserted ? 201 : 200).send(result);
+    });
+    app.get('/admin/sources/:sourceId/versions/:sha256', async request => {
+      curator(request.ownerId);
+      const input = z.object({ sourceId: z.string().regex(/^[a-z0-9-]+$/), sha256: z.string().regex(/^[a-f0-9]{64}$/) }).parse(request.params);
+      return library.get(input.sourceId, input.sha256);
+    });
+    app.post('/admin/sources/search', async request => { curator(request.ownerId); return library.search(request.body, true); });
+    app.post('/library/search', async request => library.search(request.body));
+    // Nenhuma rota ou token desta fase pode aprovar fontes juridicamente.
+  }
   app.post('/cases', async (request, reply) => reply.code(201).send(store.create(request.ownerId, caseInput.parse(request.body))));
   app.get('/cases/:id', async request => store.get(params(request.params), request.ownerId));
   app.patch('/cases/:id', async request => {
