@@ -9,14 +9,17 @@ import { DemoInvestigator } from './investigation.ts';
 import type { AnalysisProvider } from './investigation.ts';
 import { reportPdf } from './reports.ts';
 import { LegalLibrary } from './library.ts';
+import { researchResources } from './research-resources.ts';
 
 declare module 'fastify' { interface FastifyRequest { ownerId: string } }
-export function buildApp(options: { store?: Store; tokens: Record<string, string>; investigator?: AnalysisProvider; logger?: boolean; library?: { catalog: unknown; archiveRoot: string; curators: string[] } }) {
+export function buildApp(options: { store?: Store; tokens: Record<string, string>; investigator?: AnalysisProvider; logger?: boolean; library?: { catalog: unknown; archiveRoot: string; curators: string[]; researchResources?: unknown } }) {
   const tokens = Object.entries(options.tokens);
   if (!tokens.length || tokens.some(([token, owner]) => token.length < 24 || !owner.trim())) throw new Error('Configure tokens locais de pelo menos 24 caracteres e seus proprietários.');
   const store = options.store ?? new Store();
   const investigator = options.investigator ?? new DemoInvestigator();
   const library = options.library ? new LegalLibrary(store.db, options.library.catalog, options.library.archiveRoot) : null;
+  const resources = options.library?.researchResources;
+  if (resources !== undefined) researchResources(resources);
   const app = Fastify({ bodyLimit: 150_000, logger: options.logger ? { redact: ['req.headers.authorization'], serializers: { req: req => ({ method: req.method, route: req.routeOptions?.url }) } } : false, logController: new LogController({ disableRequestLogging: true }) });
   app.decorateRequest('ownerId', '');
   app.addHook('onRequest', async (request, reply) => {
@@ -36,6 +39,10 @@ export function buildApp(options: { store?: Store; tokens: Record<string, string
   const params = (raw: unknown) => z.object({ id: z.uuid() }).parse(raw).id;
   app.get('/health', async () => ({ status: 'ok', mode: 'demonstracao', realLegalAnalysisEnabled: false }));
   if (library) {
+    app.get('/library/resources', async request => {
+      const input = z.object({ uf: z.string().optional() }).strict().parse(request.query);
+      return researchResources(resources ?? [], input.uf);
+    });
     const curator = (ownerId: string) => {
       if (!options.library!.curators.includes(ownerId)) throw new DomainError('Curadoria não autorizada.', 403);
     };

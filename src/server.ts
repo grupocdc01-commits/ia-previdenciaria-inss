@@ -10,7 +10,7 @@ const environment = z.object({
   PORT: z.coerce.number().int().min(1024).max(65535).default(3000)
 }).parse(process.env);
 const app = buildApp({ store: new Store(environment.DATABASE_PATH), tokens: { [environment.DEMO_API_TOKEN]: 'local-demo' }, logger: true,
-  library: { catalog: JSON.parse(readFileSync(resolve('data/library/catalog.json'), 'utf8')), archiveRoot: resolve('data/legal-sources'), curators: ['local-demo'] }
+  library: { catalog: JSON.parse(readFileSync(resolve('data/library/catalog.json'), 'utf8')), archiveRoot: resolve('data/legal-sources'), curators: ['local-demo'], researchResources: JSON.parse(readFileSync(resolve('data/library/research-resources.json'), 'utf8')) }
 });
 for (const signal of ['SIGINT', 'SIGTERM'] as const) process.once(signal, () => { void app.close(); });
 await app.listen({ host: '127.0.0.1', port: environment.PORT });

@@ -1,5 +1,9 @@
 # Biblioteca jurídica versionada
 
+Diretório adicional de TRFs, Jusbrasil e consulta processual INSS:
+[FONTES_DE_PESQUISA.md](FONTES_DE_PESQUISA.md). Cadastro de portais e coleta de
+documentos são estados distintos; consulte `GET /library/resources`.
+
 ## Entrega
 
 A biblioteca agora tem catálogo persistente em SQLite, importação local por ID e
