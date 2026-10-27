@@ -11,3 +11,11 @@ Execute `python scripts/verificar_fontes.py` para verificar a integridade da có
 A implementação local anterior não apareceu no checkout após a reconexão. Os
 anexos de especificação foram recuperados, mas o núcleo e os testes anteriores
 continuam pendentes de recuperação. Consulte `docs/ESTADO_APOS_PUBLICACAO.md`.
+
+## Núcleo local reconstruído
+
+A nova implementação demonstrativa está em `src/`, com testes novos em `tests/`.
+Requer Node.js 24+: `npm ci`, `npm run check`, `npm run build`, `npm run demo`.
+Usa somente dados fictícios e não produz conclusões jurídicas reais.
+Instruções de API, execução e limites: [docs/NUCLEO_LOCAL.md](docs/NUCLEO_LOCAL.md).
+Histórico da retomada: [docs/RECUPERACAO_NUCLEO.md](docs/RECUPERACAO_NUCLEO.md).
