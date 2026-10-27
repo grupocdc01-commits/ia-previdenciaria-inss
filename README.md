@@ -19,3 +19,11 @@ Requer Node.js 24+: `npm ci`, `npm run check`, `npm run build`, `npm run demo`.
 Usa somente dados fictícios e não produz conclusões jurídicas reais.
 Instruções de API, execução e limites: [docs/NUCLEO_LOCAL.md](docs/NUCLEO_LOCAL.md).
 Histórico da retomada: [docs/RECUPERACAO_NUCLEO.md](docs/RECUPERACAO_NUCLEO.md).
+
+## Biblioteca jurídica
+
+Sete versões oficiais arquivadas, incluindo seis documentos normativos obtidos
+na Câmara dos Deputados. Todas aguardam revisão jurídica. Execute
+`npm run library:import` para reconstruir o banco e índice local.
+Consulte [docs/BIBLIOTECA_JURIDICA.md](docs/BIBLIOTECA_JURIDICA.md) para busca,
+API, coleta, inventário e limitações de vigência.

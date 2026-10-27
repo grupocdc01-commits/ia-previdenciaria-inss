@@ -1,0 +1,123 @@
+[
+  {
+    "id": "trf1",
+    "title": "Tribunal Regional Federal da 1ª Região",
+    "portalUrl": "https://www.trf1.jus.br/",
+    "researchUrl": "https://jurisprudencia.cjf.jus.br/?tribunal=trf1",
+    "kind": "official_jurisprudence",
+    "coverage": [
+      "DF",
+      "GO",
+      "MT",
+      "TO",
+      "BA",
+      "PI",
+      "MA",
+      "PA",
+      "AM",
+      "AC",
+      "AP",
+      "RR",
+      "RO"
+    ],
+    "verification": "official_link_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "trf2",
+    "title": "Tribunal Regional Federal da 2ª Região",
+    "portalUrl": "https://www.trf2.jus.br/",
+    "researchUrl": "https://eproc.trf2.jus.br/eproc/externo_controlador.php?acao=jurisprudencia@jurisprudencia/pesquisar",
+    "kind": "official_jurisprudence",
+    "coverage": [
+      "RJ",
+      "ES"
+    ],
+    "verification": "official_link_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "trf3",
+    "title": "Tribunal Regional Federal da 3ª Região",
+    "portalUrl": "https://www.trf3.jus.br/",
+    "researchUrl": "https://web.trf3.jus.br/jurisprudencia/",
+    "kind": "official_jurisprudence",
+    "coverage": [
+      "SP",
+      "MS"
+    ],
+    "verification": "official_link_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "trf4",
+    "title": "Tribunal Regional Federal da 4ª Região",
+    "portalUrl": "https://www.trf4.jus.br/",
+    "researchUrl": "https://eproc-jur.trf4.jus.br/eproc2trf4/externo_controlador.php?acao=jurisprudencia@jurisprudencia/pesquisar",
+    "kind": "official_jurisprudence",
+    "coverage": [
+      "PR",
+      "SC",
+      "RS"
+    ],
+    "verification": "official_link_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "trf5",
+    "title": "Tribunal Regional Federal da 5ª Região",
+    "portalUrl": "https://www.trf5.jus.br/",
+    "researchUrl": "https://juliapesquisa.trf5.jus.br/julia-pesquisa/pesquisa",
+    "kind": "official_jurisprudence",
+    "coverage": [
+      "PE",
+      "CE",
+      "RN",
+      "PB",
+      "AL",
+      "SE"
+    ],
+    "verification": "official_link_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "trf6",
+    "title": "Tribunal Regional Federal da 6ª Região",
+    "portalUrl": "https://portal.trf6.jus.br/",
+    "researchUrl": "https://portal.trf6.jus.br/juizados-especiais-federais-inicio/jurisprudencia-4/pesquisa-de-jurisprudencia-eproc/",
+    "kind": "official_jurisprudence",
+    "coverage": [
+      "MG"
+    ],
+    "verification": "official_link_documented",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "jusbrasil",
+    "title": "Jusbrasil",
+    "portalUrl": "https://www.jusbrasil.com.br/",
+    "researchUrl": "https://www.jusbrasil.com.br/",
+    "kind": "auxiliary_search",
+    "coverage": [],
+    "verification": "public_page_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  },
+  {
+    "id": "inss-consulta-processos",
+    "title": "Consulta de processos e recursos administrativos do INSS",
+    "portalUrl": "https://consultaprocessos.inss.gov.br/",
+    "researchUrl": "https://consultaprocessos.inss.gov.br/",
+    "kind": "private_case_lookup",
+    "coverage": [],
+    "verification": "public_shell_observed",
+    "checkedOn": "2026-10-27",
+    "automaticCollectionEnabled": false
+  }
+]

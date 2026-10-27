@@ -1,0 +1,23 @@
+{
+  "source_id": "camara-decreto-3048-1999",
+  "title": "Decreto 3.048/1999 — Câmara dos Deputados",
+  "url": "https://www2.camara.leg.br/legin/fed/decret/1999/decreto-3048-6-maio-1999-368532-normaatualizada-pe.html",
+  "final_url": "https://www2.camara.leg.br/legin/fed/decret/1999/decreto-3048-6-maio-1999-368532-normaatualizada-pe.html",
+  "institution": "Câmara dos Deputados",
+  "type": "decreto",
+  "retrieved_at": "2026-10-27T20:21:51.476520+00:00",
+  "sha256": "05ac349e3c3b408c2d66bf2c34789f880e02147d82f5c9916565d7348f2af042",
+  "bytes": 3715075,
+  "http_status": 200,
+  "media_type": "text/html; charset=UTF-8",
+  "approval_status": "draft",
+  "legal_validity": "nao_verificada",
+  "robots_allowed_for_path": true,
+  "robots_user_agent": "IAPrevidenciariaResearch/0.1",
+  "license_displayed": null,
+  "limitations": [
+    "Coleta pública pontual; termos e vigência exigem revisão.",
+    "Texto consolidado pode conter redações revogadas; não inferir vigência histórica.",
+    "Sem aprovação jurídica; não ativar regras."
+  ]
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "id": "cf-1988",
+    "title": "Constituição Federal",
+    "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+    "institution": "Presidência da República",
+    "type": "constituicao",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade",
+      "bpc"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "ec-103-2019",
+    "title": "Emenda Constitucional 103/2019",
+    "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm",
+    "institution": "Presidência da República",
+    "type": "emenda",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "lei-8212-1991",
+    "title": "Lei 8.212/1991",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8212cons.htm",
+    "institution": "Presidência da República",
+    "type": "lei",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "lei-8213-1991",
+    "title": "Lei 8.213/1991",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
+    "institution": "Presidência da República",
+    "type": "lei",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "loas-8742-1993",
+    "title": "Lei 8.742/1993 — LOAS",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm",
+    "institution": "Presidência da República",
+    "type": "lei",
+    "benefits": [
+      "bpc"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "decreto-3048-1999",
+    "title": "Decreto 3.048/1999",
+    "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm",
+    "institution": "Presidência da República",
+    "type": "decreto",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "inss-bpc",
+    "title": "Benefício assistencial à pessoa com deficiência (BPC-Loas)",
+    "url": "https://www.gov.br/inss/pt-br/direitos-e-deveres/beneficios-assistenciais/beneficio-assistencial-a-pessoa-com-deficiencia-bpc-loas",
+    "institution": "INSS",
+    "type": "orientacao_administrativa",
+    "benefits": [
+      "bpc"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "archived_draft"
+  },
+  {
+    "id": "camara-cf-1988",
+    "title": "Constituição Federal — Câmara dos Deputados",
+    "url": "https://www2.camara.leg.br/legin/fed/consti/1988/constituicao-1988-5-outubro-1988-322142-normaatualizada-pl.html",
+    "institution": "Câmara dos Deputados",
+    "type": "constituicao",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade",
+      "bpc"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "camara-ec-103-2019",
+    "title": "Emenda Constitucional 103/2019 — Câmara dos Deputados",
+    "url": "https://www2.camara.leg.br/legin/fed/emecon/2019/emendaconstitucional-103-12-novembro-2019-789412-publicacaooriginal-159409-pl.html",
+    "institution": "Câmara dos Deputados",
+    "type": "emenda",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "camara-lei-8212-1991",
+    "title": "Lei 8.212/1991 — Câmara dos Deputados",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/1991/lei-8212-24-julho-1991-363647-normaatualizada-pl.html",
+    "institution": "Câmara dos Deputados",
+    "type": "lei",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "camara-lei-8213-1991",
+    "title": "Lei 8.213/1991 — Câmara dos Deputados",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/1991/lei-8213-24-julho-1991-363650-normaatualizada-pl.html",
+    "institution": "Câmara dos Deputados",
+    "type": "lei",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "camara-loas-8742-1993",
+    "title": "Lei 8.742/1993 — LOAS — Câmara dos Deputados",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/1993/lei-8742-7-dezembro-1993-363163-normaatualizada-pl.html",
+    "institution": "Câmara dos Deputados",
+    "type": "lei",
+    "benefits": [
+      "bpc"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  },
+  {
+    "id": "camara-decreto-3048-1999",
+    "title": "Decreto 3.048/1999 — Câmara dos Deputados",
+    "url": "https://www2.camara.leg.br/legin/fed/decret/1999/decreto-3048-6-maio-1999-368532-normaatualizada-pe.html",
+    "institution": "Câmara dos Deputados",
+    "type": "decreto",
+    "benefits": [
+      "aposentadoria_rgps",
+      "incapacidade"
+    ],
+    "jurisdiction": "nacional",
+    "collection": "pending_permission_check"
+  }
+]
