@@ -1,0 +1,25 @@
+{
+  "case_id": "DEMO-001",
+  "status": "indeterminado",
+  "benefit_type": "aposentadoria_rgps",
+  "der": null,
+  "state": "MG",
+  "facts_verified": [],
+  "facts_reported": [],
+  "denial_reason": null,
+  "hypotheses": [],
+  "counterarguments": [],
+  "rules_executed": [],
+  "citations": [],
+  "missing_documents": [
+    "carta de indeferimento"
+  ],
+  "deadlines_to_verify": [],
+  "next_steps": [
+    "solicitar documentos"
+  ],
+  "limitations": [
+    "dados insuficientes"
+  ],
+  "professional_review_recommended": true
+}
