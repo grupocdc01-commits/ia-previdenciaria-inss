@@ -1,0 +1,64 @@
+# Desenvolvimento somente com dados fictícios; não é configuração de produção.
+name: ia-previdenciaria
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ia
+      POSTGRES_DB: ia
+      POSTGRES_PASSWORD: ${DEV_DB_PASSWORD:?Defina DEV_DB_PASSWORD no .env}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U ia -d ia']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  migration:
+    image: ia-previdenciaria-inss:local
+    command: [node, dist/src/migrate.js]
+    environment:
+      DATABASE_URL: postgres://ia:${DEV_DB_PASSWORD}@postgres:5432/ia
+    depends_on:
+      postgres: { condition: service_healthy }
+    healthcheck: { disable: true }
+  api:
+    build:
+      context: .
+      secrets: [proxy_ca]
+    image: ia-previdenciaria-inss:local
+    environment: &runtime
+      APP_ENV: local
+      MIGRATE_ON_START: 'false'
+      AUTH_MODE: demo
+      HOST: 0.0.0.0
+      DATABASE_URL: postgres://ia:${DEV_DB_PASSWORD}@postgres:5432/ia
+      DEMO_API_TOKEN: ${DEMO_API_TOKEN:?Defina DEMO_API_TOKEN no .env}
+      OBJECTS_PATH: /app/.local/objects
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      PG_POOL_MAX: 5
+      WORKER_CONCURRENCY: 2
+    ports: ['127.0.0.1:3000:3000']
+    volumes: [objects:/app/.local]
+    depends_on:
+      postgres: { condition: service_healthy }
+      migration: { condition: service_completed_successfully }
+    restart: unless-stopped
+    stop_grace_period: 30s
+  worker:
+    image: ia-previdenciaria-inss:local
+    command: [node, dist/src/worker.js]
+    environment: *runtime
+    volumes: [objects:/app/.local]
+    depends_on:
+      postgres: { condition: service_healthy }
+      api: { condition: service_started }
+    healthcheck: { disable: true }
+    restart: unless-stopped
+    stop_grace_period: 30s
+volumes:
+  database:
+  objects:
+secrets:
+  proxy_ca:
+    file: ${BUILD_CA_FILE:-/etc/ssl/certs/ca-certificates.crt}

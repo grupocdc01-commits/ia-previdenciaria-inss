@@ -1,5 +1,13 @@
 # IA Previdenciária INSS
 
+## Backend assíncrono para o front-end
+
+Execute `npm run db:migrate`, `npm run dev` e, em outro terminal, `npm run worker`.
+A API padrão enfileira análises e oferece acompanhamento por job. PostgreSQL,
+JWT, CORS e armazenamento temporário S3 estão preparados por configuração.
+Veja [docs/INFRAESTRUTURA.md](docs/INFRAESTRUTURA.md) e
+[docs/openapi.json](docs/openapi.json). Continua restrito a dados fictícios.
+
 Agente de inteligência artificial especializado
 na investigação de benefícios negados pelo INSS.
 

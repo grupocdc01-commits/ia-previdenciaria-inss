@@ -26,7 +26,7 @@ export const documentInput = z.object({
   text: z.string().trim().min(1).max(100_000)
 }).strict();
 export type DocumentRecord = z.infer<typeof documentInput> & {
-  id: string; sha256: string; pages: string[]; createdAt: string
+  id: string; sha256: string; pages: string[]; createdAt: string; purgedAt?: string
 };
 export const factFields = ['composicao_familiar', 'renda_familiar', 'periodos_contributivos', 'documentacao_medica', 'motivo_indeferimento'] as const;
 export const factInput = z.object({
