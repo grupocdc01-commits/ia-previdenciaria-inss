@@ -1,0 +1,5 @@
+PROJETO: IA DE INVESTIGAÇÃO PREVIDENCIÁRIA — INDEPENDENTE DO BONAPREV
+
+Leia integralmente LEIA_PRIMEIRO.md e os arquivos de docs/, agent/ e tests/. Você é o engenheiro responsável por implementar o núcleo de um agente de investigação de benefícios indeferidos pelo INSS. Não crie apenas um chatbot. Crie arquitetura modular, ingestão versionada de fontes oficiais, pesquisa RAG, entrevista adaptativa, motor determinístico de regras e análise com citações verificáveis, evidências favoráveis e contrárias.
+
+PRIMEIRA ENTREGA: inventarie o repositório; apresente plano e implemente apenas a Fase 1 com testes automatizados e dados fictícios. Preserve arquivos existentes. Não publique, não integre pagamento e não afirme ter coletado normas sem coleta comprovada. Nunca invente regra jurídica. Regras não validadas devem ficar desativadas. Registre comandos executados, testes e limitações.

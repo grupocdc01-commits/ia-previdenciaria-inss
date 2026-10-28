@@ -1,0 +1,23 @@
+{
+  "source_id": "camara-lei-8212-1991",
+  "title": "Lei 8.212/1991 — Câmara dos Deputados",
+  "url": "https://www2.camara.leg.br/legin/fed/lei/1991/lei-8212-24-julho-1991-363647-normaatualizada-pl.html",
+  "final_url": "https://www2.camara.leg.br/legin/fed/lei/1991/lei-8212-24-julho-1991-363647-normaatualizada-pl.html",
+  "institution": "Câmara dos Deputados",
+  "type": "lei",
+  "retrieved_at": "2026-10-27T20:21:40.495712+00:00",
+  "sha256": "e595af04a59bb8f95ecff6acc80bd15536047c2aed5d780a83eff9e40ccfa36b",
+  "bytes": 409834,
+  "http_status": 200,
+  "media_type": "text/html; charset=UTF-8",
+  "approval_status": "draft",
+  "legal_validity": "nao_verificada",
+  "robots_allowed_for_path": true,
+  "robots_user_agent": "IAPrevidenciariaResearch/0.1",
+  "license_displayed": null,
+  "limitations": [
+    "Coleta pública pontual; termos e vigência exigem revisão.",
+    "Texto consolidado pode conter redações revogadas; não inferir vigência histórica.",
+    "Sem aprovação jurídica; não ativar regras."
+  ]
+}

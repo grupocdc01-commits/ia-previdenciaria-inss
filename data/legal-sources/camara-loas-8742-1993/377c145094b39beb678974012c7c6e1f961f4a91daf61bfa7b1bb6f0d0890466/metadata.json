@@ -1,0 +1,23 @@
+{
+  "source_id": "camara-loas-8742-1993",
+  "title": "Lei 8.742/1993 — LOAS — Câmara dos Deputados",
+  "url": "https://www2.camara.leg.br/legin/fed/lei/1993/lei-8742-7-dezembro-1993-363163-normaatualizada-pl.html",
+  "final_url": "https://www2.camara.leg.br/legin/fed/lei/1993/lei-8742-7-dezembro-1993-363163-normaatualizada-pl.html",
+  "institution": "Câmara dos Deputados",
+  "type": "lei",
+  "retrieved_at": "2026-10-27T20:21:47.342712+00:00",
+  "sha256": "377c145094b39beb678974012c7c6e1f961f4a91daf61bfa7b1bb6f0d0890466",
+  "bytes": 202630,
+  "http_status": 200,
+  "media_type": "text/html; charset=UTF-8",
+  "approval_status": "draft",
+  "legal_validity": "nao_verificada",
+  "robots_allowed_for_path": true,
+  "robots_user_agent": "IAPrevidenciariaResearch/0.1",
+  "license_displayed": null,
+  "limitations": [
+    "Coleta pública pontual; termos e vigência exigem revisão.",
+    "Texto consolidado pode conter redações revogadas; não inferir vigência histórica.",
+    "Sem aprovação jurídica; não ativar regras."
+  ]
+}

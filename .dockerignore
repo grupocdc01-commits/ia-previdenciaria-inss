@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+.local
+.local-*
+node_modules
+dist
+work
+data/legal-sources
+attachments
+*.log

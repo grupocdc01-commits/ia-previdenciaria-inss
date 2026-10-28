@@ -1,0 +1,3 @@
+/data/legal-sources/**/original.html -text
+/data/legal-sources/**/robots.txt -text
+/docs/originais/** -text
