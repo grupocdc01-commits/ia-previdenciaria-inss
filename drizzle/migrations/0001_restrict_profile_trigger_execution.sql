@@ -1,0 +1,2 @@
+REVOKE EXECUTE ON FUNCTION public.create_private_profile() FROM PUBLIC, anon, authenticated;
+COMMENT ON FUNCTION public.create_private_profile() IS 'Auth signup trigger only; not callable through the application Data API.';

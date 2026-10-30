@@ -1,0 +1,230 @@
+COMANDO / EVIDÊNCIA: module2-tests.log
+
+> test
+> vitest run
+
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:04:59
+   Duration  36.69s (transform 1.67s, setup 4.57s, import 5.53s, tests 9.19s, environment 12.36s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+
+COMANDO / EVIDÊNCIA: module2-python-tests.log
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.006s
+
+OK
+
+
+COMANDO / EVIDÊNCIA: module2-database.log
+test_anonymous_cannot_execute_rpc (__main__.AnamnesisDatabaseTests.test_anonymous_cannot_execute_rpc) ... ok
+test_direct_ledger_writes_are_not_granted (__main__.AnamnesisDatabaseTests.test_direct_ledger_writes_are_not_granted) ... ok
+test_parallel_competing_answers_reject_stale_writers (__main__.AnamnesisDatabaseTests.test_parallel_competing_answers_reject_stale_writers) ... ok
+test_parallel_retries_commit_only_once (__main__.AnamnesisDatabaseTests.test_parallel_retries_commit_only_once) ... ok
+test_replay_is_idempotent (__main__.AnamnesisDatabaseTests.test_replay_is_idempotent) ... ok
+test_same_request_with_different_payload_is_rejected (__main__.AnamnesisDatabaseTests.test_same_request_with_different_payload_is_rejected) ... ok
+test_simple_commit_persists_facts_and_both_messages (__main__.AnamnesisDatabaseTests.test_simple_commit_persists_facts_and_both_messages) ... ok
+test_stale_turn_does_not_write_messages (__main__.AnamnesisDatabaseTests.test_stale_turn_does_not_write_messages) ... ok
+test_storage_failure_rolls_back_everything (__main__.AnamnesisDatabaseTests.test_storage_failure_rolls_back_everything) ... ok
+test_tenant_isolation_on_rpc_and_ledger_reads (__main__.AnamnesisDatabaseTests.test_tenant_isolation_on_rpc_and_ledger_reads) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 5.162s
+
+OK
+
+
+COMANDO / EVIDÊNCIA: module2-simple.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed | 27 skipped (32)
+   Start at  20:58:23
+   Duration  1.04s (transform 190ms, setup 165ms, import 228ms, tests 96ms, environment 357ms)
+
+
+
+COMANDO / EVIDÊNCIA: module2-medium.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  25 passed | 7 skipped (32)
+   Start at  20:58:24
+   Duration  1.23s (transform 144ms, setup 157ms, import 157ms, tests 315ms, environment 413ms)
+
+
+
+COMANDO / EVIDÊNCIA: module2-high.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 30 skipped (32)
+   Start at  20:58:25
+   Duration  1.46s (transform 137ms, setup 110ms, import 164ms, tests 734ms, environment 281ms)
+
+
+
+COMANDO / EVIDÊNCIA: module2-typecheck.log
+Sem saída de diagnóstico; código de saída 0 observado na execução.
+
+
+COMANDO / EVIDÊNCIA: module2-lint.log
+
+> lint
+> eslint .
+
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/code-block.tsx
+  177:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/conversation.tsx
+  110:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/prompt-input.tsx
+  188:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  201:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  345:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  369:14  warning  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file                      react-refresh/only-export-components
+  371:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/tool.tsx
+  63:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/badge.tsx
+  32:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/button-group.tsx
+  78:62  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/button.tsx
+  51:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/form.tsx
+  163:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/navigation-menu.tsx
+  111:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/sidebar.tsx
+  743:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/toggle.tsx
+  42:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/lib/case-store.tsx
+  57:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+✖ 16 problems (0 errors, 16 warnings)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+
+COMANDO / EVIDÊNCIA: module2-build.log
+
+✓ built in 4.62s
+[nitro] ℹ Using auto generated worker name: grupocdc01-commits-ia-previdenciaria-inss
+ℹ Generated .output/server/wrangler.json
+ℹ Generated .wrangler/deploy/config.json
+ℹ Generated .output/public/_headers
+ℹ Generated .output/nitro.json
+
+[nitro] ✔ You can preview this build using npx vite preview
+[nitro] ✔ You can deploy this build using npx nitro deploy --prebuilt
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+
+COMANDO / EVIDÊNCIA: module2-stress-1.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:02:12
+   Duration  63.90s (transform 6.02s, setup 13.94s, import 22.34s, tests 25.26s, environment 45.04s)
+
+
+
+COMANDO / EVIDÊNCIA: module2-stress-2.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:02:12
+   Duration  64.50s (transform 5.74s, setup 15.63s, import 22.20s, tests 22.77s, environment 47.51s)
+
+
+
+COMANDO / EVIDÊNCIA: module2-stress-3.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:02:12
+   Duration  66.14s (transform 6.18s, setup 15.74s, import 21.51s, tests 26.15s, environment 47.91s)
+
+
+
+COMANDO / EVIDÊNCIA: module2-stress-4.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:03:17
+   Duration  40.78s (transform 3.68s, setup 10.15s, import 13.72s, tests 13.52s, environment 30.49s)
+
+
+
+COMANDO / EVIDÊNCIA: module2-stress-5.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:03:17
+   Duration  41.34s (transform 3.81s, setup 8.73s, import 15.12s, tests 15.22s, environment 29.05s)
+
+
+
+COMANDO / EVIDÊNCIA: module2-stress-6.log
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  22 passed (22)
+      Tests  224 passed (224)
+   Start at  21:03:19
+   Duration  40.32s (transform 4.25s, setup 8.61s, import 15.14s, tests 15.60s, environment 28.82s)
+

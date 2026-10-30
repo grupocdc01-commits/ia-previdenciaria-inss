@@ -1,4 +1,37 @@
-# IA Previdenciária INSS
+# Welcome to your Lovable project
 
-Agente de inteligência artificial especializado
-na investigação de benefícios negados pelo INSS.
+This project was built with [Lovable](https://lovable.dev).
+
+## Build with Lovable
+
+Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
+- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+
+## Development
+
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+```sh
+git clone <this-repository-url>
+cd <repository-name>
+npm i
+npm run dev
+```
+
+## Built with
+
+- TanStack Start
+- TypeScript
+- React
+- Tailwind CSS
+
+# Base jurídica em desenvolvimento
+
+A rota `/biblioteca` apresenta referências e pendências de conferência. A base não está homologada para conclusões sobre benefícios. Consulte [o relatório do Módulo 1](docs/MODULO-1-BASE-JURIDICA.md) para origem dos dados, revisão e testes executados.
+
+O [Módulo 2](docs/MODULO-2-ANAMNESE.md) acrescenta complementos validados ao formulário e uma anamnese privada estruturada optativa. O fluxo privado novo permanece desabilitado por padrão e exige revisão da migração e validação em homologação antes da habilitação.
+
+A [parte administrativa do Módulo 3](docs/MODULO-3-DOCUMENTOS-PERIODOS-RELATORIOS.md) prepara conferência de campos extraídos, união neutra de intervalos no servidor e relatório de lacunas. Permanece desabilitada por padrão; cálculos previdenciários oficiais, carência e PDF continuam bloqueados até homologação.

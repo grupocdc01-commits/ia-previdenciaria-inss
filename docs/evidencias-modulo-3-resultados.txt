@@ -1,0 +1,1404 @@
+
+===== module3-tests-initial.log =====
+
+> test
+> vitest run --maxWorkers=2
+
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+ ❯ src/test/document-dossier-ui.test.tsx (5 tests | 1 failed) 10322ms
+     × prevents duplicate saves and editing while a confirmation is in flight 10023ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/test/document-dossier-ui.test.tsx > module 3 review and report UI > prevents duplicate saves and editing while a confirmation is in flight
+Error: Hook timed out in 10000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ src/test/document-dossier-ui.test.tsx:9:1
+      7| const mocks = vi.hoisted(() => ({ submit: vi.fn() }));
+      8| vi.mock("@/lib/api/cloud-adapter", () => ({ cloudAdapter: { documentMo…
+      9| beforeEach(() => mocks.submit.mockReset().mockResolvedValue({ ok: true…
+       | ^
+     10| afterEach(cleanup);
+     11| describe("module 3 review and report UI", () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 24 passed (25)
+      Tests  1 failed | 273 passed (274)
+   Start at  22:12:45
+   Duration  17.12s (transform 1.19s, setup 2.75s, import 4.16s, tests 14.46s, environment 8.88s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+===== module3-tests-second.log =====
+
+> test
+> vitest run --maxWorkers=2
+
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  274 passed (274)
+   Start at  22:13:39
+   Duration  21.14s (transform 1.91s, setup 4.46s, import 6.28s, tests 9.15s, environment 16.16s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+===== module3-ui-final.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  22:15:06
+   Duration  996ms (transform 149ms, setup 123ms, import 205ms, tests 210ms, environment 326ms)
+
+
+===== module3-level-1.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed | 20 skipped (24)
+   Start at  22:17:21
+   Duration  1.39s (transform 184ms, setup 251ms, import 237ms, tests 21ms, environment 613ms)
+
+
+===== module3-level-2.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  18 passed | 6 skipped (24)
+   Start at  22:17:21
+   Duration  1.63s (transform 244ms, setup 221ms, import 287ms, tests 23ms, environment 792ms)
+
+
+===== module3-level-3.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 22 skipped (24)
+   Start at  22:17:21
+   Duration  1.60s (transform 252ms, setup 304ms, import 307ms, tests 71ms, environment 640ms)
+
+
+===== module3-python-final.log =====
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.005s
+
+OK
+
+===== module3-database-initial.log =====
+test_anonymous_cannot_execute_rpc (__main__.DocumentDatabaseTests.test_anonymous_cannot_execute_rpc) ... ok
+test_direct_ledger_writes_are_not_granted (__main__.DocumentDatabaseTests.test_direct_ledger_writes_are_not_granted) ... ok
+test_document_anonymous_and_direct_writes_are_denied (__main__.DocumentDatabaseTests.test_document_anonymous_and_direct_writes_are_denied) ... ok
+test_document_changed_hash_or_snapshot_is_rejected (__main__.DocumentDatabaseTests.test_document_changed_hash_or_snapshot_is_rejected) ... ok
+test_document_cross_owner_rpc_and_history_are_isolated (__main__.DocumentDatabaseTests.test_document_cross_owner_rpc_and_history_are_isolated) ... ok
+test_document_deletion_cascades_review_history (__main__.DocumentDatabaseTests.test_document_deletion_cascades_review_history) ... ok
+test_document_expired_or_deleting_records_cannot_be_reviewed (__main__.DocumentDatabaseTests.test_document_expired_or_deleting_records_cannot_be_reviewed) ... ok
+test_document_history_failure_rolls_back_current_review (__main__.DocumentDatabaseTests.test_document_history_failure_rolls_back_current_review) ... ok
+test_document_identical_retry_creates_no_duplicate_history (__main__.DocumentDatabaseTests.test_document_identical_retry_creates_no_duplicate_history) ... ok
+test_document_invalid_decisions_and_medical_extraction_are_rejected (__main__.DocumentDatabaseTests.test_document_invalid_decisions_and_medical_extraction_are_rejected) ... ok
+test_document_parallel_competing_reviews_do_not_overwrite (__main__.DocumentDatabaseTests.test_document_parallel_competing_reviews_do_not_overwrite) ... ok
+test_document_parallel_identical_retries_commit_once (__main__.DocumentDatabaseTests.test_document_parallel_identical_retries_commit_once) ... ok
+test_document_simple_review_preserves_extraction_and_appends_revision (__main__.DocumentDatabaseTests.test_document_simple_review_preserves_extraction_and_appends_revision) ... ok
+test_document_stale_revision_does_not_overwrite_new_decisions (__main__.DocumentDatabaseTests.test_document_stale_revision_does_not_overwrite_new_decisions) ... ok
+test_parallel_competing_answers_reject_stale_writers (__main__.DocumentDatabaseTests.test_parallel_competing_answers_reject_stale_writers) ... ok
+test_parallel_retries_commit_only_once (__main__.DocumentDatabaseTests.test_parallel_retries_commit_only_once) ... ok
+test_replay_is_idempotent (__main__.DocumentDatabaseTests.test_replay_is_idempotent) ... ok
+test_same_request_with_different_payload_is_rejected (__main__.DocumentDatabaseTests.test_same_request_with_different_payload_is_rejected) ... ok
+test_simple_commit_persists_facts_and_both_messages (__main__.DocumentDatabaseTests.test_simple_commit_persists_facts_and_both_messages) ... ok
+test_stale_turn_does_not_write_messages (__main__.DocumentDatabaseTests.test_stale_turn_does_not_write_messages) ... ok
+test_storage_failure_rolls_back_everything (__main__.DocumentDatabaseTests.test_storage_failure_rolls_back_everything) ... ok
+test_tenant_isolation_on_rpc_and_ledger_reads (__main__.DocumentDatabaseTests.test_tenant_isolation_on_rpc_and_ledger_reads) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 20.779s
+
+OK
+
+===== module3-types-final.log =====
+
+===== module3-lint-final.log =====
+
+> lint
+> eslint .
+
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/code-block.tsx
+  177:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/conversation.tsx
+  110:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/prompt-input.tsx
+  188:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  201:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  345:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  369:14  warning  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file                      react-refresh/only-export-components
+  371:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ai-elements/tool.tsx
+  63:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/badge.tsx
+  32:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/button-group.tsx
+  78:62  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/button.tsx
+  51:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/form.tsx
+  163:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/navigation-menu.tsx
+  111:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/sidebar.tsx
+  743:3  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/components/ui/toggle.tsx
+  42:18  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/workspace/ia-previdenciaria-inss/src/lib/case-store.tsx
+  57:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+✖ 16 problems (0 errors, 16 warnings)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+===== module3-build-final.log =====
+
+> build
+> vite build
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+vite v8.1.5 building client environment for production...
+[2K
+transforming...[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/legal-library.functions.ts:5:32 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts:46:33 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts:76:30 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts:96:38 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:58:42 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:98:37 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:112:36 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:139:38 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:client] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:164:39 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+✓ 5403 modules transformed.
+rendering chunks...
+computing gzip size...
+.output/public/assets/lovable-mark-DKVi-oJX.svg                    7.06 kB │ gzip:   1.15 kB
+.output/public/assets/assistente-exemplos-Ct7Nvavq.jpg            80.71 kB
+.output/public/assets/index-BPcuF8oP.css                           3.71 kB │ gzip:   2.58 kB
+.output/public/assets/styles-Cpo6Eg9H.css                         89.72 kB │ gzip:  15.47 kB
+.output/public/assets/queryOptions-Dfvzj6n2.js                     0.03 kB │ gzip:   0.05 kB
+.output/public/assets/not-found-DIgawKw1.js                        0.05 kB │ gzip:   0.07 kB
+.output/public/assets/mermaid-WFAXDIZX-CJjhp_92.js                 0.07 kB │ gzip:   0.08 kB
+.output/public/assets/route-CQo5HQcl.js                            0.07 kB │ gzip:   0.08 kB
+.output/public/assets/useQuery-CeKxttCb.js                         0.09 kB │ gzip:   0.10 kB
+.output/public/assets/array-BifhSqXX.js                            0.10 kB │ gzip:   0.11 kB
+.output/public/assets/channel-CIG7WX3G.js                          0.11 kB │ gzip:   0.12 kB
+.output/public/assets/pie-WAS4IAKB-D5QrUC2g.js                     0.11 kB │ gzip:   0.11 kB
+.output/public/assets/info-A6RAGUB7-AZ8VcEaY.js                    0.11 kB │ gzip:   0.12 kB
+.output/public/assets/radar-RG4KPBEZ-BuYYKOJl.js                   0.11 kB │ gzip:   0.12 kB
+.output/public/assets/packet-AYTQ26CC-Bdg2essy.js                  0.12 kB │ gzip:   0.12 kB
+.output/public/assets/cynefin-OW5HDTMX-Bxpgy9Q-.js                 0.12 kB │ gzip:   0.12 kB
+.output/public/assets/treemap-WGGIJYW6-dx7qI3mD.js                 0.12 kB │ gzip:   0.12 kB
+.output/public/assets/wardley-WFR3VGLG-Dexzwvt6.js                 0.12 kB │ gzip:   0.12 kB
+.output/public/assets/gitGraph-4MIJSDKK-DBRsV9Fh.js                0.12 kB │ gzip:   0.12 kB
+.output/public/assets/railroad-74A4TZTK-Nkuw4fzg.js                0.12 kB │ gzip:   0.12 kB
+.output/public/assets/treeView-Q6P3EWNA-DVwK8Kqr.js                0.12 kB │ gzip:   0.12 kB
+.output/public/assets/railroad-peg-WCYAUIDC-CrrHZFIz.js            0.12 kB │ gzip:   0.12 kB
+.output/public/assets/architecture-7GRP2DOG-BHZiePHg.js            0.12 kB │ gzip:   0.12 kB
+.output/public/assets/railroad-abnf-HS5TGJTU-gAPZoBfp.js           0.12 kB │ gzip:   0.12 kB
+.output/public/assets/railroad-ebnf-LZEXJU2U-DvwkawHG.js           0.12 kB │ gzip:   0.12 kB
+.output/public/assets/eventmodeling-NTZA5JFV-CKBX3xli.js           0.12 kB │ gzip:   0.12 kB
+.output/public/assets/init-C-OQMol4.js                             0.14 kB │ gzip:   0.12 kB
+.output/public/assets/chunk-Y2CYZVJY-DsF7k-Jl.js                   0.15 kB │ gzip:   0.14 kB
+.output/public/assets/arrow-right-M--n7l9j.js                      0.16 kB │ gzip:   0.16 kB
+.output/public/assets/useSuspenseQuery-CY1BnIZq.js                 0.17 kB │ gzip:   0.16 kB
+.output/public/assets/chunk-2Q5K7J3B-C1jixKkw.js                   0.19 kB │ gzip:   0.16 kB
+.output/public/assets/matchContext-Bwb0AJGb.js                     0.20 kB │ gzip:   0.16 kB
+.output/public/assets/chunk-JWPE2WC7-DVXcaiue.js                   0.22 kB │ gzip:   0.17 kB
+.output/public/assets/chunk-XXDRQBXY-DqAYeljN.js                   0.26 kB │ gzip:   0.22 kB
+.output/public/assets/useNavigate-DKuGe-Bq.js                      0.26 kB │ gzip:   0.21 kB
+.output/public/assets/chunk-CLGD4ZFX-DCKmLXpd.js                   0.32 kB │ gzip:   0.25 kB
+.output/public/assets/chunk-5VM5RSS4-ZNzvKenW.js                   0.36 kB │ gzip:   0.27 kB
+.output/public/assets/chunk-UY3FDG6J-XZwQOzbF.js                   0.45 kB │ gzip:   0.31 kB
+.output/public/assets/chunk-I5DQTOEV-Cux5OBYe.js                   0.45 kB │ gzip:   0.31 kB
+.output/public/assets/useServerFn-D-tdO3P0.js                      0.45 kB │ gzip:   0.30 kB
+.output/public/assets/chunk-5V3GS4D5-B6UpbGCn.js                   0.46 kB │ gzip:   0.31 kB
+.output/public/assets/chunk-KI3K4JFJ-bgHYJH0f.js                   0.46 kB │ gzip:   0.31 kB
+.output/public/assets/chunk-6TQVIW2G-kn-138pS.js                   0.46 kB │ gzip:   0.31 kB
+.output/public/assets/chunk-ICYGCRZG-BSFpafu0.js                   0.50 kB │ gzip:   0.35 kB
+.output/public/assets/codeowners-C8r90Shi.js                       0.54 kB │ gzip:   0.31 kB
+.output/public/assets/chunk-POPQ4Y6H-DPSLxvFq.js                   0.57 kB │ gzip:   0.40 kB
+.output/public/assets/chunk-3Z5EZCMW-BBL48ahF.js                   0.60 kB │ gzip:   0.39 kB
+.output/public/assets/flowDiagram-HODETNUW-CJyhPG7g.js             0.61 kB │ gzip:   0.32 kB
+.output/public/assets/infoDiagram-27XIBGKW-CRIQNQz6.js             0.65 kB │ gzip:   0.42 kB
+.output/public/assets/highlighted-body-JLMTFACH-CjPtF7n4.js        0.65 kB │ gzip:   0.42 kB
+.output/public/assets/types-D1-Gs8nY.js                            0.67 kB │ gzip:   0.45 kB
+.output/public/assets/shellsession-CVsQGYfZ.js                     0.71 kB │ gzip:   0.43 kB
+.output/public/assets/rolldown-runtime-hePW80VL.js                 0.71 kB │ gzip:   0.42 kB
+.output/public/assets/tsv-sltzmVWM.js                              0.73 kB │ gzip:   0.33 kB
+.output/public/assets/classDiagram-ZZMXUADV-DrpL0wis.js            0.78 kB │ gzip:   0.44 kB
+.output/public/assets/classDiagram-v2-VYDZK3BY-DrpL0wis.js         0.78 kB │ gzip:   0.44 kB
+.output/public/assets/stateDiagram-v2-MP3YSRHH-5a_j5G48.js         0.78 kB │ gzip:   0.45 kB
+.output/public/assets/chunk-XHIXRSVI-Bu6LAW6p.js                   0.83 kB │ gzip:   0.47 kB
+.output/public/assets/html-derivative-DNPJNw-0.js                  0.84 kB │ gzip:   0.45 kB
+.output/public/assets/swimlanesDiagram-VR7AAH4N-By3HymcG.js        0.87 kB │ gzip:   0.49 kB
+.output/public/assets/sizeCapture-INFHLROL-B0uUizjq.js             0.87 kB │ gzip:   0.51 kB
+.output/public/assets/chunk-6AZGARVD-CYyHPsEW.js                   0.90 kB │ gzip:   0.49 kB
+.output/public/assets/chunk-IH6LHLGP-D3gp9iPn.js                   0.92 kB │ gzip:   0.49 kB
+.output/public/assets/adapter-ZElRyTve.js                          0.94 kB │ gzip:   0.58 kB
+.output/public/assets/line-BaDbn1sg.js                             0.94 kB │ gzip:   0.47 kB
+.output/public/assets/git-rebase-BDPpS8w6.js                       0.98 kB │ gzip:   0.44 kB
+.output/public/assets/qmldir-DCQb3MpD.js                           0.99 kB │ gzip:   0.44 kB
+.output/public/assets/chunk-OUJLGHUK-CYjUPErt.js                   1.04 kB │ gzip:   0.58 kB
+.output/public/assets/chunk-747NJXEK-ZQ1az0_F.js                   1.06 kB │ gzip:   0.59 kB
+.output/public/assets/chunk-2ZTRR5NV-Cr-_ry_6.js                   1.13 kB │ gzip:   0.62 kB
+.output/public/assets/csv-Dx-8-gkx.js                              1.13 kB │ gzip:   0.36 kB
+.output/public/assets/ordinal-BDEzSJ7C.js                          1.17 kB │ gzip:   0.56 kB
+.output/public/assets/preload-helper-Czpn1I53.js                   1.19 kB │ gzip:   0.67 kB
+.output/public/assets/git-commit-BSykSTBG.js                       1.22 kB │ gzip:   0.52 kB
+.output/public/assets/xsl-BOPS8gLt.js                              1.36 kB │ gzip:   0.49 kB
+.output/public/assets/chunk-GVQU2GXP-7DIF0Yie.js                   1.41 kB │ gzip:   0.79 kB
+.output/public/assets/chunk-6K3QC6MW-8lwas69x.js                   1.46 kB │ gzip:   0.78 kB
+.output/public/assets/sparql-D_iOobhT.js                           1.47 kB │ gzip:   0.81 kB
+.output/public/assets/ini-B5eOa1yu.js                              1.51 kB │ gzip:   0.49 kB
+.output/public/assets/contextual-summary-8eij5yGn.js               1.52 kB │ gzip:   0.74 kB
+.output/public/assets/assistente-exemplos-vhsdMEa0.js              1.55 kB │ gzip:   0.92 kB
+.output/public/assets/reset-password-IQLhcsQ_.js                   1.63 kB │ gzip:   0.88 kB
+.output/public/assets/fortran-fixed-form-DEKoE2YW.js               1.66 kB │ gzip:   0.68 kB
+.output/public/assets/chunk-6EIED4P4-DLcrKSZa.js                   1.67 kB │ gzip:   0.74 kB
+.output/public/assets/railroadDiagram-O6MQD6OU-D3so6TmN.js         1.71 kB │ gzip:   0.79 kB
+.output/public/assets/docker-IyjqRm3v.js                           1.73 kB │ gzip:   0.59 kB
+.output/public/assets/dotenv-CuH5my32.js                           1.74 kB │ gzip:   0.60 kB
+.output/public/assets/desktop-Dlh5hvp9.js                          1.82 kB │ gzip:   0.75 kB
+.output/public/assets/hxml-Dcm88srW.js                             1.89 kB │ gzip:   0.89 kB
+.output/public/assets/abnfDiagram-VCTEODGH-DcgqNcY8.js             1.90 kB │ gzip:   0.91 kB
+.output/public/assets/chunk-P2QGCYS3-Kptjv9Rf.js                   1.94 kB │ gzip:   0.95 kB
+.output/public/assets/chunk-F27PBJKO-LpA9pyCI.js                   1.97 kB │ gzip:   0.88 kB
+.output/public/assets/pegDiagram-XKGWAZYB-BnXDPFQn.js              2.06 kB │ gzip:   0.96 kB
+.output/public/assets/context-probe-D0BJV72R.js                    2.10 kB │ gzip:   1.04 kB
+.output/public/assets/ebnfDiagram-PWID7BFC-ss8y3jgz.js             2.11 kB │ gzip:   0.91 kB
+.output/public/assets/erb-CpQ5AKmM.js                              2.13 kB │ gzip:   0.62 kB
+.output/public/assets/wenyan-C8pVoKbM.js                           2.15 kB │ gzip:   1.08 kB
+.output/public/assets/dist-v5Q1xZ2K.js                             2.17 kB │ gzip:   0.98 kB
+.output/public/assets/useSelector-CyPVP0gj.js                      2.21 kB │ gzip:   0.97 kB
+.output/public/assets/jssm-DXw9l8Rf.js                             2.23 kB │ gzip:   0.61 kB
+.output/public/assets/acompanhamento-CMPsjy6D.js                   2.26 kB │ gzip:   1.12 kB
+.output/public/assets/path-COt_16Va.js                             2.27 kB │ gzip:   0.98 kB
+.output/public/assets/edge-D8qeodQq.js                             2.30 kB │ gzip:   0.67 kB
+.output/public/assets/reg-CRGYupPL.js                              2.33 kB │ gzip:   0.69 kB
+.output/public/assets/investigacoes-BZcKC_Mf.js                    2.42 kB │ gzip:   1.20 kB
+.output/public/assets/perguntas-D0eiKaZI.js                        2.52 kB │ gzip:   1.21 kB
+.output/public/assets/diff-woXpYk--.js                             2.56 kB │ gzip:   0.68 kB
+.output/public/assets/gleam-CSRkHgEL.js                            2.57 kB │ gzip:   0.81 kB
+.output/public/assets/hy-CZbG8q4J.js                               2.64 kB │ gzip:   1.17 kB
+.output/public/assets/documentos-YJJJhfbn.js                       2.69 kB │ gzip:   1.19 kB
+.output/public/assets/investigation-shell-CJTbDn4M.js              2.74 kB │ gzip:   1.20 kB
+.output/public/assets/openscad-BUDT5pXO.js                         2.81 kB │ gzip:   1.00 kB
+.output/public/assets/log-BNLmms1o.js                              2.84 kB │ gzip:   0.89 kB
+.output/public/assets/json-DAgxKhMr.js                             2.89 kB │ gzip:   0.82 kB
+.output/public/assets/cairo-DLTphjLi.js                            2.93 kB │ gzip:   0.80 kB
+.output/public/assets/berry-DKpUyyne.js                            2.99 kB │ gzip:   0.80 kB
+.output/public/assets/jsonl-CmCQp5Yx.js                            3.00 kB │ gzip:   0.78 kB
+.output/public/assets/conferencia-DJq2xjkv.js                      3.07 kB │ gzip:   1.37 kB
+.output/public/assets/jsonc-CYpm1nAK.js                            3.10 kB │ gzip:   0.78 kB
+.output/public/assets/logo-Cluzi2Zq.js                             3.12 kB │ gzip:   1.46 kB
+.output/public/assets/po-BiJDBrnU.js                               3.23 kB │ gzip:   0.90 kB
+.output/public/assets/json5-BR5RXkoi.js                            3.24 kB │ gzip:   0.82 kB
+.output/public/assets/mipsasm-BMqwQI7S.js                          3.25 kB │ gzip:   1.17 kB
+.output/public/assets/tasl-DMoTqEGO.js                             3.28 kB │ gzip:   0.84 kB
+.output/public/assets/rbs-C0MpOrj4.js                              3.30 kB │ gzip:   0.72 kB
+.output/public/assets/genie-CV2tkWYe.js                            3.34 kB │ gzip:   1.20 kB
+.output/public/assets/rel-BtDbiS_P.js                              3.36 kB │ gzip:   1.10 kB
+.output/public/assets/vala-zf12oZj6.js                             3.36 kB │ gzip:   1.18 kB
+.output/public/assets/splunk-BC2Px7Mm.js                           3.42 kB │ gzip:   1.51 kB
+.output/public/assets/arc-DMqT1Ve5.js                              3.47 kB │ gzip:   1.46 kB
+.output/public/assets/hurl-DCZHXKU4.js                             3.51 kB │ gzip:   1.09 kB
+.output/public/assets/fluent-C03EYrpw.js                           3.60 kB │ gzip:   0.89 kB
+.output/public/assets/ssh-config-BgfXC-Er.js                       3.61 kB │ gzip:   1.59 kB
+.output/public/assets/jsonnet-CJTPZ8u_.js                          3.61 kB │ gzip:   1.03 kB
+.output/public/assets/kdl-CsD5j6eV.js                              3.62 kB │ gzip:   1.03 kB
+.output/public/assets/narrat-_X_XdTYD.js                           3.66 kB │ gzip:   1.09 kB
+.output/public/assets/turtle-ByJddavk.js                           3.69 kB │ gzip:   0.96 kB
+.output/public/assets/glsl-D5MA2a_X.js                             3.69 kB │ gzip:   1.46 kB
+.output/public/assets/chunk-TLUHSLCS-CfwuYfcT.js                   3.74 kB │ gzip:   1.54 kB
+.output/public/assets/shell-_YynUYzR.js                            3.75 kB │ gzip:   1.54 kB
+.output/public/assets/zenscript-BnlCZFoB.js                        3.90 kB │ gzip:   1.28 kB
+.output/public/assets/ron-VUp2lXgN.js                              3.90 kB │ gzip:   0.97 kB
+.output/public/assets/gn-CAXYAgV-.js                               4.01 kB │ gzip:   1.48 kB
+.output/public/assets/pascal-4ZHwLPI5.js                           4.14 kB │ gzip:   1.67 kB
+.output/public/assets/lazyRouteComponent-BVoAgJF7.js               4.15 kB │ gzip:   1.54 kB
+.output/public/assets/diagram-Z3DM3KII-Bk9Yj0vF.js                 4.28 kB │ gzip:   1.85 kB
+.output/public/assets/auth-H80e_S0B.js                             4.41 kB │ gzip:   1.86 kB
+.output/public/assets/http-kmH8AyfE.js                             4.41 kB │ gzip:   1.06 kB
+.output/public/assets/tcl-CZd0xW_V.js                              4.42 kB │ gzip:   1.50 kB
+.output/public/assets/nextflow-CSgcYZcx.js                         4.50 kB │ gzip:   1.16 kB
+.output/public/assets/rosmsg-CAekHB0j.js                           4.51 kB │ gzip:   1.05 kB
+.output/public/assets/defaultLocale-BFoDCU3G.js                    4.63 kB │ gzip:   2.12 kB
+.output/public/assets/polar-C7UOKdEL.js                            4.66 kB │ gzip:   1.12 kB
+.output/public/assets/sdbl-bTVj8UrX.js                             4.69 kB │ gzip:   2.00 kB
+.output/public/assets/fennel-DQxkIbk2.js                           4.76 kB │ gzip:   1.53 kB
+.output/public/assets/bibtex-Ci_nEsc7.js                           4.78 kB │ gzip:   0.83 kB
+.output/public/assets/privacidade-i1x24Ohp.js                      4.79 kB │ gzip:   2.05 kB
+.output/public/assets/button-DHKMx5wC.js                           4.80 kB │ gzip:   2.10 kB
+.output/public/assets/routes-DGmPkbOG.js                           4.91 kB │ gzip:   2.09 kB
+.output/public/assets/resultado-DluAZl6c.js                        5.02 kB │ gzip:   1.76 kB
+.output/public/assets/llvm-DqHOMS-s.js                             5.03 kB │ gzip:   2.01 kB
+.output/public/assets/investigacao._threadId.painel-DV8FPMGu.js    5.13 kB │ gzip:   1.76 kB
+.output/public/assets/wgsl-BsKzXJz4.js                             5.13 kB │ gzip:   1.38 kB
+.output/public/assets/gdresource-xMC7jr7x.js                       5.28 kB │ gzip:   1.33 kB
+.output/public/assets/zig-CMLA9XwU.js                              5.33 kB │ gzip:   1.55 kB
+.output/public/assets/qml-_a-QhfPD.js                              5.33 kB │ gzip:   1.38 kB
+.output/public/assets/dax-BkyTk9wS.js                              5.35 kB │ gzip:   2.21 kB
+.output/public/assets/bicep-CUHmPFLl.js                            5.37 kB │ gzip:   1.14 kB
+.output/public/assets/xml-BlnrEAEy.js                              5.44 kB │ gzip:   1.25 kB
+.output/public/assets/awk-BWXHIvNe.js                              5.45 kB │ gzip:   1.37 kB
+.output/public/assets/linear-C7gIVo4m.js                           5.51 kB │ gzip:   2.25 kB
+.output/public/assets/jinja-81yqctvv.js                            5.62 kB │ gzip:   1.36 kB
+.output/public/assets/lean-CewbzKMR.js                             5.77 kB │ gzip:   1.91 kB
+.output/public/assets/chunk-PWAF6VOD-toJucTFy.js                   5.83 kB │ gzip:   2.68 kB
+.output/public/assets/powerquery-DNMTfnFr.js                       5.89 kB │ gzip:   1.51 kB
+.output/public/assets/shaderlab-TOUzSsQk.js                        5.91 kB │ gzip:   2.08 kB
+.output/public/assets/questionario-vlKSaiy1.js                     5.93 kB │ gzip:   2.27 kB
+.output/public/assets/cypher-ClKdZ_lG.js                           5.94 kB │ gzip:   1.71 kB
+.output/public/assets/coq-CGaSfhwR.js                              6.04 kB │ gzip:   1.95 kB
+.output/public/assets/vb-DOwzaHZ0.js                               6.06 kB │ gzip:   2.32 kB
+.output/public/assets/diagram-UQ7AKVKN-CFJQVLqv.js                 6.07 kB │ gzip:   2.57 kB
+.output/public/assets/moonbit-D9W784E_.js                          6.07 kB │ gzip:   1.70 kB
+.output/public/assets/pieDiagram-E7YTZNPT-18qho2TH.js              6.22 kB │ gzip:   2.60 kB
+.output/public/assets/min-dark-BSWPekZh.js                         6.28 kB │ gzip:   1.70 kB
+.output/public/assets/gdshader-CBce3t8t.js                         6.31 kB │ gzip:   1.72 kB
+.output/public/assets/ara-4CJ0cIlV.js                              6.35 kB │ gzip:   1.80 kB
+.output/public/assets/verilog-B2gwz-sJ.js                          6.40 kB │ gzip:   1.92 kB
+.output/public/assets/clojure-DqKBuwfJ.js                          6.40 kB │ gzip:   1.41 kB
+.output/public/assets/postcss-BXeXVLqQ.js                          6.41 kB │ gzip:   1.90 kB
+.output/public/assets/toml-CcmNWLt0.js                             6.41 kB │ gzip:   1.28 kB
+.output/public/assets/proto-DB4EqR-F.js                            6.54 kB │ gzip:   1.41 kB
+.output/public/assets/chapel-DmtgEXO_.js                           6.62 kB │ gzip:   1.85 kB
+.output/public/assets/mermaid-parser.core-lk7neWIF.js              6.71 kB │ gzip:   1.86 kB
+.output/public/assets/red-CYlAq2b0.js                              6.73 kB │ gzip:   1.70 kB
+.output/public/assets/talonscript-CohzipZa.js                      6.75 kB │ gzip:   1.48 kB
+.output/public/assets/biblioteca-ClsTUxyy.js                       6.76 kB │ gzip:   2.50 kB
+.output/public/assets/r-BHcO8Vjq.js                                6.80 kB │ gzip:   1.89 kB
+.output/public/assets/riscv-Ckw8ddFX.js                            6.90 kB │ gzip:   1.97 kB
+.output/public/assets/soy-CXX9LSpm.js                              6.92 kB │ gzip:   1.62 kB
+.output/public/assets/solarized-light-DFPxpIYQ.js                  6.93 kB │ gzip:   1.79 kB
+.output/public/assets/min-light-DDpmG2fV.js                        6.96 kB │ gzip:   1.88 kB
+.output/public/assets/scheme-DQCgrYNe.js                           7.16 kB │ gzip:   2.04 kB
+.output/public/assets/hlsl-Cvrh5tZx.js                             7.25 kB │ gzip:   2.18 kB
+.output/public/assets/solarized-dark-b97czJOk.js                   7.39 kB │ gzip:   1.89 kB
+.output/public/assets/qss-Fe1Jh2GI.js                              7.46 kB │ gzip:   2.57 kB
+.output/public/assets/prisma-DMgNhnYS.js                           7.73 kB │ gzip:   1.48 kB
+.output/public/assets/systemd-BxMlprV5.js                          7.86 kB │ gzip:   2.54 kB
+.output/public/assets/jsx-runtime-DE3RlOCf.js                      7.89 kB │ gzip:   2.99 kB
+.output/public/assets/regexp-DR20uMnK.js                           8.05 kB │ gzip:   1.47 kB
+.output/public/assets/diagram-S7CK7UJ4-CQPLb9HF.js                 8.19 kB │ gzip:   3.66 kB
+.output/public/assets/monokai-BscAjiQZ.js                          8.24 kB │ gzip:   1.97 kB
+.output/public/assets/haml-ChtpF0E7.js                             8.33 kB │ gzip:   1.86 kB
+.output/public/assets/vue-html-DkKkQnZL.js                         8.47 kB │ gzip:   1.68 kB
+.output/public/assets/plsql-DGHpHOYJ.js                            8.50 kB │ gzip:   2.99 kB
+.output/public/assets/dart-CHZY9Xhz.js                             8.60 kB │ gzip:   1.99 kB
+.output/public/assets/horizon-CE9ld1lL.js                          8.77 kB │ gzip:   1.94 kB
+.output/public/assets/kotlin-DhhofPvG.js                           8.77 kB │ gzip:   2.12 kB
+.output/public/assets/horizon-bright-DSNQnXHK.js                   8.78 kB │ gzip:   1.96 kB
+.output/public/assets/useBaseQuery-CnKgSgKf.js                     8.88 kB │ gzip:   3.25 kB
+.output/public/assets/make-Dixweg8N.js                             8.95 kB │ gzip:   1.76 kB
+.output/public/assets/andromeeda-vGVdxbeo.js                       9.01 kB │ gzip:   2.35 kB
+.output/public/assets/sas-D3h2pRQf.js                              9.06 kB │ gzip:   3.82 kB
+.output/public/assets/dark-plus-Cs2F2srj.js                        9.09 kB │ gzip:   2.10 kB
+.output/public/assets/slack-dark-DnToyrRv.js                       9.11 kB │ gzip:   1.96 kB
+.output/public/assets/smithy-Dgaz7aur.js                           9.12 kB │ gzip:   1.51 kB
+.output/public/assets/sass-DXrisJhu.js                             9.28 kB │ gzip:   2.48 kB
+.output/public/assets/link-CsGstYKf.js                             9.29 kB │ gzip:   4.28 kB
+.output/public/assets/plastic-DQwYfKfQ.js                          9.29 kB │ gzip:   1.96 kB
+.output/public/assets/slack-ochin-B2OO5cIa.js                      9.42 kB │ gzip:   2.08 kB
+.output/public/assets/chunk-L3NEJ4N5-JgWRhJeT.js                   9.68 kB │ gzip:   2.93 kB
+.output/public/assets/jison-CBjhYtSs.js                            9.69 kB │ gzip:   1.86 kB
+.output/public/assets/tex-BK-H2Wn4.js                              9.73 kB │ gzip:   3.10 kB
+.output/public/assets/cmake-Bj61d0ZC.js                            9.84 kB │ gzip:   3.37 kB
+.output/public/assets/light-plus-DVQuIRkW.js                       9.93 kB │ gzip:   2.27 kB
+.output/public/assets/cynefinDiagram-5FMLGOSQ-CIbu8hNb.js          9.94 kB │ gzip:   3.52 kB
+.output/public/assets/hcl-Dh228itO.js                             10.04 kB │ gzip:   1.93 kB
+.output/public/assets/rst-hVyWO_Fc.js                             10.31 kB │ gzip:   2.24 kB
+.output/public/assets/pkl-ot-7Btpt.js                             10.36 kB │ gzip:   1.37 kB
+.output/public/assets/chunk-2E4U76K2-NUZCPByD.js                  10.39 kB │ gzip:   4.15 kB
+.output/public/assets/dream-maker-DW3nJb8Q.js                     10.46 kB │ gzip:   2.25 kB
+.output/public/assets/raku-B3gFvitq.js                            10.46 kB │ gzip:   2.94 kB
+.output/public/assets/nextflow-groovy-D7IRt6Pp.js                 10.52 kB │ gzip:   2.16 kB
+.output/public/assets/yaml-Du_6cdrH.js                            10.57 kB │ gzip:   2.32 kB
+.output/public/assets/stateDiagram-D77RDMKH-DhphIqIO.js           10.64 kB │ gzip:   3.73 kB
+.output/public/assets/diagram-VSXAHHWV-lnWNVGDy.js                10.66 kB │ gzip:   4.13 kB
+.output/public/assets/just-BuSkJCkO.js                            10.84 kB │ gzip:   2.62 kB
+.output/public/assets/elm-o4NJxfws.js                             10.94 kB │ gzip:   2.09 kB
+.output/public/assets/dagre-GXQ25YYZ-CYW8golw.js                  10.97 kB │ gzip:   4.15 kB
+.output/public/assets/github-light-EUqPIrTm.js                    11.18 kB │ gzip:   2.49 kB
+.output/public/assets/prolog-iXnhIJG7.js                          11.34 kB │ gzip:   3.84 kB
+.output/public/assets/terraform-DswuEJGm.js                       11.38 kB │ gzip:   2.51 kB
+.output/public/assets/github-dark-C-LZuMrd.js                     11.40 kB │ gzip:   2.53 kB
+.output/public/assets/puppet-CDv2pdJW.js                          11.43 kB │ gzip:   2.10 kB
+.output/public/assets/laserwave-C_8bwKvT.js                       11.49 kB │ gzip:   2.57 kB
+.output/public/assets/gherkin-DExj1W_8.js                         11.93 kB │ gzip:   5.04 kB
+.output/public/assets/wasm-ByWQv1Qj.js                            12.00 kB │ gzip:   2.17 kB
+.output/public/assets/hjson-CxZEssPk.js                           12.04 kB │ gzip:   1.64 kB
+.output/public/assets/surrealql-BZoq2lXR.js                       12.06 kB │ gzip:   3.29 kB
+.output/public/assets/apache-U0d_L8uA.js                          12.44 kB │ gzip:   3.71 kB
+.output/public/assets/handlebars-CpsBgm7t.js                      12.48 kB │ gzip:   2.42 kB
+.output/public/assets/vesper-DdrHHSXu.js                          12.73 kB │ gzip:   1.99 kB
+.output/public/assets/beancount-C2IN4Vk8.js                       12.84 kB │ gzip:   2.21 kB
+.output/public/assets/bat-qdxAdBWQ.js                             12.88 kB │ gzip:   3.23 kB
+.output/public/assets/fish-BJitypiv.js                            13.03 kB │ gzip:   1.73 kB
+.output/public/assets/nsis-CjNLYCLg.js                            13.11 kB │ gzip:   4.06 kB
+.output/public/assets/contextual-ks2Kd0dT.js                      13.14 kB │ gzip:   5.18 kB
+.output/public/assets/v-DBj4K9d_.js                               13.32 kB │ gzip:   2.75 kB
+.output/public/assets/vitesse-light-VbXTXTou.js                   13.61 kB │ gzip:   3.03 kB
+.output/public/assets/aurora-x-CDeNXAV0.js                        13.65 kB │ gzip:   2.28 kB
+.output/public/assets/vitesse-black-fwtXNY1n.js                   13.67 kB │ gzip:   3.05 kB
+.output/public/assets/vitesse-dark-BZCL-v6S.js                    13.75 kB │ gzip:   3.06 kB
+.output/public/assets/pug-Co4hciMS.js                             13.84 kB │ gzip:   2.58 kB
+.output/public/assets/exemplos-CajI2kj9.js                        13.88 kB │ gzip:   4.24 kB
+.output/public/assets/demo-cases-DnSr7bap.js                      14.01 kB │ gzip:   5.13 kB
+.output/public/assets/synthwave-84-nFMaYfgc.js                    14.03 kB │ gzip:   2.85 kB
+.output/public/assets/smalltalk-BHpQb5nM.js                       14.11 kB │ gzip:   2.14 kB
+.output/public/assets/github-light-default-BXViO-2h.js            14.15 kB │ gzip:   3.02 kB
+.output/public/assets/github-light-high-contrast-B68TUdTA.js      14.27 kB │ gzip:   3.00 kB
+.output/public/assets/clarity-CtfBBspg.js                         14.35 kB │ gzip:   2.50 kB
+.output/public/assets/github-dark-dimmed-Bx1FflLF.js              14.43 kB │ gzip:   3.11 kB
+.output/public/assets/github-dark-default-DXG-b-1a.js             14.43 kB │ gzip:   3.12 kB
+.output/public/assets/github-dark-high-contrast-B_tTalzw.js       14.59 kB │ gzip:   3.07 kB
+.output/public/assets/gnuplot-7GGW24-e.js                         14.77 kB │ gzip:   3.27 kB
+.output/public/assets/rust-DpiIf5JO.js                            15.16 kB │ gzip:   2.72 kB
+.output/public/assets/kusto-C7mF5XQf.js                           15.16 kB │ gzip:   3.92 kB
+.output/public/assets/nix-IvuFDN5E.js                             15.50 kB │ gzip:   2.47 kB
+.output/public/assets/actionscript-3-Cs6JJXT5.js                  15.53 kB │ gzip:   2.70 kB
+.output/public/assets/lua-FONpmTUP.js                             15.60 kB │ gzip:   3.19 kB
+.output/public/assets/chunk-SVP7TREG-D8CIJFsK.js                  15.64 kB │ gzip:   4.35 kB
+.output/public/assets/diagram-VX7I27RA-m1QaP9os.js                15.75 kB │ gzip:   5.52 kB
+.output/public/assets/abap-CLvhMVsD.js                            15.84 kB │ gzip:   5.93 kB
+.output/public/assets/matlab-D7qyCx1q.js                          16.07 kB │ gzip:   3.06 kB
+.output/public/assets/cue-CE9AQfxI.js                             16.19 kB │ gzip:   2.04 kB
+.output/public/assets/elixir-BkREp_f2.js                          16.26 kB │ gzip:   2.76 kB
+.output/public/assets/luau-VGWVLoqX.js                            16.29 kB │ gzip:   3.56 kB
+.output/public/assets/solidity-Bj7E1mRn.js                        16.40 kB │ gzip:   3.14 kB
+.output/public/assets/odin-B1RWQWA5.js                            16.50 kB │ gzip:   2.92 kB
+.output/public/assets/ts-tags-C4CDubZg.js                         16.54 kB │ gzip:   2.05 kB
+.output/public/assets/kanagawa-wave-BML5mF2J.js                   17.11 kB │ gzip:   2.90 kB
+.output/public/assets/kanagawa-lotus-BmuOG9ZW.js                  17.11 kB │ gzip:   2.91 kB
+.output/public/assets/kanagawa-dragon-Bozd7klA.js                 17.12 kB │ gzip:   2.92 kB
+.output/public/assets/ishikawaDiagram-5VMMS53U-peSFB7of.js        17.31 kB │ gzip:   6.53 kB
+.output/public/assets/move-BYnGhZoM.js                            17.65 kB │ gzip:   3.06 kB
+.output/public/assets/graphql-Ctjuxyvl.js                         18.08 kB │ gzip:   2.53 kB
+.output/public/assets/liquid-VY2h0b2O.js                          18.10 kB │ gzip:   3.14 kB
+.output/public/assets/svelte-CZ5lJGR6.js                          18.25 kB │ gzip:   3.14 kB
+.output/public/assets/investigation-documents-Pa78HJZC.js         18.52 kB │ gzip:   6.14 kB
+.output/public/assets/material-theme-Bm3Qr25_.js                  18.61 kB │ gzip:   3.10 kB
+.output/public/assets/material-theme-darker-2IIEA8gg.js           18.62 kB │ gzip:   3.10 kB
+.output/public/assets/material-theme-ocean-CHQ94UKr.js            18.62 kB │ gzip:   3.12 kB
+.output/public/assets/material-theme-lighter-uhdI0v04.js          18.63 kB │ gzip:   3.10 kB
+.output/public/assets/material-theme-palenight-B5W6OYN7.js        18.63 kB │ gzip:   3.11 kB
+.output/public/assets/gdscript-DYvRD3hg.js                        19.08 kB │ gzip:   3.76 kB
+.output/public/assets/groovy-CacY0gHj.js                          19.17 kB │ gzip:   3.59 kB
+.output/public/assets/ayu-dark-DluEY0Gj.js                        20.07 kB │ gzip:   3.93 kB
+.output/public/assets/ayu-mirage-Bqwy1Gya.js                      20.08 kB │ gzip:   3.91 kB
+.output/public/assets/glimmer-js-BTqwx0oO.js                      20.08 kB │ gzip:   2.94 kB
+.output/public/assets/glimmer-ts-N9jKyowB.js                      20.08 kB │ gzip:   2.93 kB
+.output/public/assets/mdc-CX_1c8hS.js                             20.08 kB │ gzip:   6.81 kB
+.output/public/assets/powershell-QtSnmXcu.js                      20.14 kB │ gzip:   4.05 kB
+.output/public/assets/ayu-light-C3h-C4tm.js                       20.14 kB │ gzip:   3.89 kB
+.output/public/assets/kanban-definition-UXKFOSKX-BLX4Q_4Y.js      20.31 kB │ gzip:   7.17 kB
+.output/public/assets/viml-DvXPmvsu.js                            20.35 kB │ gzip:   6.73 kB
+.output/public/assets/snazzy-light-4G7pJPwS.js                    20.77 kB │ gzip:   3.80 kB
+.output/public/assets/dracula-BHWKrbxM.js                         21.06 kB │ gzip:   3.99 kB
+.output/public/assets/dracula-soft-5eyTD99u.js                    21.07 kB │ gzip:   4.02 kB
+.output/public/assets/wit-DdvCle-K.js                             21.46 kB │ gzip:   2.87 kB
+.output/public/assets/rose-pine-aMsaMD1D.js                       21.73 kB │ gzip:   3.88 kB
+.output/public/assets/rose-pine-moon-DO-qXg-I.js                  21.74 kB │ gzip:   3.89 kB
+.output/public/assets/rose-pine-dawn-8PwUyIlP.js                  21.74 kB │ gzip:   3.89 kB
+.output/public/assets/nushell--0fT3PI1.js                         21.76 kB │ gzip:   5.44 kB
+.output/public/assets/nim-BrYFxDF2.js                             22.45 kB │ gzip:   3.15 kB
+.output/public/assets/common-lisp-Cv5bFMCO.js                     22.57 kB │ gzip:   6.07 kB
+.output/public/assets/gruvbox-dark-hard-C820rvS2.js               22.63 kB │ gzip:   4.15 kB
+.output/public/assets/gruvbox-dark-soft-MrdJrrXF.js               22.63 kB │ gzip:   4.15 kB
+.output/public/assets/gruvbox-light-hard-BC_s9l72.js              22.63 kB │ gzip:   4.16 kB
+.output/public/assets/gruvbox-light-soft-BSMLrYjP.js              22.63 kB │ gzip:   4.16 kB
+.output/public/assets/gruvbox-dark-medium-BPjhmG05.js             22.63 kB │ gzip:   4.15 kB
+.output/public/assets/gruvbox-light-medium-BAWPOn9u.js            22.63 kB │ gzip:   4.16 kB
+.output/public/assets/sankeyDiagram-P5KCCOFB-6x1S8NC9.js          22.79 kB │ gzip:   8.25 kB
+.output/public/assets/journeyDiagram-3NMN7TZE-CCb_dk3t.js         23.17 kB │ gzip:   8.16 kB
+.output/public/assets/mindmap-definition-YA3MSWOX-C4TTBa04.js     23.44 kB │ gzip:   8.02 kB
+.output/public/assets/cadence-CQ2zXKGN.js                         23.66 kB │ gzip:   3.65 kB
+.output/public/assets/sql-ByhjMBKn.js                             23.73 kB │ gzip:   7.57 kB
+.output/public/assets/graphlib-DS17s2tU.js                        23.90 kB │ gzip:   8.31 kB
+.output/public/assets/astro-Dq6p_VTJ.js                           24.02 kB │ gzip:   7.59 kB
+.output/public/assets/apl-BRH60u60.js                             24.02 kB │ gzip:   4.16 kB
+.output/public/assets/templ-EWf5LxrK.js                           24.06 kB │ gzip:   5.41 kB
+.output/public/assets/angular-html-CPrDeWzk.js                    24.24 kB │ gzip:   3.99 kB
+.output/public/assets/vhdl-BroJfC0k.js                            24.25 kB │ gzip:   3.86 kB
+.output/public/assets/purescript-9MfHhQsQ.js                      24.67 kB │ gzip:   3.24 kB
+.output/public/assets/twig-D6Rh4Rda.js                            24.85 kB │ gzip:   4.00 kB
+.output/public/assets/vue-D5NIjYCb.js                             24.96 kB │ gzip:   3.03 kB
+.output/public/assets/wardleyDiagram-VM6X3IG4-CYPn-MVh.js         25.23 kB │ gzip:   6.55 kB
+.output/public/assets/one-light-D7Lr4KcI.js                       25.29 kB │ gzip:   3.63 kB
+.output/public/assets/fsharp-D13ZGOAj.js                          25.30 kB │ gzip:   4.12 kB
+.output/public/assets/marko-BRIeiu02.js                           25.72 kB │ gzip:   3.66 kB
+.output/public/assets/night-owl-light-eJ-hLW7d.js                 25.89 kB │ gzip:   4.23 kB
+.output/public/assets/c3-D0apG41V.js                              26.37 kB │ gzip:   3.97 kB
+.output/public/assets/system-verilog-Dh5ihWbf.js                  26.54 kB │ gzip:   4.85 kB
+.output/public/assets/nord-Cb4Vim4T.js                            26.72 kB │ gzip:   4.35 kB
+.output/public/assets/codeql-oeQT6MSM.js                          26.87 kB │ gzip:   3.79 kB
+.output/public/assets/typespec-BGhR2SqG.js                        26.99 kB │ gzip:   2.75 kB
+.output/public/assets/rough.esm-By172zw-.js                       27.10 kB │ gzip:   8.85 kB
+.output/public/assets/bundle-mjs-B_AA55HL.js                      27.22 kB │ gzip:   8.67 kB
+.output/public/assets/scss-DDJaLTnA.js                            27.26 kB │ gzip:   4.23 kB
+.output/public/assets/java-DdHNQ9hk.js                            27.28 kB │ gzip:   4.31 kB
+.output/public/assets/coffee-CiiSLhB6.js                          27.42 kB │ gzip:   6.35 kB
+.output/public/assets/razor-DVe451rE.js                           27.45 kB │ gzip:   3.54 kB
+.output/public/assets/scala-BiFt_7mu.js                           28.88 kB │ gzip:   3.93 kB
+.output/public/assets/night-owl-DhmEMT88.js                       28.91 kB │ gzip:   5.14 kB
+.output/public/assets/gitGraphDiagram-WWUBYQGX-C55Zi-Zo.js        29.01 kB │ gzip:   8.57 kB
+.output/public/assets/crystal-Bn4W9FYe.js                         29.41 kB │ gzip:   4.44 kB
+.output/public/assets/applescript-CCn79oCD.js                     29.56 kB │ gzip:   5.94 kB
+.output/public/assets/chunk-75Z2AOVW-DFK8OPwB.js                  30.37 kB │ gzip:   8.43 kB
+.output/public/assets/timeline-definition-24CTP7MA-8Pf5tR8F.js    30.38 kB │ gzip:   9.98 kB
+.output/public/assets/erDiagram-RLTQ6QDP-QQeHv8F3.js              30.69 kB │ gzip:  10.57 kB
+.output/public/assets/requirementDiagram-BXWQKSXE-C6TZ9csk.js     31.00 kB │ gzip:   9.78 kB
+.output/public/assets/stylus-B6D30XZt.js                          31.06 kB │ gzip:   8.01 kB
+.output/public/assets/julia-KRkZs2hS.js                           31.22 kB │ gzip:   4.34 kB
+.output/public/assets/ahk-DwADkxyd.js                             31.44 kB │ gzip:   7.83 kB
+.output/public/assets/poimandres-DRFjx7u4.js                      33.49 kB │ gzip:   5.49 kB
+.output/public/assets/quadrantDiagram-AXDQQJYC-BLSGibrm.js        33.51 kB │ gzip:   9.74 kB
+.output/public/assets/bsl-_VjlB9mv.js                             33.94 kB │ gzip:   8.35 kB
+.output/public/assets/nginx-BTMw9COX.js                           35.35 kB │ gzip:   4.45 kB
+.output/public/assets/houston-CsvMBhTu.js                         35.41 kB │ gzip:   5.76 kB
+.output/public/assets/tokyo-night-oM2G3aXe.js                     35.66 kB │ gzip:   6.22 kB
+.output/public/assets/haxe-C8oCnwJJ.js                            35.94 kB │ gzip:   6.00 kB
+.output/public/assets/org-Cd0u8vWD.js                             36.26 kB │ gzip:   3.67 kB
+.output/public/assets/chunk-OSK3NFVY-D1hXYp2m.js                  36.46 kB │ gzip:   7.96 kB
+.output/public/assets/dagre-PrKaheQc.js                           36.85 kB │ gzip:  13.22 kB
+.output/public/assets/one-dark-pro-C6YyR8OD.js                    37.05 kB │ gzip:   6.10 kB
+.output/public/assets/erlang-Cphh6RMH.js                          37.47 kB │ gzip:   4.36 kB
+.output/public/assets/chunk-IMKFNOWR-Bmfhhy0e.js                  37.64 kB │ gzip:  12.27 kB
+.output/public/assets/bird2-CYIUgYqB.js                           38.67 kB │ gzip:   8.49 kB
+.output/public/assets/cobol-CGlx5WnO.js                           39.07 kB │ gzip:  10.88 kB
+.output/public/assets/asm-Cmm7eHzH.js                             40.71 kB │ gzip:   8.16 kB
+.output/public/assets/vennDiagram-4TSXK5OY-CjdN4PpN.js            41.16 kB │ gzip:  15.11 kB
+.output/public/assets/blockDiagram-I7D4REHJ-B4aI-WvR.js           41.42 kB │ gzip:  13.37 kB
+.output/public/assets/haskell-D8IpX4py.js                         41.48 kB │ gzip:   6.41 kB
+.output/public/assets/shellscript-Da78Ox-3.js                     41.54 kB │ gzip:   6.13 kB
+.output/public/assets/perl-1pN6i0RM.js                            43.14 kB │ gzip:   4.64 kB
+.output/public/assets/d-qD-0Kul2.js                               43.78 kB │ gzip:   8.43 kB
+.output/public/assets/xychartDiagram-S5SC5T6Z-Dg3HQJQO.js         44.14 kB │ gzip:  12.22 kB
+.output/public/assets/ahk2-_6rzW9BS.js                            45.05 kB │ gzip:   9.87 kB
+.output/public/assets/src-B6xuSHsQ.js                             45.68 kB │ gzip:  16.00 kB
+.output/public/assets/chunk-LNGE3PJU-p78rraeW.js                  46.38 kB │ gzip:  15.54 kB
+.output/public/assets/ruby-Zd-8tM08.js                            46.63 kB │ gzip:   5.70 kB
+.output/public/assets/go-rLFTqkRN.js                              46.81 kB │ gzip:   5.14 kB
+.output/public/assets/apex-KFGFyKwG.js                            47.88 kB │ gzip:   6.85 kB
+.output/public/assets/ada-X3Y2mlq2.js                             48.07 kB │ gzip:   5.96 kB
+.output/public/assets/chunk-TICWLB2K-CCdWsgWl.js                  48.78 kB │ gzip:  15.76 kB
+.output/public/assets/imba-DsUTQ-LC.js                            49.92 kB │ gzip:   9.47 kB
+.output/public/assets/catppuccin-mocha-DjuaAJKi.js                50.84 kB │ gzip:   8.47 kB
+.output/public/assets/catppuccin-latte-CtsyrtPq.js                50.84 kB │ gzip:   8.48 kB
+.output/public/assets/catppuccin-frappe-C9Q5zVZY.js               50.85 kB │ gzip:   8.48 kB
+.output/public/assets/catppuccin-macchiato-R8nAf1vR.js            50.85 kB │ gzip:   8.48 kB
+.output/public/assets/chunk-GMAD6QVW-B_hU_TY3.js                  51.84 kB │ gzip:  16.69 kB
+.output/public/assets/css-AeYbVOD-.js                             53.43 kB │ gzip:  12.53 kB
+.output/public/assets/everforest-dark-sB-x3p7T.js                 53.74 kB │ gzip:   8.37 kB
+.output/public/assets/everforest-light-Df2xbC6M.js                53.74 kB │ gzip:   8.36 kB
+.output/public/assets/mermaid-BxpfTIzt.js                         54.80 kB │ gzip:   4.79 kB
+.output/public/assets/wikitext-ClFFjSW2.js                        55.87 kB │ gzip:   4.81 kB
+.output/public/assets/stata-CjrVU8-t.js                           56.99 kB │ gzip:  12.39 kB
+.output/public/assets/html-hnucWepv.js                            57.32 kB │ gzip:  11.78 kB
+.output/public/assets/ballerina-B7ZEbQpA.js                       58.68 kB │ gzip:   8.10 kB
+.output/public/assets/markdown-BYOwaDjH.js                        59.32 kB │ gzip:   5.66 kB
+.output/public/assets/catalog-schema-26SW8DQ0.js                  60.98 kB │ gzip:  14.74 kB
+.output/public/assets/chunk-SHT3W25Y-DwdcMlyz.js                  61.24 kB │ gzip:  19.84 kB
+.output/public/assets/ocaml-O90oeIOV.js                           62.44 kB │ gzip:   5.04 kB
+.output/public/assets/c4Diagram-7LVT6UL2-DyS5hZbD.js              64.72 kB │ gzip:  18.53 kB
+.output/public/assets/ganttDiagram-EL5Y4UJY-BFrWQC3C.js           69.35 kB │ gzip:  22.74 kB
+.output/public/assets/mojo-fg40_ntQ.js                            69.51 kB │ gzip:   9.20 kB
+.output/public/assets/python-gzcpVVnB.js                          69.94 kB │ gzip:   9.09 kB
+.output/public/assets/c-iCihek07.js                               72.17 kB │ gzip:  10.55 kB
+.output/public/assets/latex-CvI9akcJ.js                           73.24 kB │ gzip:   6.78 kB
+.output/public/assets/vyper-CgoNMtux.js                           74.64 kB │ gzip:  10.69 kB
+.output/public/assets/hack-ZTcFnVsP.js                            81.07 kB │ gzip:  26.45 kB
+.output/public/assets/cose-bilkent-JH36ORCC-D0Vm2JR5.js           81.25 kB │ gzip:  21.55 kB
+.output/public/assets/swift-CyEgAFGc.js                           87.22 kB │ gzip:  14.79 kB
+.output/public/assets/fortran-free-form-CYNrtFtB.js               88.96 kB │ gzip:  11.18 kB
+.output/public/assets/csharp-dmMxLVLW.js                          91.43 kB │ gzip:  10.79 kB
+.output/public/assets/racket-DcIDlBhZ.js                          92.38 kB │ gzip:  15.07 kB
+.output/public/assets/less-DVTAwKKz.js                            97.62 kB │ gzip:  14.84 kB
+.output/public/assets/chunk-4HAMMTFA-BLLnwszD.js                 104.85 kB │ gzip:  25.62 kB
+.output/public/assets/blade-CC3PQRrX.js                          104.97 kB │ gzip:  28.29 kB
+.output/public/assets/objective-c-D1A_Heim.js                    105.40 kB │ gzip:  23.63 kB
+.output/public/assets/swimlanes-42K2YHIH-Cqe2MUTE.js             111.15 kB │ gzip:  38.02 kB
+.output/public/assets/php-C7NaTRTO.js                            113.12 kB │ gzip:  28.84 kB
+.output/public/assets/sequenceDiagram-WJ2MYXX4-D_eYZgvV.js       115.75 kB │ gzip:  30.58 kB
+.output/public/assets/asciidoc-SCjQUq34.js                       136.04 kB │ gzip:   9.45 kB
+.output/public/assets/mdx-DQZ5AkYe.js                            136.10 kB │ gzip:  23.54 kB
+.output/public/assets/architectureDiagram-5GKGNRK7-DjNARLJN.js   148.90 kB │ gzip:  41.14 kB
+.output/public/assets/typst-Bq_qwoSs.js                          163.48 kB │ gzip:  10.96 kB
+.output/public/assets/objective-cpp-BsSzOQcm.js                  171.96 kB │ gzip:  30.98 kB
+.output/public/assets/javascript-obGGvMPs.js                     174.89 kB │ gzip:  16.68 kB
+.output/public/assets/tsx-CUOciP0b.js                            175.60 kB │ gzip:  16.68 kB
+.output/public/assets/jsx-gTgmArGx.js                            177.85 kB │ gzip:  16.77 kB
+.output/public/assets/typescript-BydbNFcO.js                     181.14 kB │ gzip:  16.29 kB
+.output/public/assets/angular-ts-DCisMPVX.js                     183.73 kB │ gzip:  16.78 kB
+.output/public/assets/vue-vine-C-CFC0K-.js                       190.05 kB │ gzip:  18.07 kB
+.output/public/assets/chunk-DU6HZSFF-CIBulCQI.js                 237.97 kB │ gzip:  39.12 kB
+.output/public/assets/katex-CLeJGgK6.js                          259.04 kB │ gzip:  77.46 kB
+.output/public/assets/wolfram-DLL8P-h_.js                        262.38 kB │ gzip:  77.63 kB
+.output/public/assets/index-CcJsCpEf.js                          295.71 kB │ gzip:  93.69 kB
+.output/public/assets/cloud-adapter-D8-yytCR.js                  399.98 kB │ gzip: 106.07 kB
+.output/public/assets/cytoscape.esm-bUcbUvCQ.js                  435.05 kB │ gzip: 137.84 kB
+.output/public/assets/investigacao._threadId-COed0jq5.js         446.53 kB │ gzip: 148.54 kB
+.output/public/assets/chunk-7TTQLYRW-Bn7YVDYP.js                 485.54 kB │ gzip: 148.53 kB
+.output/public/assets/wasm-BnjxR4X6.js                           622.32 kB │ gzip: 232.09 kB
+.output/public/assets/chunk-FOHPRMQF-l2z4K2jD.js                 662.10 kB │ gzip: 143.15 kB
+.output/public/assets/cpp-71xkOQct.js                            785.54 kB │ gzip:  58.27 kB
+.output/public/assets/emacs-lisp-DR2vtWaj.js                     790.01 kB │ gzip: 200.31 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 3.92s
+vite v8.1.5 building ssr environment for production...
+[2K
+transforming...[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/legal-library.functions.ts?tss-serverfn-split:5:32 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts?tss-serverfn-split:46:33 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts?tss-serverfn-split:76:30 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts?tss-serverfn-split:96:38 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts?tss-serverfn-split:58:42 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts?tss-serverfn-split:98:37 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts?tss-serverfn-split:112:36 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts?tss-serverfn-split:139:38 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts?tss-serverfn-split:164:39 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/legal-library.functions.ts:5:32 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts:46:33 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts:76:30 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/investigation.functions.ts:96:38 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:58:42 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:98:37 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:112:36 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:139:38 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+[plugin tanstack-start-core::server-fn:ssr] /workspace/ia-previdenciaria-inss/src/lib/api/document.functions.ts:164:39 createServerFn().inputValidator() is deprecated. Use createServerFn().validator() instead.
+✓ 176 modules transformed.
+rendering chunks...
+computing gzip size...
+node_modules/.nitro/vite/services/ssr/assets/lovable-mark-DKVi-oJX.svg                           7.06 kB │ gzip:  1.15 kB
+node_modules/.nitro/vite/services/ssr/assets/assistente-exemplos-Ct7Nvavq.jpg                   80.71 kB
+node_modules/.nitro/vite/services/ssr/assets/router-BPcuF8oP.css                                 3.71 kB │ gzip:  2.58 kB
+node_modules/.nitro/vite/services/ssr/assets/styles-Cpo6Eg9H.css                                89.72 kB │ gzip: 15.47 kB
+node_modules/.nitro/vite/services/ssr/assets/assistente-exemplos-By1hsPuk.js                     0.18 kB │ gzip:  0.12 kB
+node_modules/.nitro/vite/services/ssr/assets/route-DAXPpgou.js                                   0.19 kB │ gzip:  0.15 kB
+node_modules/.nitro/vite/services/ssr/assets/empty-plugin-adapters-D9UWiqvJ.js                   0.22 kB │ gzip:  0.16 kB
+node_modules/.nitro/vite/services/ssr/assets/privacidade-I1sCUDXU.js                             0.35 kB │ gzip:  0.24 kB
+node_modules/.nitro/vite/services/ssr/assets/investigacoes-BOtB3moq.js                           0.35 kB │ gzip:  0.24 kB
+node_modules/.nitro/vite/services/ssr/assets/createServerRpc-CxD4EZ5P.js                         0.40 kB │ gzip:  0.27 kB
+node_modules/.nitro/vite/services/ssr/assets/useServerFn-CrZF2pjq.js                             0.63 kB │ gzip:  0.35 kB
+node_modules/.nitro/vite/services/ssr/assets/createMiddleware-B_4t7rW1.js                        0.83 kB │ gzip:  0.32 kB
+node_modules/.nitro/vite/services/ssr/assets/types-DLSXFnKv.js                                   0.91 kB │ gzip:  0.56 kB
+node_modules/.nitro/vite/services/ssr/assets/legal-library.functions-I3KDPgpv.js                 0.94 kB │ gzip:  0.48 kB
+node_modules/.nitro/vite/services/ssr/assets/request-auth.server-DdHmsst8.js                     1.00 kB │ gzip:  0.55 kB
+node_modules/.nitro/vite/services/ssr/assets/case-store-g436Niv9.js                              1.24 kB │ gzip:  0.55 kB
+node_modules/.nitro/vite/services/ssr/assets/investigacao._threadId-CpaXrBcO.js                  1.38 kB │ gzip:  0.64 kB
+node_modules/.nitro/vite/services/ssr/assets/investigacao._threadId.painel-B6Aem2ZF.js           1.40 kB │ gzip:  0.65 kB
+node_modules/.nitro/vite/services/ssr/assets/adapter-CtfIR60H.js                                 1.50 kB │ gzip:  0.84 kB
+node_modules/.nitro/vite/services/ssr/assets/document-dossier-schema-C6QWQooZ.js                 1.58 kB │ gzip:  0.68 kB
+node_modules/.nitro/vite/services/ssr/assets/client.server-KzwUIAkW.js                           1.73 kB │ gzip:  0.78 kB
+node_modules/.nitro/vite/services/ssr/assets/button-BqbbtAR3.js                                  1.84 kB │ gzip:  0.84 kB
+node_modules/.nitro/vite/services/ssr/assets/start-H7vjNw5w.js                                   2.05 kB │ gzip:  0.88 kB
+node_modules/.nitro/vite/services/ssr/assets/document-policy-Do-AXoKS.js                         2.32 kB │ gzip:  1.19 kB
+node_modules/.nitro/vite/services/ssr/assets/contextual-summary-CQF8m0sB.js                      2.36 kB │ gzip:  0.93 kB
+node_modules/.nitro/vite/services/ssr/assets/reset-password-Bnjya_Cv.js                          2.44 kB │ gzip:  1.07 kB
+node_modules/.nitro/vite/services/ssr/assets/createCsrfMiddleware-jzif2P7h.js                    2.45 kB │ gzip:  0.86 kB
+node_modules/.nitro/vite/services/ssr/assets/auth-middleware-Dcy-eaQM.js                         2.67 kB │ gzip:  1.09 kB
+node_modules/.nitro/vite/services/ssr/assets/request-response-B7GxCXoC.js                        3.02 kB │ gzip:  1.02 kB
+node_modules/.nitro/vite/services/ssr/assets/context-probe-Ka_lMbgC.js                           3.25 kB │ gzip:  1.26 kB
+node_modules/.nitro/vite/services/ssr/assets/investigacoes-3M_m9m8A.js                           3.34 kB │ gzip:  1.34 kB
+node_modules/.nitro/vite/services/ssr/assets/__23tanstack-start-server-fn-resolver-pGmW6XUh.js   3.41 kB │ gzip:  1.16 kB
+node_modules/.nitro/vite/services/ssr/assets/acompanhamento-CnAh1Gce.js                          3.42 kB │ gzip:  1.40 kB
+node_modules/.nitro/vite/services/ssr/assets/perguntas-CmHCCIlS.js                               3.89 kB │ gzip:  1.50 kB
+node_modules/.nitro/vite/services/ssr/assets/documentos-QzRDtsN1.js                              4.09 kB │ gzip:  1.45 kB
+node_modules/.nitro/vite/services/ssr/assets/investigation-shell-BxSbtJts.js                     4.11 kB │ gzip:  1.34 kB
+node_modules/.nitro/vite/services/ssr/assets/anamnesis.server-VQsKLFdr.js                        4.30 kB │ gzip:  1.73 kB
+node_modules/.nitro/vite/services/ssr/assets/conferencia-oSuGhFbW.js                             4.41 kB │ gzip:  1.63 kB
+node_modules/.nitro/vite/services/ssr/index.js                                                   4.61 kB │ gzip:  1.92 kB
+node_modules/.nitro/vite/services/ssr/assets/routes-ZTD5bOme.js                                  5.23 kB │ gzip:  1.91 kB
+node_modules/.nitro/vite/services/ssr/assets/shell-DL2lzd_A.js                                   5.24 kB │ gzip:  1.87 kB
+node_modules/.nitro/vite/services/ssr/assets/gemini.server-BatpBydD.js                           5.83 kB │ gzip:  2.40 kB
+node_modules/.nitro/vite/services/ssr/assets/investigation-CUdNFDxW.js                           6.16 kB │ gzip:  2.39 kB
+node_modules/.nitro/vite/services/ssr/assets/auth-BXDuCOQr.js                                    6.45 kB │ gzip:  2.20 kB
+node_modules/.nitro/vite/services/ssr/assets/catalog-schema-DO_nyw0x.js                          6.78 kB │ gzip:  2.39 kB
+node_modules/.nitro/vite/services/ssr/assets/privacidade-D39wg1di.js                             6.94 kB │ gzip:  2.36 kB
+node_modules/.nitro/vite/services/ssr/assets/investigation.functions-DxADWd_P.js                 7.02 kB │ gzip:  2.24 kB
+node_modules/.nitro/vite/services/ssr/assets/investigacao._threadId.painel-COvQf-O_.js           7.04 kB │ gzip:  2.08 kB
+node_modules/.nitro/vite/services/ssr/assets/resultado-IXIvVwy1.js                               7.29 kB │ gzip:  2.11 kB
+node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-DNLDDv8E.js              7.30 kB │ gzip:  1.64 kB
+node_modules/.nitro/vite/services/ssr/assets/client-DaUVSx77.js                                  7.53 kB │ gzip:  2.58 kB
+node_modules/.nitro/vite/services/ssr/assets/questionario-DcQxh1hr.js                            9.00 kB │ gzip:  2.81 kB
+node_modules/.nitro/vite/services/ssr/assets/createServerFn-DDDJMFWM.js                          9.90 kB │ gzip:  3.00 kB
+node_modules/.nitro/vite/services/ssr/assets/contextual-BP5dcss0.js                             10.21 kB │ gzip:  3.71 kB
+node_modules/.nitro/vite/services/ssr/assets/biblioteca-BaQHe4KH.js                             10.37 kB │ gzip:  2.98 kB
+node_modules/.nitro/vite/services/ssr/assets/catalog-BZ2hh5NE.js                                10.41 kB │ gzip:  3.72 kB
+node_modules/.nitro/vite/services/ssr/assets/document-dossier.server-D4tMbSfu.js                10.64 kB │ gzip:  3.80 kB
+node_modules/.nitro/vite/services/ssr/assets/cloud-adapter-D32eeDNN.js                          11.29 kB │ gzip:  3.57 kB
+node_modules/.nitro/vite/services/ssr/assets/anamnesis-BfKrF8V1.js                              13.00 kB │ gzip:  4.13 kB
+node_modules/.nitro/vite/services/ssr/assets/document.functions-CHUKigtv.js                     13.81 kB │ gzip:  4.07 kB
+node_modules/.nitro/vite/services/ssr/assets/demo-cases-Cx0jT7p9.js                             17.03 kB │ gzip:  5.77 kB
+node_modules/.nitro/vite/services/ssr/assets/exemplos-Z0WKegNx.js                               20.36 kB │ gzip:  4.48 kB
+node_modules/.nitro/vite/services/ssr/assets/investigation-documents-ClZGRUiT.js                25.54 kB │ gzip:  6.15 kB
+node_modules/.nitro/vite/services/ssr/assets/router-ivnVa8em.js                                 37.51 kB │ gzip:  9.13 kB
+node_modules/.nitro/vite/services/ssr/assets/investigacao._threadId-BEpojYEt.js                 46.81 kB │ gzip: 12.20 kB
+node_modules/.nitro/vite/services/ssr/assets/server-D4r2fd25.js                                 60.33 kB │ gzip: 15.52 kB
+
+✓ built in 741ms
+
+[nitro] ◐ Building [Nitro] (preset: cloudflare-module, compatibility: 2026-10-30)
+[nitro] ✔ Generated public .output/public
+vite v8.1.5 building nitro environment for production...
+
+ WARN  inlineDynamicImports option is ignored because the codeSplitting option is specified.
+
+[2K
+transforming...[plugin unwasm] Failed to load the WebAssembly module; falling back to module mode: Cannot resolve module "env" (from: /workspace/ia-previdenciaria-inss/node_modules/shiki/dist/onig.wasm)
+✓ 5371 modules transformed.
+rendering chunks...
+computing gzip size...
+.output/server/wasm/onig-b1644a9e745f1309.wasm                       466.61 kB │ gzip:   159.69 kB
+.output/server/_libs/_362.mjs                                          0.06 kB │ gzip:     0.07 kB
+.output/server/_libs/_368.mjs                                          0.06 kB │ gzip:     0.08 kB
+.output/server/_libs/_328.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_329.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_330.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_331.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_332.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_333.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_335.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_337.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_338.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_339.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_340.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_341.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_342.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_343.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_344.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_345.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_346.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_347.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_348.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_349.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_350.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_351.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_352.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_353.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_354.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_355.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_356.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_357.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_358.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_360.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_361.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_363.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_364.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_365.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_366.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_367.mjs                                          0.07 kB │ gzip:     0.07 kB
+.output/server/_libs/_370.mjs                                          0.07 kB │ gzip:     0.08 kB
+.output/server/_libs/_334.mjs                                          0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_2.mjs                                            0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_248.mjs                                          0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_3.mjs                                            0.08 kB │ gzip:     0.09 kB
+.output/server/_libs/_144.mjs                                          0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_359.mjs                                          0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_59.mjs                                           0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_83.mjs                                           0.08 kB │ gzip:     0.08 kB
+.output/server/_libs/_120.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_122.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_134.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_184.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_194.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_369.mjs                                          0.09 kB │ gzip:     0.10 kB
+.output/server/_libs/_60.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_210.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_211.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_213.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_215.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_216.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_224.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_238.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_243.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_254.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_260.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_101.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_128.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_136.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_148.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_151.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_157.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_163.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_164.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_174.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_175.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_183.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_188.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_189.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_190.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_192.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_201.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_204.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_206.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_209.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_23.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_24.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_27.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_313.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_35.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_37.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_39.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_41.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_44.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_46.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_48.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_55.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_58.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_73.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_76.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_80.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_81.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_85.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_93.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_96.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_98.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_217.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_237.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_241.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_244.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_249.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_250.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_251.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_256.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_258.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_100.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_105.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_124.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_127.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_130.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_131.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_132.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_133.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_135.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_143.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_146.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_147.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_153.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_154.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_156.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_158.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_159.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_160.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_167.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_169.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_176.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_181.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_185.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_186.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_21.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_25.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_28.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_30.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_308.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_33.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_34.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_36.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_57.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_75.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_84.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_87.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_91.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_95.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_99.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_212.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_229.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_233.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_239.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_247.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_255.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_113.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_117.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_129.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_137.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_138.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_139.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_140.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_141.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_145.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_150.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_152.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_161.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_173.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_180.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_187.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_193.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_195.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_200.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_208.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_45.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_50.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_52.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_53.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_56.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_63.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_67.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_68.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_214.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_218.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_222.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_225.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_226.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_227.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_230.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_232.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_257.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_5.mjs                                            0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_103.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_104.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_106.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_109.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_123.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_149.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_155.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_162.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_170.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_191.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_198.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_199.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_202.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_205.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_207.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_32.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_324.mjs                                          0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_51.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_62.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_64.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_70.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_71.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_74.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_79.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_82.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_88.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_89.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_92.mjs                                           0.09 kB │ gzip:     0.09 kB
+.output/server/_libs/_235.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_242.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_246.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_261.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_114.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_121.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_126.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_142.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_165.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_166.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_168.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_177.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_291.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_292.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_305.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_311.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_43.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_61.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_65.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_66.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_78.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_86.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_97.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_.mjs                                             0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_223.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_245.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_252.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_253.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_259.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_274.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_102.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_110.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_111.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_12.mjs                                           0.10 kB │ gzip:     0.10 kB
+.output/server/_libs/_172.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_182.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_303.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_40.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_219.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_221.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_231.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_240.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_262.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_264.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_265.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_10.mjs                                           0.10 kB │ gzip:     0.10 kB
+.output/server/_libs/_296.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_304.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_307.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_310.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_316.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_47.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_49.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_228.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_266.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_272.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_112.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_115.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_116.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_118.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_119.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_125.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_13.mjs                                           0.10 kB │ gzip:     0.10 kB
+.output/server/_libs/_196.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_197.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_203.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_26.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_297.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_31.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_312.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_317.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_42.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_69.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_94.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_236.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_263.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_267.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_11.mjs                                           0.10 kB │ gzip:     0.10 kB
+.output/server/_libs/_178.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_280.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_318.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_323.mjs                                          0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_38.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_72.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_77.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_90.mjs                                           0.10 kB │ gzip:     0.09 kB
+.output/server/_libs/_220.mjs                                          0.11 kB │ gzip:     0.09 kB
+.output/server/_libs/_19.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_20.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_283.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_29.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_309.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_319.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_322.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_326.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_7.mjs                                            0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_273.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_14.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_179.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_18.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_295.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_325.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_327.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_9.mjs                                            0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_234.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_22.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_290.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_294.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_302.mjs                                          0.11 kB │ gzip:     0.09 kB
+.output/server/_libs/_314.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_315.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_320.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_171.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_275.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_293.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_306.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_321.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_54.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_17.mjs                                           0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_276.mjs                                          0.11 kB │ gzip:     0.10 kB
+.output/server/_libs/_269.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_271.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_107.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_15.mjs                                           0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_16.mjs                                           0.12 kB │ gzip:     0.11 kB
+.output/server/_libs/_284.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_286.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_6.mjs                                            0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_268.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_108.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_278.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_287.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_289.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_8.mjs                                            0.12 kB │ gzip:     0.11 kB
+.output/server/_libs/_277.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_285.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_281.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_288.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_300.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_270.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_298.mjs                                          0.12 kB │ gzip:     0.10 kB
+.output/server/_libs/_299.mjs                                          0.13 kB │ gzip:     0.10 kB
+.output/server/_libs/_301.mjs                                          0.13 kB │ gzip:     0.10 kB
+.output/server/_libs/_279.mjs                                          0.13 kB │ gzip:     0.11 kB
+.output/server/_libs/_4.mjs                                            0.13 kB │ gzip:     0.11 kB
+.output/server/_libs/_282.mjs                                          0.13 kB │ gzip:     0.11 kB
+.output/server/_libs/motion.mjs                                        0.16 kB │ gzip:     0.13 kB
+.output/server/_libs/shiki.mjs                                         0.17 kB │ gzip:     0.15 kB
+.output/server/_ssr/route-DAXPpgou.mjs                                 0.22 kB │ gzip:     0.18 kB
+.output/server/_ssr/empty-plugin-adapters-D9UWiqvJ.mjs                 0.23 kB │ gzip:     0.16 kB
+.output/server/_libs/bail.mjs                                          0.25 kB │ gzip:     0.19 kB
+.output/server/_libs/_336.mjs                                          0.30 kB │ gzip:     0.17 kB
+.output/server/_ssr/privacidade-I1sCUDXU.mjs                           0.38 kB │ gzip:     0.26 kB
+.output/server/_ssr/investigacoes-BOtB3moq.mjs                         0.38 kB │ gzip:     0.25 kB
+.output/server/_ssr/createServerRpc-CxD4EZ5P.mjs                       0.40 kB │ gzip:     0.28 kB
+.output/server/_libs/is-plain-obj.mjs                                  0.41 kB │ gzip:     0.24 kB
+.output/server/_libs/khroma.mjs                                        0.46 kB │ gzip:     0.25 kB
+.output/server/_libs/d3-scale-chromatic.mjs                            0.47 kB │ gzip:     0.30 kB
+.output/server/_libs/rehype-sanitize.mjs                               0.56 kB │ gzip:     0.32 kB
+.output/server/_chunks/ssr-renderer.mjs                                0.60 kB │ gzip:     0.36 kB
+.output/server/_libs/estree-util-is-identifier-name.mjs                0.65 kB │ gzip:     0.38 kB
+.output/server/_libs/decode-named-character-reference+[...].mjs        0.71 kB │ gzip:     0.44 kB
+.output/server/_libs/html-url-attributes.mjs                           0.71 kB │ gzip:     0.42 kB
+.output/server/_libs/rehype-raw.mjs                                    0.76 kB │ gzip:     0.41 kB
+.output/server/_ssr/useServerFn-CrZF2pjq.mjs                           0.82 kB │ gzip:     0.44 kB
+.output/server/_ssr/createMiddleware-B_4t7rW1.mjs                      0.83 kB │ gzip:     0.33 kB
+.output/server/_ssr/types-DLSXFnKv.mjs                                 0.95 kB │ gzip:     0.59 kB
+.output/server/_ssr/legal-library.functions-I3KDPgpv.mjs               0.96 kB │ gzip:     0.51 kB
+.output/server/_libs/remark-parse.mjs                                  1.01 kB │ gzip:     0.49 kB
+.output/server/_ssr/request-auth.server-DdHmsst8.mjs                   1.11 kB │ gzip:     0.61 kB
+.output/server/_libs/hookable.mjs                                      1.16 kB │ gzip:     0.51 kB
+.output/server/_libs/remark-gfm.mjs                                    1.22 kB │ gzip:     0.51 kB
+.output/server/_libs/radix-ui__react-compose-refs.mjs                  1.23 kB │ gzip:     0.58 kB
+.output/server/_ssr/investigacao._threadId-CpaXrBcO.mjs                1.37 kB │ gzip:     0.68 kB
+.output/server/_ssr/investigacao._threadId.painel-B6Aem2ZF.mjs         1.38 kB │ gzip:     0.69 kB
+.output/server/_runtime.mjs                                            1.44 kB │ gzip:     0.67 kB
+.output/server/_ssr/adapter-CtfIR60H.mjs                               1.54 kB │ gzip:     0.87 kB
+.output/server/_ssr/case-store-g436Niv9.mjs                            1.57 kB │ gzip:     0.66 kB
+.output/server/_ssr/document-dossier-schema-C6QWQooZ.mjs               1.81 kB │ gzip:     0.77 kB
+.output/server/_ssr/client.server-KzwUIAkW.mjs                         1.83 kB │ gzip:     0.83 kB
+.output/server/_ssr/start-H7vjNw5w.mjs                                 1.95 kB │ gzip:     0.86 kB
+.output/server/_ssr/button-BqbbtAR3.mjs                                2.09 kB │ gzip:     0.93 kB
+.output/server/_ssr/createCsrfMiddleware-jzif2P7h.mjs                  2.45 kB │ gzip:     0.86 kB
+.output/server/_ssr/document-policy-Do-AXoKS.mjs                       2.48 kB │ gzip:     1.26 kB
+.output/server/_libs/extend.mjs                                        2.60 kB │ gzip:     0.97 kB
+.output/server/_ssr/auth-middleware-Dcy-eaQM.mjs                       2.77 kB │ gzip:     1.13 kB
+.output/server/_libs/d3-interpolate.mjs                                2.82 kB │ gzip:     0.98 kB
+.output/server/_ssr/contextual-summary-CQF8m0sB.mjs                    2.86 kB │ gzip:     1.01 kB
+.output/server/_ssr/reset-password-Bnjya_Cv.mjs                        3.01 kB │ gzip:     1.17 kB
+.output/server/_libs/d3-path.mjs                                       3.06 kB │ gzip:     1.00 kB
+.output/server/_ssr/request-response-B7GxCXoC.mjs                      3.06 kB │ gzip:     1.06 kB
+.output/server/_libs/nanoid.mjs                                        3.09 kB │ gzip:     1.15 kB
+.output/server/_libs/class-variance-authority+clsx.mjs                 3.17 kB │ gzip:     1.24 kB
+.output/server/_libs/d3-color.mjs                                      3.30 kB │ gzip:     1.29 kB
+.output/server/_libs/braintree__sanitize-url.mjs                       3.38 kB │ gzip:     1.13 kB
+.output/server/__23tanstack-start-server-fn-resolver-pGmW6XUh.mjs      3.55 kB │ gzip:     1.20 kB
+.output/server/_ssr/context-probe-Ka_lMbgC.mjs                         3.85 kB │ gzip:     1.37 kB
+.output/server/_ssr/acompanhamento-CnAh1Gce.mjs                        3.97 kB │ gzip:     1.50 kB
+.output/server/_ssr/investigacoes-3M_m9m8A.mjs                         3.99 kB │ gzip:     1.45 kB
+.output/server/_ssr/anamnesis.server-VQsKLFdr.mjs                      4.41 kB │ gzip:     1.79 kB
+.output/server/_ssr/perguntas-CmHCCIlS.mjs                             4.43 kB │ gzip:     1.57 kB
+.output/server/_ssr/ssr.mjs                                            4.54 kB │ gzip:     1.92 kB
+.output/server/_ssr/documentos-QzRDtsN1.mjs                            4.77 kB │ gzip:     1.53 kB
+.output/server/_libs/remark-rehype.mjs                                 4.92 kB │ gzip:     2.01 kB
+.output/server/_libs/d3-axis.mjs                                       4.98 kB │ gzip:     1.51 kB
+.output/server/_ssr/investigation-shell-BxSbtJts.mjs                   5.16 kB │ gzip:     1.50 kB
+.output/server/_ssr/conferencia-oSuGhFbW.mjs                           5.33 kB │ gzip:     1.75 kB
+.output/server/_libs/radix-ui__react-slot.mjs                          5.65 kB │ gzip:     1.74 kB
+.output/server/_ssr/gemini.server-BatpBydD.mjs                         5.82 kB │ gzip:     2.41 kB
+.output/server/_libs/es-toolkit.mjs                                    5.84 kB │ gzip:     1.84 kB
+.output/server/_ssr/shell-DL2lzd_A.mjs                                 6.10 kB │ gzip:     1.96 kB
+.output/server/_libs/lovable.dev__cloud-auth-js.mjs                    6.12 kB │ gzip:     2.22 kB
+.output/server/_ssr/investigation-CUdNFDxW.mjs                         6.12 kB │ gzip:     2.31 kB
+.output/server/_ssr/routes-ZTD5bOme.mjs                                6.15 kB │ gzip:     2.00 kB
+.output/server/_libs/ai-sdk__provider.mjs                              6.18 kB │ gzip:     1.74 kB
+.output/server/_libs/d3-array.mjs                                      6.28 kB │ gzip:     1.52 kB
+.output/server/_libs/tanstack__react-query.mjs                         6.90 kB │ gzip:     1.88 kB
+.output/server/_ssr/catalog-schema-DO_nyw0x.mjs                        7.01 kB │ gzip:     2.48 kB
+.output/server/_libs/ungap__structured-clone.mjs                       7.03 kB │ gzip:     2.15 kB
+.output/server/_ssr/investigation.functions-DxADWd_P.mjs               7.16 kB │ gzip:     2.30 kB
+.output/server/_ssr/auth-BXDuCOQr.mjs                                  7.20 kB │ gzip:     2.30 kB
+.output/server/_libs/rehype-harden.mjs                                 7.22 kB │ gzip:     1.92 kB
+.output/server/_tanstack-start-manifest_v-DNLDDv8E.mjs                 7.35 kB │ gzip:     1.68 kB
+.output/server/_ssr/client-DaUVSx77.mjs                                7.58 kB │ gzip:     2.62 kB
+.output/server/_ssr/privacidade-D39wg1di.mjs                           7.96 kB │ gzip:     2.47 kB
+.output/server/_ssr/investigacao._threadId.painel-COvQf-O_.mjs         8.14 kB │ gzip:     2.15 kB
+.output/server/_libs/markdown-table.mjs                                8.81 kB │ gzip:     2.53 kB
+.output/server/_libs/d3-shape.mjs                                      8.97 kB │ gzip:     2.54 kB
+.output/server/_ssr/resultado-IXIvVwy1.mjs                             9.13 kB │ gzip:     2.24 kB
+.output/server/_ssr/createServerFn-DDDJMFWM.mjs                        9.47 kB │ gzip:     3.01 kB
+.output/server/_libs/h3-v2+rou3+srvx.mjs                               9.89 kB │ gzip:     3.06 kB
+.output/server/_ssr/questionario-DcQxh1hr.mjs                         10.09 kB │ gzip:     2.92 kB
+.output/server/_ssr/catalog-BZ2hh5NE.mjs                              10.24 kB │ gzip:     3.71 kB
+.output/server/_ssr/contextual-BP5dcss0.mjs                           10.29 kB │ gzip:     3.76 kB
+.output/server/_libs/d3-format.mjs                                    10.56 kB │ gzip:     3.02 kB
+.output/server/_ssr/document-dossier.server-D4tMbSfu.mjs              10.67 kB │ gzip:     3.83 kB
+.output/server/_libs/d3-hierarchy.mjs                                 10.97 kB │ gzip:     2.71 kB
+.output/server/_ssr/cloud-adapter-D32eeDNN.mjs                        11.19 kB │ gzip:     3.57 kB
+.output/server/_ssr/biblioteca-BaQHe4KH.mjs                           11.70 kB │ gzip:     3.09 kB
+.output/server/_libs/iconify__utils.mjs                               11.91 kB │ gzip:     3.69 kB
+.output/server/_libs/d3-sankey+d3-shape.mjs                           12.30 kB │ gzip:     3.01 kB
+.output/server/_libs/tanstack__history.mjs                            12.50 kB │ gzip:     3.70 kB
+.output/server/_libs/supabase__functions-js.mjs                       12.54 kB │ gzip:     3.47 kB
+.output/server/_libs/cytoscape-cose-bilkent.mjs                       12.55 kB │ gzip:     3.44 kB
+.output/server/_ssr/anamnesis-BfKrF8V1.mjs                            13.04 kB │ gzip:     4.17 kB
+.output/server/_ssr/document.functions-CHUKigtv.mjs                   14.05 kB │ gzip:     4.15 kB
+.output/server/_libs/shikijs__engine-oniguruma.mjs                    15.02 kB │ gzip:     3.84 kB
+.output/server/_libs/dayjs.mjs                                        15.25 kB │ gzip:     4.61 kB
+.output/server/_libs/use-stick-to-bottom.mjs                          15.86 kB │ gzip:     4.45 kB
+.output/server/_libs/mdast-util-gfm+[...].mjs                         16.28 kB │ gzip:     3.48 kB
+.output/server/_libs/h3+rou3+srvx.mjs                                 16.61 kB │ gzip:     4.80 kB
+.output/server/_ssr/demo-cases-Cx0jT7p9.mjs                           17.04 kB │ gzip:     5.79 kB
+.output/server/_libs/lucide-react.mjs                                 17.23 kB │ gzip:     3.54 kB
+.output/server/_libs/lovable.dev__ai-gateway.mjs                      18.30 kB │ gzip:     5.54 kB
+.output/server/_libs/hast-util-sanitize.mjs                           19.53 kB │ gzip:     5.43 kB
+.output/server/_libs/hast-util-raw+[...].mjs                          22.45 kB │ gzip:     5.77 kB
+.output/server/_libs/remend.mjs                                       22.81 kB │ gzip:     6.49 kB
+.output/server/_ssr/exemplos-Z0WKegNx.mjs                             23.64 kB │ gzip:     4.64 kB
+.output/server/_libs/hast-util-to-jsx-runtime+[...].mjs               24.54 kB │ gzip:     6.75 kB
+.output/server/_ssr/investigation-documents-ClZGRUiT.mjs              28.65 kB │ gzip:     6.32 kB
+.output/server/_libs/@tanstack/router-core+[...].mjs                  29.60 kB │ gzip:     7.99 kB
+.output/server/_libs/character-entities.mjs                           35.30 kB │ gzip:    12.27 kB
+.output/server/_ssr/router-ivnVa8em.mjs                               37.34 kB │ gzip:     9.14 kB
+.output/server/_libs/shiki+streamdown__code.mjs                       37.35 kB │ gzip:     7.51 kB
+.output/server/_libs/supabase__supabase-js.mjs                        37.86 kB │ gzip:    11.17 kB
+.output/server/_libs/d3-scale+[...].mjs                               41.32 kB │ gzip:     8.97 kB
+.output/server/_libs/cytoscape-fcose.mjs                              48.51 kB │ gzip:    10.34 kB
+.output/server/_libs/mdast-util-to-hast+[...].mjs                     48.72 kB │ gzip:    10.15 kB
+.output/server/_libs/supabase__phoenix.mjs                            50.54 kB │ gzip:    12.76 kB
+.output/server/_libs/upsetjs__venn.js.mjs                             50.90 kB │ gzip:    13.19 kB
+.output/server/_ssr/investigacao._threadId-BEpojYEt.mjs               51.10 kB │ gzip:    12.34 kB
+.output/server/_libs/micromark-extension-gfm+[...].mjs                52.51 kB │ gzip:     9.89 kB
+.output/server/_ssr/server-D4r2fd25.mjs                               59.24 kB │ gzip:    15.44 kB
+.output/server/_libs/marked.mjs                                       59.26 kB │ gzip:    15.97 kB
+.output/server/_libs/tanstack__query-core.mjs                         62.80 kB │ gzip:    13.50 kB
+.output/server/_libs/supabase__realtime-js.mjs                        81.87 kB │ gzip:    20.93 kB
+.output/server/_libs/zod.mjs                                         100.21 kB │ gzip:    17.36 kB
+.output/server/_libs/@shikijs/engine-javascript+[...].mjs            102.48 kB │ gzip:    28.42 kB
+.output/server/_libs/@ai-sdk/provider-utils+[...].mjs                104.46 kB │ gzip:    27.79 kB
+.output/server/_libs/supabase__postgrest-js.mjs                      110.46 kB │ gzip:    23.20 kB
+.output/server/_libs/dagre-d3-es+lodash-es.mjs                       122.98 kB │ gzip:    28.79 kB
+.output/server/index.mjs                                             123.34 kB │ gzip:    27.03 kB
+.output/server/_libs/@supabase/storage-js+[...].mjs                  127.52 kB │ gzip:    23.94 kB
+.output/server/_libs/mdast-util-from-markdown+[...].mjs              181.13 kB │ gzip:    33.65 kB
+.output/server/_libs/@streamdown/cjk+[...].mjs                       181.56 kB │ gzip:    44.79 kB
+.output/server/_libs/@ai-sdk/react+[...].mjs                         204.82 kB │ gzip:    39.62 kB
+.output/server/_libs/@shikijs/core+[...].mjs                         235.93 kB │ gzip:    55.63 kB
+.output/server/_libs/streamdown+[...].mjs                            244.31 kB │ gzip:    56.53 kB
+.output/server/_libs/supabase__auth-js+tslib.mjs                     320.57 kB │ gzip:    65.13 kB
+.output/server/_libs/cose-base+layout-base.mjs                       369.86 kB │ gzip:    69.14 kB
+.output/server/_libs/framer-motion+[...].mjs                         387.84 kB │ gzip:   105.83 kB
+.output/server/_libs/@tanstack/react-router+[...].mjs                755.41 kB │ gzip:   160.01 kB
+.output/server/_libs/@streamdown/math+[...].mjs                      846.17 kB │ gzip:   192.34 kB
+.output/server/_libs/cytoscape.mjs                                   869.24 kB │ gzip:   199.61 kB
+.output/server/_libs/mermaid-js__parser+unenv.mjs                  1,189.04 kB │ gzip:   207.48 kB
+.output/server/_libs/@streamdown/mermaid+[...].mjs                 1,230.48 kB │ gzip:   236.90 kB
+.output/server/_libs/shikijs__themes.mjs                           1,475.97 kB │ gzip:   173.64 kB
+.output/server/_libs/mermaid+uuid.mjs                              1,770.71 kB │ gzip:   389.30 kB
+.output/server/_libs/shikijs__langs.mjs                            8,581.37 kB │ gzip: 1,300.76 kB
+
+✓ built in 2.94s
+[nitro] ℹ Using auto generated worker name: grupocdc01-commits-ia-previdenciaria-inss
+ℹ Generated .output/server/wrangler.json
+ℹ Generated .wrangler/deploy/config.json
+ℹ Generated .output/public/_headers
+ℹ Generated .output/nitro.json
+
+[nitro] ✔ You can preview this build using npx vite preview
+[nitro] ✔ You can deploy this build using npx nitro deploy --prebuilt
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+===== module3-stability-final.log =====
+[{"run": 1, "exit_code": 0, "passed": 276, "seconds": 51.03}, {"run": 2, "exit_code": 0, "passed": 276, "seconds": 50.48}, {"run": 3, "exit_code": 0, "passed": 276, "seconds": 49.32}, {"run": 4, "exit_code": 0, "passed": 276, "seconds": 42.8}, {"run": 5, "exit_code": 0, "passed": 276, "seconds": 45.17}, {"run": 6, "exit_code": 0, "passed": 276, "seconds": 44.11}]
+
+===== module3-stress-1.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  276 passed (276)
+   Start at  22:15:20
+   Duration  50.32s (transform 3.95s, setup 11.26s, import 17.43s, tests 19.02s, environment 36.82s)
+
+
+===== module3-stress-2.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  276 passed (276)
+   Start at  22:15:20
+   Duration  49.88s (transform 4.01s, setup 10.50s, import 17.35s, tests 20.27s, environment 35.51s)
+
+
+===== module3-stress-3.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  276 passed (276)
+   Start at  22:15:20
+   Duration  48.54s (transform 3.99s, setup 11.52s, import 14.74s, tests 20.22s, environment 34.97s)
+
+
+===== module3-stress-4.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  276 passed (276)
+   Start at  22:16:10
+   Duration  42.10s (transform 3.82s, setup 8.64s, import 15.19s, tests 16.20s, environment 30.13s)
+
+
+===== module3-stress-5.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  276 passed (276)
+   Start at  22:16:11
+   Duration  43.98s (transform 4.48s, setup 10.11s, import 15.23s, tests 20.35s, environment 30.04s)
+
+
+===== module3-stress-6.log =====
+
+ RUN  v4.1.11 /workspace/ia-previdenciaria-inss
+
+
+ Test Files  25 passed (25)
+      Tests  276 passed (276)
+   Start at  22:16:12
+   Duration  42.90s (transform 4.56s, setup 9.61s, import 15.50s, tests 15.94s, environment 31.67s)
