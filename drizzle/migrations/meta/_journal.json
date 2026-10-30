@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793204399885,
+      "tag": "0000_private_investigation_threads",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793206082200,
+      "tag": "0001_restrict_profile_trigger_execution",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793228695234,
+      "tag": "0002_private_document_processing",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793228904875,
+      "tag": "0003_optional_usage_document",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793229057401,
+      "tag": "0004_restrict_expired_document_reads",
+      "breakpoints": true
+    }
+  ]
+}
