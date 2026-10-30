@@ -117,7 +117,9 @@ function Index() {
                   <span className="block text-muted-foreground">{e.text}</span>
                   <span
                     className={`mt-2 inline-block rounded-full px-3 py-1 text-sm font-bold ${
-                      e.ready ? "bg-success text-success-foreground" : "bg-warning text-warning-foreground"
+                      e.ready
+                        ? "bg-success text-success-foreground"
+                        : "bg-warning text-warning-foreground"
                     }`}
                   >
                     {e.status}
@@ -131,7 +133,9 @@ function Index() {
         <section className="mt-10 rounded-2xl bg-muted p-6">
           <h2 className="text-xl font-bold">Com transparência</h2>
           <ul className="mt-2 list-disc space-y-1 pl-5">
-            <li>A análise jurídica completa ainda está em desenvolvimento e passa por revisão humana.</li>
+            <li>
+              A análise jurídica completa ainda está em desenvolvimento e passa por revisão humana.
+            </li>
             <li>Não substituímos advogado, médico ou perito, e não temos vínculo com o INSS.</li>
             <li>Não garantimos a concessão do benefício.</li>
           </ul>

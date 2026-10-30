@@ -4,7 +4,10 @@ import { cn } from "@/lib/utils";
 
 export function DemoBanner() {
   return (
-    <div role="note" className="bg-warning text-warning-foreground text-center text-sm font-bold px-4 py-2">
+    <div
+      role="note"
+      className="bg-warning text-warning-foreground text-center text-sm font-bold px-4 py-2"
+    >
       ⚠ Ambiente de demonstração. Use somente informações fictícias.
     </div>
   );
@@ -13,14 +16,23 @@ export function DemoBanner() {
 export function Disclaimer({ className }: { className?: string }) {
   return (
     <p className={cn("rounded-xl border-l-4 border-primary bg-card p-4 text-base", className)}>
-      Somos um assistente digital de orientação previdenciária, não um escritório de advocacia. Ajudamos você a
-      entender sua situação, organizar documentos e identificar próximos passos, buscando evitar perda de tempo e
-      gastos desnecessários. <strong>Não garantimos a concessão do benefício.</strong>
+      Somos um assistente digital de orientação previdenciária, não um escritório de advocacia.
+      Ajudamos você a entender sua situação, organizar documentos e identificar próximos passos,
+      buscando evitar perda de tempo e gastos desnecessários.{" "}
+      <strong>Não garantimos a concessão do benefício.</strong>
     </p>
   );
 }
 
-export function Page({ children, title, step }: { children: ReactNode; title?: string; step?: string }) {
+export function Page({
+  children,
+  title,
+  step,
+}: {
+  children: ReactNode;
+  title?: string;
+  step?: string;
+}) {
   return (
     <div className="min-h-screen flex flex-col">
       <DemoBanner />
@@ -29,20 +41,25 @@ export function Page({ children, title, step }: { children: ReactNode; title?: s
           <Link to="/" className="font-display text-xl font-semibold text-primary">
             IA Previdenciária INSS
           </Link>
-          <Link to="/exemplos" className="text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground">
+          <Link
+            to="/exemplos"
+            className="text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
+          >
             Exemplos fictícios
           </Link>
         </div>
       </header>
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 py-8">
-        {step && <p className="text-sm font-bold uppercase tracking-wide text-muted-foreground">{step}</p>}
+        {step && (
+          <p className="text-sm font-bold uppercase tracking-wide text-muted-foreground">{step}</p>
+        )}
         {title && <h1 className="mt-1 mb-6 text-3xl sm:text-4xl font-semibold">{title}</h1>}
         {children}
       </main>
       <footer className="border-t border-border text-sm text-muted-foreground">
         <p className="mx-auto max-w-2xl px-5 py-6">
-          Orientação preliminar. Não substitui advogado, médico ou perito. Sem vínculo com o INSS ou qualquer órgão
-          público.
+          Orientação preliminar. Não substitui advogado, médico ou perito. Sem vínculo com o INSS ou
+          qualquer órgão público.
         </p>
       </footer>
     </div>
@@ -103,10 +120,14 @@ export function ChoiceList<T extends string>({
                 )}
                 {on && <span className="text-sm font-bold text-primary">✓ Selecionado</span>}
               </span>
-              {desc && <span className="mt-1 block text-sm font-normal text-muted-foreground">{desc}</span>}
+              {desc && (
+                <span className="mt-1 block text-sm font-normal text-muted-foreground">{desc}</span>
+              )}
               {detail && (
                 <details className="mt-1 text-sm font-normal">
-                  <summary className="cursor-pointer text-primary underline underline-offset-2">Saiba mais</summary>
+                  <summary className="cursor-pointer text-primary underline underline-offset-2">
+                    Saiba mais
+                  </summary>
                   <p className="mt-1 text-muted-foreground">{detail}</p>
                 </details>
               )}
@@ -125,7 +146,10 @@ export function Progress({ current, total }: { current: number; total: number })
         Pergunta {current} de {total}
       </p>
       <div className="h-2 rounded-full bg-muted" aria-hidden>
-        <div className="h-2 rounded-full bg-primary transition-all" style={{ width: `${(current / total) * 100}%` }} />
+        <div
+          className="h-2 rounded-full bg-primary transition-all"
+          style={{ width: `${(current / total) * 100}%` }}
+        />
       </div>
     </div>
   );

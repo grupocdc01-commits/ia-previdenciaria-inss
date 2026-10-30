@@ -9,7 +9,15 @@ import {
   skipDocuments,
 } from "./investigation.functions";
 import { ApiError, type CaseAdapter, type Analysis, type Job } from "./types";
-import { privateProcessingStatus, saveProcessingPreferences, validateGeminiModels, listPrivateDocuments, openPrivateDocument, deletePrivateDocument, extractPrivateDocument } from "./document.functions";
+import {
+  privateProcessingStatus,
+  saveProcessingPreferences,
+  validateGeminiModels,
+  listPrivateDocuments,
+  openPrivateDocument,
+  deletePrivateDocument,
+  extractPrivateDocument,
+} from "./document.functions";
 
 export class CloudCaseAdapter implements CaseAdapter {
   readonly mode = "cloud" as const;
@@ -29,8 +37,12 @@ export class CloudCaseAdapter implements CaseAdapter {
     const body = new FormData();
     body.append("threadId", threadId);
     body.append("file", file);
-    const response = await fetch("/api/private-document-upload", { method: "POST", headers: await this.headers(), body });
-    const result = await response.json() as { error?: string; id?: string; duplicate?: boolean };
+    const response = await fetch("/api/private-document-upload", {
+      method: "POST",
+      headers: await this.headers(),
+      body,
+    });
+    const result = (await response.json()) as { error?: string; id?: string; duplicate?: boolean };
     if (!response.ok) throw new Error(result.error ?? "Não foi possível enviar.");
     return result;
   }

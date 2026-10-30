@@ -41,7 +41,9 @@ function Panel() {
   const sections: { title: string; text: string; kind: Evidence; uncertainty: string }[] = [
     {
       title: "1. Resumo do caso",
-      text: data.benefit ? `Benefício informado: ${data.benefit}. ${data.scope}` : "Benefício ainda não informado.",
+      text: data.benefit
+        ? `Benefício informado: ${data.benefit}. ${data.scope}`
+        : "Benefício ainda não informado.",
       kind: "declarado",
       uncertainty: "Baseado apenas no que você contou.",
     },
@@ -125,7 +127,9 @@ function Panel() {
         <section className="mt-5 rounded-2xl border border-border bg-card p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-xl font-bold">7. Prazos que precisam ser confirmados</h2>
-            <span className={`rounded-full px-3 py-1 text-sm font-bold ${badge.nao_verificado.cls}`}>
+            <span
+              className={`rounded-full px-3 py-1 text-sm font-bold ${badge.nao_verificado.cls}`}
+            >
               {badge.nao_verificado.label}
             </span>
           </div>

@@ -49,10 +49,15 @@ export interface Analysis {
   pdf: { disponivel: boolean; expiraEm: string | null };
 }
 
-export type ApiErrorKind = "unauthorized" | "conflict" | "rate_limited" | "not_found" | "network" | "unknown";
+export type ApiErrorKind =
+  "unauthorized" | "conflict" | "rate_limited" | "not_found" | "network" | "unknown";
 
 export class ApiError extends Error {
-  constructor(public kind: ApiErrorKind, message: string, public retryAfterSec?: number) {
+  constructor(
+    public kind: ApiErrorKind,
+    message: string,
+    public retryAfterSec?: number,
+  ) {
     super(message);
   }
 }

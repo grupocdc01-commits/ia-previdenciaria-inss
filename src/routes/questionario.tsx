@@ -35,9 +35,47 @@ function Questionario() {
   const up = (p: Partial<Answers>) => setAnswers((x) => ({ ...x, ...p }));
 
   const steps: Step[] = [
-    { title: "Para quem é o atendimento?", ok: !!a.paraQuem, render: () => <ChoiceList name="paraQuem" options={LABELS.paraQuem} value={a.paraQuem} onChange={(v) => up({ paraQuem: v })} /> },
-    { key: "beneficio", title: "Você já sabe qual benefício procura?", ok: !!a.beneficio, render: () => <ChoiceList name="beneficio" options={LABELS.beneficioPergunta} descriptions={LABELS.beneficioExplicacao} details={LABELS.beneficioDetalhe} recommended="nao_sei" value={a.beneficio} onChange={(v) => up({ beneficio: v })} /> },
-    { key: "situacao", title: "Qual a situação do pedido?", ok: !!a.situacao, render: () => <ChoiceList name="situacao" options={LABELS.situacao} value={a.situacao} onChange={(v) => up({ situacao: v })} /> },
+    {
+      title: "Para quem é o atendimento?",
+      ok: !!a.paraQuem,
+      render: () => (
+        <ChoiceList
+          name="paraQuem"
+          options={LABELS.paraQuem}
+          value={a.paraQuem}
+          onChange={(v) => up({ paraQuem: v })}
+        />
+      ),
+    },
+    {
+      key: "beneficio",
+      title: "Você já sabe qual benefício procura?",
+      ok: !!a.beneficio,
+      render: () => (
+        <ChoiceList
+          name="beneficio"
+          options={LABELS.beneficioPergunta}
+          descriptions={LABELS.beneficioExplicacao}
+          details={LABELS.beneficioDetalhe}
+          recommended="nao_sei"
+          value={a.beneficio}
+          onChange={(v) => up({ beneficio: v })}
+        />
+      ),
+    },
+    {
+      key: "situacao",
+      title: "Qual a situação do pedido?",
+      ok: !!a.situacao,
+      render: () => (
+        <ChoiceList
+          name="situacao"
+          options={LABELS.situacao}
+          value={a.situacao}
+          onChange={(v) => up({ situacao: v })}
+        />
+      ),
+    },
   ];
   if (a.situacao === "negado")
     steps.push({
@@ -45,9 +83,19 @@ function Questionario() {
       ok: true,
       render: () => (
         <div className="grid gap-3">
-          <label htmlFor="dn" className="font-bold">Data em que recebeu</label>
-          <input id="dn" type="date" value={a.dataNegativa ?? ""} onChange={(e) => up({ dataNegativa: e.target.value })} className="h-14 rounded-xl border-2 border-input bg-card px-4 text-lg" />
-          <Button variant="outline" className="h-12 w-fit" onClick={() => up({ dataNegativa: "" })}>Não sei</Button>
+          <label htmlFor="dn" className="font-bold">
+            Data em que recebeu
+          </label>
+          <input
+            id="dn"
+            type="date"
+            value={a.dataNegativa ?? ""}
+            onChange={(e) => up({ dataNegativa: e.target.value })}
+            className="h-14 rounded-xl border-2 border-input bg-card px-4 text-lg"
+          />
+          <Button variant="outline" className="h-12 w-fit" onClick={() => up({ dataNegativa: "" })}>
+            Não sei
+          </Button>
         </div>
       ),
     });
@@ -57,9 +105,19 @@ function Questionario() {
       ok: true,
       render: () => (
         <div className="grid gap-2">
-          <label htmlFor="ex" className="font-bold">Copie ou resuma o texto (use apenas informações fictícias)</label>
-          <textarea id="ex" rows={5} value={a.comunicacaoExigencia ?? ""} onChange={(e) => up({ comunicacaoExigencia: e.target.value })} className="rounded-xl border-2 border-input bg-card p-4 text-lg" />
-          <p className="text-sm text-muted-foreground">Se não tiver, deixe em branco. Vamos indicar como conseguir.</p>
+          <label htmlFor="ex" className="font-bold">
+            Copie ou resuma o texto (use apenas informações fictícias)
+          </label>
+          <textarea
+            id="ex"
+            rows={5}
+            value={a.comunicacaoExigencia ?? ""}
+            onChange={(e) => up({ comunicacaoExigencia: e.target.value })}
+            className="rounded-xl border-2 border-input bg-card p-4 text-lg"
+          />
+          <p className="text-sm text-muted-foreground">
+            Se não tiver, deixe em branco. Vamos indicar como conseguir.
+          </p>
         </div>
       ),
     });
@@ -69,17 +127,40 @@ function Questionario() {
     render: () => (
       <div className="grid gap-5">
         <div className="grid gap-2">
-          <label htmlFor="idade" className="font-bold">Idade (em anos)</label>
+          <label htmlFor="idade" className="font-bold">
+            Idade (em anos)
+          </label>
           <div className="flex gap-3">
-            <input id="idade" inputMode="numeric" value={a.idade === "Não sei" ? "" : a.idade ?? ""} onChange={(e) => up({ idade: e.target.value.replace(/\D/g, "").slice(0, 3) })} className="h-14 w-32 rounded-xl border-2 border-input bg-card px-4 text-lg" />
-            <Button variant={a.idade === "Não sei" ? "default" : "outline"} className="h-14" onClick={() => up({ idade: "Não sei" })}>Não sei</Button>
+            <input
+              id="idade"
+              inputMode="numeric"
+              value={a.idade === "Não sei" ? "" : (a.idade ?? "")}
+              onChange={(e) => up({ idade: e.target.value.replace(/\D/g, "").slice(0, 3) })}
+              className="h-14 w-32 rounded-xl border-2 border-input bg-card px-4 text-lg"
+            />
+            <Button
+              variant={a.idade === "Não sei" ? "default" : "outline"}
+              className="h-14"
+              onClick={() => up({ idade: "Não sei" })}
+            >
+              Não sei
+            </Button>
           </div>
         </div>
         <div className="grid gap-2">
-          <label htmlFor="uf" className="font-bold">Estado</label>
-          <select id="uf" value={a.uf ?? ""} onChange={(e) => up({ uf: e.target.value })} className="h-14 rounded-xl border-2 border-input bg-card px-4 text-lg">
+          <label htmlFor="uf" className="font-bold">
+            Estado
+          </label>
+          <select
+            id="uf"
+            value={a.uf ?? ""}
+            onChange={(e) => up({ uf: e.target.value })}
+            className="h-14 rounded-xl border-2 border-input bg-card px-4 text-lg"
+          >
             <option value="">Selecione</option>
-            {UFS.map((u) => <option key={u}>{u}</option>)}
+            {UFS.map((u) => (
+              <option key={u}>{u}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -98,7 +179,13 @@ function Questionario() {
         onChange={(v) => {
           const t = a.trabalhos ?? [];
           const solo = v === "nunca" || v === "nao_sei";
-          up({ trabalhos: solo ? [v] : t.includes(v) ? t.filter((d) => d !== v) : [...t.filter((d) => d !== "nunca" && d !== "nao_sei"), v] });
+          up({
+            trabalhos: solo
+              ? [v]
+              : t.includes(v)
+                ? t.filter((d) => d !== v)
+                : [...t.filter((d) => d !== "nunca" && d !== "nao_sei"), v],
+          });
         }}
       />
     ),
@@ -114,7 +201,12 @@ function Questionario() {
         value={a.docs}
         onChange={(v: DocInicial) =>
           up({
-            docs: v === "nenhum" ? ["nenhum"] : a.docs.includes(v) ? a.docs.filter((d) => d !== v) : [...a.docs.filter((d) => d !== "nenhum"), v],
+            docs:
+              v === "nenhum"
+                ? ["nenhum"]
+                : a.docs.includes(v)
+                  ? a.docs.filter((d) => d !== v)
+                  : [...a.docs.filter((d) => d !== "nenhum"), v],
           })
         }
       />
@@ -135,11 +227,31 @@ function Questionario() {
       <h1 className="mb-6 text-3xl font-semibold">{s.title}</h1>
       {s.render()}
       {probing && probe && (
-        <ContextProbe key={probe.id} probe={probe} onDone={(st, v) => { setAnswers((x) => recordProbe(x, probe, st, v)); setProbing(false); advance(); }} />
+        <ContextProbe
+          key={probe.id}
+          probe={probe}
+          onDone={(st, v) => {
+            setAnswers((x) => recordProbe(x, probe, st, v));
+            setProbing(false);
+            advance();
+          }}
+        />
       )}
-      <p className="mt-6 text-sm text-muted-foreground">Estas informações são declaradas por você e não estão comprovadas.</p>
+      <p className="mt-6 text-sm text-muted-foreground">
+        Estas informações são declaradas por você e não estão comprovadas.
+      </p>
       <div className="mt-8 flex justify-between gap-3">
-        <Button variant="outline" className="h-14 px-6 text-lg" disabled={idx === 0} onClick={() => { setProbing(false); setI(idx - 1); }}>← Voltar</Button>
+        <Button
+          variant="outline"
+          className="h-14 px-6 text-lg"
+          disabled={idx === 0}
+          onClick={() => {
+            setProbing(false);
+            setI(idx - 1);
+          }}
+        >
+          ← Voltar
+        </Button>
         <Button className="h-14 px-8 text-lg" disabled={!s.ok || probing} onClick={next}>
           {last ? "Continuar" : "Próxima →"}
         </Button>

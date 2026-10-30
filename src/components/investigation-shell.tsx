@@ -39,7 +39,9 @@ export function InvestigationShell({ children }: { children: ReactNode }) {
             </Button>
             {signedIn ? (
               <>
-                <Button asChild variant="ghost"><Link to="/privacidade">Privacidade e uso</Link></Button>
+                <Button asChild variant="ghost">
+                  <Link to="/privacidade">Privacidade e uso</Link>
+                </Button>
                 <Button asChild variant="outline">
                   <Link to="/investigacoes">Minhas investigações</Link>
                 </Button>

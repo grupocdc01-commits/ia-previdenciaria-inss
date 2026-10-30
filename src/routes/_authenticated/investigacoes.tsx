@@ -36,11 +36,22 @@ function Investigations() {
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold">Minha Jornada</h1>
         <p className="mt-2 text-muted-foreground">
-          Cada atendimento guarda sua história, as perguntas respondidas e os documentos enviados, de forma privada.
+          Cada atendimento guarda sua história, as perguntas respondidas e os documentos enviados,
+          de forma privada.
         </p>
         <ol className="mt-5 grid gap-2 sm:grid-cols-4 text-sm" aria-label="Etapas da jornada">
-          {["1. Contar a história", "2. Perguntas guiadas", "3. Documentos (opcional)", "4. Painel do caso"].map((s) => (
-            <li key={s} className="rounded-lg bg-secondary px-3 py-2 font-bold text-secondary-foreground">{s}</li>
+          {[
+            "1. Contar a história",
+            "2. Perguntas guiadas",
+            "3. Documentos (opcional)",
+            "4. Painel do caso",
+          ].map((s) => (
+            <li
+              key={s}
+              className="rounded-lg bg-secondary px-3 py-2 font-bold text-secondary-foreground"
+            >
+              {s}
+            </li>
           ))}
         </ol>
         <Button

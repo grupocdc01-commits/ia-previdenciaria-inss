@@ -46,34 +46,56 @@ function Acompanhamento() {
         setErr(API_ERROR_MESSAGE[e instanceof ApiError ? e.kind : "unknown"]);
       }
     })();
-    return () => { stop = true; clearTimeout(t); };
+    return () => {
+      stop = true;
+      clearTimeout(t);
+    };
   }, [caseId]);
 
   const cur = status ? FLOW.indexOf(status) : -1;
   return (
     <Page title="Acompanhamento" step="Processamento (simulado)">
       <p className="mb-6 text-muted-foreground">
-        Este é o processamento desta plataforma, não o prazo de análise do INSS. Não mostramos tempo estimado.
+        Este é o processamento desta plataforma, não o prazo de análise do INSS. Não mostramos tempo
+        estimado.
       </p>
-      {err && <p role="alert" className="mb-4 rounded-xl bg-destructive p-4 text-destructive-foreground">{err}</p>}
+      {err && (
+        <p role="alert" className="mb-4 rounded-xl bg-destructive p-4 text-destructive-foreground">
+          {err}
+        </p>
+      )}
       <ol className="grid gap-3" aria-live="polite">
         {FLOW.map((s, i) => {
           const done = i < cur || status === "completed";
           const now = i === cur && status !== "completed";
           return (
-            <li key={s} className={cn("flex items-center gap-3 rounded-xl border-2 p-4 text-lg", now ? "border-primary bg-secondary" : "border-border bg-card")}>
-              <span aria-hidden className="w-6 text-center font-bold">{done ? "✓" : now ? "●" : "○"}</span>
+            <li
+              key={s}
+              className={cn(
+                "flex items-center gap-3 rounded-xl border-2 p-4 text-lg",
+                now ? "border-primary bg-secondary" : "border-border bg-card",
+              )}
+            >
+              <span aria-hidden className="w-6 text-center font-bold">
+                {done ? "✓" : now ? "●" : "○"}
+              </span>
               <span>{JOB_LABEL[s]}</span>
-              <span className="ml-auto text-sm font-bold">{done ? "Feito" : now ? "Agora" : "Aguardando"}</span>
+              <span className="ml-auto text-sm font-bold">
+                {done ? "Feito" : now ? "Agora" : "Aguardando"}
+              </span>
             </li>
           );
         })}
       </ol>
       {(status === "failed" || status === "cancelled") && (
-        <p role="alert" className="mt-4 rounded-xl bg-destructive p-4 text-destructive-foreground">{JOB_LABEL[status]}</p>
+        <p role="alert" className="mt-4 rounded-xl bg-destructive p-4 text-destructive-foreground">
+          {JOB_LABEL[status]}
+        </p>
       )}
       {status === "completed" && (
-        <Button asChild className="mt-8 h-14 w-full text-lg"><Link to="/resultado">Ver relatório</Link></Button>
+        <Button asChild className="mt-8 h-14 w-full text-lg">
+          <Link to="/resultado">Ver relatório</Link>
+        </Button>
       )}
       <p className="mt-6 text-sm text-muted-foreground">
         Sair e voltar ao caso depende do login, que ainda não está disponível.

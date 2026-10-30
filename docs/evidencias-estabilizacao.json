@@ -1,0 +1,179 @@
+{
+  "date": "2026-10-30",
+  "base_commit": "0e8d726c40677913dfde8a48aa6b878c01b9dfc3",
+  "simple": {
+    "passed": 120,
+    "failed": 0,
+    "skipped": 0,
+    "files": 14
+  },
+  "medium": {
+    "passed": 73,
+    "failed": 0,
+    "skipped": 0,
+    "files": 6
+  },
+  "stress_initial": {
+    "concurrent_processes": 3,
+    "runs": [
+      {
+        "run": 1,
+        "exit_code": 1,
+        "passed": 113,
+        "seconds": 31.41
+      },
+      {
+        "run": 2,
+        "exit_code": 1,
+        "passed": 113,
+        "seconds": 30.49
+      },
+      {
+        "run": 3,
+        "exit_code": 1,
+        "passed": 113,
+        "seconds": 31.01
+      },
+      {
+        "run": 4,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 22.26
+      },
+      {
+        "run": 5,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 22.81
+      },
+      {
+        "run": 6,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 21.8
+      }
+    ]
+  },
+  "stress_final": {
+    "concurrent_processes": 3,
+    "runs": [
+      {
+        "run": 1,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 28.96
+      },
+      {
+        "run": 2,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 30.63
+      },
+      {
+        "run": 3,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 27.95
+      },
+      {
+        "run": 4,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 32.39
+      },
+      {
+        "run": 5,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 33.18
+      },
+      {
+        "run": 6,
+        "exit_code": 0,
+        "passed": 120,
+        "seconds": 31.63
+      }
+    ]
+  },
+  "typecheck_exit": 0,
+  "lint": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 16
+  },
+  "build_exit": 0,
+  "formatting_only_files": [
+    "src/components/ai-elements/conversation.tsx",
+    "src/components/ai-elements/message.tsx",
+    "src/components/ai-elements/prompt-input.tsx",
+    "src/components/ai-elements/tool.tsx",
+    "src/components/context-probe.tsx",
+    "src/components/investigation-shell.tsx",
+    "src/components/previdenciary-assistant.tsx",
+    "src/components/private-documents.tsx",
+    "src/components/shell.tsx",
+    "src/components/ui/button-group.tsx",
+    "src/components/ui/input-group.tsx",
+    "src/components/ui/spinner.tsx",
+    "src/generated/ai-gateway/models.d.ts",
+    "src/integrations/supabase/auth-attacher.ts",
+    "src/integrations/supabase/auth-middleware.ts",
+    "src/integrations/supabase/client.server.ts",
+    "src/integrations/supabase/client.ts",
+    "src/integrations/supabase/cron-auth.ts",
+    "src/integrations/supabase/previewAuthStorage.ts",
+    "src/integrations/supabase/types.ts",
+    "src/lib/api/adapter.ts",
+    "src/lib/api/cloud-adapter.ts",
+    "src/lib/api/document.functions.ts",
+    "src/lib/api/gemini.server.ts",
+    "src/lib/api/types.ts",
+    "src/lib/auth-messages.ts",
+    "src/lib/case-model.ts",
+    "src/lib/demo-cases.ts",
+    "src/lib/example-flow.ts",
+    "src/lib/gemini-model-policy.ts",
+    "src/lib/legal-registry.ts",
+    "src/lib/legal/contextual.ts",
+    "src/lib/legal/engine.ts",
+    "src/lib/legal/periods.ts",
+    "src/lib/legal/report.ts",
+    "src/lib/legal/routing.ts",
+    "src/lib/legal/sources.ts",
+    "src/routes/_authenticated/investigacao.$threadId.painel.tsx",
+    "src/routes/_authenticated/investigacoes.tsx",
+    "src/routes/_authenticated/privacidade.tsx",
+    "src/routes/acompanhamento.tsx",
+    "src/routes/api/investigation-chat.ts",
+    "src/routes/api/public/document-retention.ts",
+    "src/routes/conferencia.tsx",
+    "src/routes/documentos.tsx",
+    "src/routes/exemplos.tsx",
+    "src/routes/index.tsx",
+    "src/routes/perguntas.tsx",
+    "src/routes/questionario.tsx",
+    "src/routes/resultado.tsx",
+    "src/test/beneficio-pergunta.test.ts",
+    "src/test/contextual-probe.test.ts",
+    "src/test/document-policy.test.ts",
+    "src/test/example-flow.test.ts",
+    "src/test/gemini-model-policy.test.ts",
+    "src/test/legal-engine.test.ts",
+    "src/test/legal-routing.test.ts"
+  ],
+  "log_sha256": {
+    "stabilization-lint.log": "575d3a24ca5b0a3abdf516b54c778999a0594257249a703849352a472f305c52",
+    "stabilization-stress-2.log": "a62c993812e69c50c921201811a6447b533e64521586a65c5eba852af095cdd4",
+    "stabilization-stress-6.log": "fe492d894d7cd9a1c5a390ac487bf1f9d4bc07afe8c05f8805fc319acb165bad",
+    "stabilization-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stabilization-build.log": "0e410496ca90ced38e7d5e54bbc9409d13af10bde999528155642aee8a7070ed",
+    "stabilization-stress-3.log": "8991e0cbb661f7424dbbf7c033a29a19bae81868f6969b54c21afb47ae81b808",
+    "stabilization-medium.log": "3f205862d17ab5ff9f29be00953407eb0ffe0796cb32092f20b9656b71377e68",
+    "stabilization-stress-4.log": "788c651878545854747961731d8a77afd5b575f00dfdf0e5d10f43915e34bc47",
+    "stabilization-lint-fix.log": "c1dcb179cb21448545753f9d943233a6c471739e2af4dda3248708b3d34b15d9",
+    "stabilization-stress-5.log": "5baaf607a01a0a7ac5a2892f471b87cc530cadde419c2ed79c276d8ccea36fc5",
+    "stabilization-new-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stabilization-stress-1.log": "2b89c1f57e311435145e3117c6198a779b5c25a5769892a4e76752dbd06bddf0",
+    "stabilization-tests.log": "9767455997377fcd49bacd1af12a5f8fa15e89bd098af210b03d42d075234b7a"
+  }
+}

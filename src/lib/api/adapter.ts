@@ -33,7 +33,10 @@ class DemoAdapter implements CaseAdapter {
  */
 export class HttpAdapter implements CaseAdapter {
   readonly mode = "http" as const;
-  constructor(private baseUrl: string, private getToken: () => string | null) {}
+  constructor(
+    private baseUrl: string,
+    private getToken: () => string | null,
+  ) {}
 
   private async req<T>(path: string, init?: RequestInit): Promise<T> {
     const token = this.getToken();
@@ -42,7 +45,11 @@ export class HttpAdapter implements CaseAdapter {
     try {
       res = await fetch(`${this.baseUrl}${path}`, {
         ...init,
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...init?.headers },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          ...init?.headers,
+        },
       });
     } catch {
       throw new ApiError("network", "rede");

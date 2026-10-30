@@ -59,21 +59,39 @@ export const DEMO_CASES: DemoCase[] = [
     },
     analysis: base({
       caseId: "demo-crianca",
-      resumo: "Pedido de BPC ainda não feito para criança de 7 anos (dados fictícios). Faltam informações e documentos.",
-      linhaDoTempo: [{ data: "Não informada", fato: "Início das dificuldades", origem: "declarado" }],
+      resumo:
+        "Pedido de BPC ainda não feito para criança de 7 anos (dados fictícios). Faltam informações e documentos.",
+      linhaDoTempo: [
+        { data: "Não informada", fato: "Início das dificuldades", origem: "declarado" },
+      ],
       documentosAnalisados: ["Relatório médico fictício (texto sintético)"],
       fatosDeclarados: ["Dificuldade na fala", "Precisa de ajuda para se vestir", "Mora em MG"],
       fatosComprovados: [],
-      explicacao: "Com as informações atuais, não é possível orientar sobre o pedido com segurança. O BPC avalia como a condição afeta a vida da criança, além da renda da família.",
-      inconsistencias: ["Início das dificuldades não informado.", "Composição familiar não informada."],
-      proximosPassos: ["Pedir relatório escolar à escola.", "Verificar ou atualizar o CadÚnico no CRAS.", "Responder as perguntas pendentes."],
+      explicacao:
+        "Com as informações atuais, não é possível orientar sobre o pedido com segurança. O BPC avalia como a condição afeta a vida da criança, além da renda da família.",
+      inconsistencias: [
+        "Início das dificuldades não informado.",
+        "Composição familiar não informada.",
+      ],
+      proximosPassos: [
+        "Pedir relatório escolar à escola.",
+        "Verificar ou atualizar o CadÚnico no CRAS.",
+        "Responder as perguntas pendentes.",
+      ],
       preparoAdvogado: {
         disponiveis: ["Relatório médico"],
         faltantes: [
-          { nome: "Relatório escolar", porque: "Mostra dificuldades na escola.", onde: "Escola da criança" },
+          {
+            nome: "Relatório escolar",
+            porque: "Mostra dificuldades na escola.",
+            onde: "Escola da criança",
+          },
           { nome: "CadÚnico", porque: "Exigido para o BPC.", onde: "CRAS" },
         ],
-        perguntas: ["Quais relatórios são mais importantes no meu caso?", "Preciso atualizar o CadÚnico antes de pedir?"],
+        perguntas: [
+          "Quais relatórios são mais importantes no meu caso?",
+          "Preciso atualizar o CadÚnico antes de pedir?",
+        ],
       },
     }),
   },
@@ -94,8 +112,11 @@ export const DEMO_CASES: DemoCase[] = [
     },
     analysis: base({
       caseId: "demo-negado",
-      resumo: "BPC informado como negado (dados fictícios). A decisão escrita do INSS ainda não foi fornecida.",
-      urgencias: ["Data da negativa não informada. Prazos dependem dela — obtenha a decisão o quanto antes."],
+      resumo:
+        "BPC informado como negado (dados fictícios). A decisão escrita do INSS ainda não foi fornecida.",
+      urgencias: [
+        "Data da negativa não informada. Prazos dependem dela — obtenha a decisão o quanto antes.",
+      ],
       linhaDoTempo: [
         { data: "Data fictícia", fato: "Pedido protocolado", origem: "documentado" },
         { data: "Não informada", fato: "Negativa comunicada", origem: "declarado" },
@@ -104,15 +125,31 @@ export const DEMO_CASES: DemoCase[] = [
       fatosDeclarados: ["O pedido foi negado"],
       fatosComprovados: ["Existe um pedido protocolado"],
       motivoInss: null,
-      explicacao: "O motivo da negativa não está demonstrado. Faltam documentos para saber por que o pedido foi negado. Não vamos supor uma causa.",
-      proximosPassos: ["Baixar a decisão de indeferimento no Meu INSS.", "Pedir cópia do processo administrativo.", "Anotar a data em que recebeu a comunicação."],
+      explicacao:
+        "O motivo da negativa não está demonstrado. Faltam documentos para saber por que o pedido foi negado. Não vamos supor uma causa.",
+      proximosPassos: [
+        "Baixar a decisão de indeferimento no Meu INSS.",
+        "Pedir cópia do processo administrativo.",
+        "Anotar a data em que recebeu a comunicação.",
+      ],
       preparoAdvogado: {
         disponiveis: ["Protocolo"],
         faltantes: [
-          { nome: "Decisão de indeferimento", porque: "Mostra o motivo e a data.", onde: "Meu INSS" },
-          { nome: "Processo administrativo", porque: "Reúne perícias e avaliações.", onde: "Meu INSS" },
+          {
+            nome: "Decisão de indeferimento",
+            porque: "Mostra o motivo e a data.",
+            onde: "Meu INSS",
+          },
+          {
+            nome: "Processo administrativo",
+            porque: "Reúne perícias e avaliações.",
+            onde: "Meu INSS",
+          },
         ],
-        perguntas: ["Qual é o prazo para recorrer no meu caso?", "Vale mais recorrer ou fazer novo pedido?"],
+        perguntas: [
+          "Qual é o prazo para recorrer no meu caso?",
+          "Vale mais recorrer ou fazer novo pedido?",
+        ],
       },
     }),
   },
@@ -129,13 +166,23 @@ export const DEMO_CASES: DemoCase[] = [
       uf: "SP",
       docs: ["protocolo", "relatorios_medicos", "cnis"],
       comunicacaoExigencia: "Carta fictícia pedindo laudo atualizado.",
-      adaptadas: { i_limitacoes: "Não consigo ficar em pé por muito tempo.", i_acidente: "Não houve acidente." },
-      docStatus: { carta_exigencia: "disponivel", protocolo: "disponivel", medicos: "falta", cnis: "disponivel" },
+      adaptadas: {
+        i_limitacoes: "Não consigo ficar em pé por muito tempo.",
+        i_acidente: "Não houve acidente.",
+      },
+      docStatus: {
+        carta_exigencia: "disponivel",
+        protocolo: "disponivel",
+        medicos: "falta",
+        cnis: "disponivel",
+      },
     },
     analysis: base({
       caseId: "demo-exigencia",
       resumo: "Pedido fictício em análise com exigência de laudo médico atualizado.",
-      urgencias: ["Exigência com prazo informado na carta (fictícia). Verifique a data na carta real."],
+      urgencias: [
+        "Exigência com prazo informado na carta (fictícia). Verifique a data na carta real.",
+      ],
       linhaDoTempo: [
         { data: "Data fictícia", fato: "Pedido protocolado", origem: "documentado" },
         { data: "Data fictícia", fato: "Carta de exigência emitida", origem: "documentado" },
@@ -144,13 +191,23 @@ export const DEMO_CASES: DemoCase[] = [
       fatosDeclarados: ["Dificuldade para ficar em pé", "Sem acidente"],
       fatosComprovados: ["INSS solicitou laudo médico atualizado (exemplo)"],
       motivoInss: "Exigência: apresentar laudo médico atualizado (texto fictício).",
-      explicacao: "O INSS pediu um documento antes de decidir. Responder dentro do prazo evita que o pedido seja encerrado.",
+      explicacao:
+        "O INSS pediu um documento antes de decidir. Responder dentro do prazo evita que o pedido seja encerrado.",
       fundamentosFavoraveis: ["CNIS mostra vínculos registrados (exemplo)."],
       fundamentosContrarios: ["Laudo médico atual ainda não apresentado."],
-      proximosPassos: ["Agendar consulta para laudo atualizado.", "Enviar o documento pelo Meu INSS."],
+      proximosPassos: [
+        "Agendar consulta para laudo atualizado.",
+        "Enviar o documento pelo Meu INSS.",
+      ],
       preparoAdvogado: {
         disponiveis: ["Protocolo", "Carta de exigência", "CNIS"],
-        faltantes: [{ nome: "Laudo médico atualizado", porque: "Foi pedido pelo INSS.", onde: "Médico que acompanha você" }],
+        faltantes: [
+          {
+            nome: "Laudo médico atualizado",
+            porque: "Foi pedido pelo INSS.",
+            onde: "Médico que acompanha você",
+          },
+        ],
         perguntas: ["O que fazer se não conseguir o laudo a tempo?"],
       },
       pdf: { disponivel: true, expiraEm: "24 horas após a geração (exemplo)" },

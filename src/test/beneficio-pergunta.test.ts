@@ -8,11 +8,15 @@ describe("pergunta de benefício do questionário", () => {
   });
 
   it("mantém as mesmas opções de benefício já existentes", () => {
-    expect(new Set(Object.keys(LABELS.beneficioPergunta))).toEqual(new Set(Object.keys(LABELS.beneficio)));
+    expect(new Set(Object.keys(LABELS.beneficioPergunta))).toEqual(
+      new Set(Object.keys(LABELS.beneficio)),
+    );
   });
 
   it("explica cada opção em linguagem simples, com 'Saiba mais' para detalhes", () => {
-    for (const key of Object.keys(LABELS.beneficioPergunta) as (keyof typeof LABELS.beneficioPergunta)[]) {
+    for (const key of Object.keys(
+      LABELS.beneficioPergunta,
+    ) as (keyof typeof LABELS.beneficioPergunta)[]) {
       expect(LABELS.beneficioExplicacao[key]?.length ?? 0).toBeGreaterThan(0);
       expect(LABELS.beneficioDetalhe[key]?.length ?? 0).toBeGreaterThan(0);
     }
