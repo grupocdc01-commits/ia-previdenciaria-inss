@@ -1,0 +1,14 @@
+[
+  { "id": "lei-8213", "url": "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm" },
+  { "id": "decreto-3048", "url": "https://www.planalto.gov.br/ccivil_03/decreto/d3048.htm" },
+  {
+    "id": "ec-103",
+    "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm"
+  },
+  { "id": "loas", "url": "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm" },
+  { "id": "lei-10259", "url": "https://www.planalto.gov.br/ccivil_03/leis/leis_2001/l10259.htm" },
+  {
+    "id": "in-128",
+    "url": "https://www.in.gov.br/en/web/dou/-/instrucao-normativa-pres/inss-n-128-de-28-de-marco-de-2022-389275446"
+  }
+]

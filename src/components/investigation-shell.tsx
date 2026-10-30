@@ -35,6 +35,9 @@ export function InvestigationShell({ children }: { children: ReactNode }) {
           </Link>
           <nav className="flex flex-wrap items-center gap-3">
             <Button asChild variant="ghost">
+              <Link to="/biblioteca">Base jurídica</Link>
+            </Button>
+            <Button asChild variant="ghost">
               <Link to="/exemplos">Exemplos fictícios</Link>
             </Button>
             {signedIn ? (

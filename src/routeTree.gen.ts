@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AcompanhamentoRouteImport } from './routes/acompanhamento'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BibliotecaRouteImport } from './routes/biblioteca'
 import { Route as ConferenciaRouteImport } from './routes/conferencia'
 import { Route as DocumentosRouteImport } from './routes/documentos'
 import { Route as ExemplosRouteImport } from './routes/exemplos'
@@ -46,6 +47,11 @@ const AcompanhamentoRoute = AcompanhamentoRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliotecaRoute = BibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConferenciaRoute = ConferenciaRouteImport.update({
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acompanhamento': typeof AcompanhamentoRoute
   '/auth': typeof AuthRoute
+  '/biblioteca': typeof BibliotecaRoute
   '/conferencia': typeof ConferenciaRoute
   '/documentos': typeof DocumentosRoute
   '/exemplos': typeof ExemplosRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acompanhamento': typeof AcompanhamentoRoute
   '/auth': typeof AuthRoute
+  '/biblioteca': typeof BibliotecaRoute
   '/conferencia': typeof ConferenciaRoute
   '/documentos': typeof DocumentosRoute
   '/exemplos': typeof ExemplosRoute
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/acompanhamento': typeof AcompanhamentoRoute
   '/auth': typeof AuthRoute
+  '/biblioteca': typeof BibliotecaRoute
   '/conferencia': typeof ConferenciaRoute
   '/documentos': typeof DocumentosRoute
   '/exemplos': typeof ExemplosRoute
@@ -199,6 +208,7 @@ export interface FileRouteTypes {
     | '/'
     | '/acompanhamento'
     | '/auth'
+    | '/biblioteca'
     | '/conferencia'
     | '/documentos'
     | '/exemplos'
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/'
     | '/acompanhamento'
     | '/auth'
+    | '/biblioteca'
     | '/conferencia'
     | '/documentos'
     | '/exemplos'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/acompanhamento'
     | '/auth'
+    | '/biblioteca'
     | '/conferencia'
     | '/documentos'
     | '/exemplos'
@@ -262,6 +274,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AcompanhamentoRoute: typeof AcompanhamentoRoute
   AuthRoute: typeof AuthRoute
+  BibliotecaRoute: typeof BibliotecaRoute
   ConferenciaRoute: typeof ConferenciaRoute
   DocumentosRoute: typeof DocumentosRoute
   ExemplosRoute: typeof ExemplosRoute
@@ -303,6 +316,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblioteca': {
+      id: '/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof BibliotecaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/conferencia': {
@@ -449,6 +469,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AcompanhamentoRoute: AcompanhamentoRoute,
   AuthRoute: AuthRoute,
+  BibliotecaRoute: BibliotecaRoute,
   ConferenciaRoute: ConferenciaRoute,
   DocumentosRoute: DocumentosRoute,
   ExemplosRoute: ExemplosRoute,

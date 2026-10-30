@@ -1,5 +1,7 @@
 import { sourceById } from "./sources";
 import { FACT_QUESTIONS, type ModuleResult } from "./engine";
+import { findLegalRecord, resolveLegalCitations } from "./catalog";
+import { legalToday } from "./catalog-schema";
 
 const PLAIN: Record<string, string> = {
   atendido: "parece cumprido",
@@ -13,12 +15,15 @@ export function technicalReport(results: ModuleResult[]) {
     title: m.title,
     overall: m.overall,
     preliminary: m.preliminary,
+    releaseStatus: "bloqueado" as const,
     sourcesTrusted: m.sourcesTrusted,
     caveats: m.caveats,
     requirements: m.requirements.map((r) => ({
       ...r,
       basis: r.basis.map((b) => {
         const s = sourceById(b.sourceId);
+        const record = findLegalRecord(s.id, s.version);
+        const today = legalToday();
         return {
           ...b,
           title: s.title,
@@ -26,6 +31,20 @@ export function technicalReport(results: ModuleResult[]) {
           version: s.version,
           verification: s.verification,
           review: s.review,
+          audit: record
+            ? {
+                revision: record.revision,
+                capturedAt: record.capture?.capturedAt ?? null,
+                sha256: record.capture?.sha256 ?? null,
+                legalStatus: record.legalStatus,
+                reviewDueOn: record.review.dueOn,
+                blockers: resolveLegalCitations(
+                  [{ sourceId: s.id, version: s.version, reference: b.article }],
+                  m.referenceDate ?? today,
+                  today,
+                ).citations[0]?.blockers ?? ["fonte_desconhecida"],
+              }
+            : null,
         };
       }),
     })),
@@ -40,8 +59,14 @@ export function plainReport(results: ModuleResult[]) {
     );
     return {
       title: m.title,
-      summary: `${m.title}: ${PLAIN[m.overall]} (resultado preliminar).`,
-      lines: m.requirements.map((r) => `${r.label}: ${PLAIN[r.status]}. ${r.reason}`),
+      summary: m.sourcesTrusted
+        ? `${m.title}: ${PLAIN[m.overall]} (resultado preliminar).`
+        : `${m.title}: conclusão bloqueada; fontes ou dispositivos ainda não conferidos.`,
+      lines: m.requirements.map((r) =>
+        m.sourcesTrusted
+          ? `${r.label}: ${PLAIN[r.status]}. ${r.reason}`
+          : `${r.label}: aguarda conferência das referências e revisão jurídica.`,
+      ),
     };
   });
   return {

@@ -27,3 +27,7 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+# Base jurídica em desenvolvimento
+
+A rota `/biblioteca` apresenta referências e pendências de conferência. A base não está homologada para conclusões sobre benefícios. Consulte [o relatório do Módulo 1](docs/MODULO-1-BASE-JURIDICA.md) para origem dos dados, revisão e testes executados.

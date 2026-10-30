@@ -1,0 +1,13 @@
+[
+  {
+    "id": "in-128",
+    "capture": {
+      "sha256": "9b710de04719d96deefd68ef132a342053a702c0228840da44ce8448b176e81f",
+      "capturedAt": "2026-10-30T20:10:53.678855Z",
+      "finalUrl": "https://www.in.gov.br/en/web/dou/-/instrucao-normativa-pres/inss-n-128-de-28-de-marco-de-2022-389275446",
+      "bytes": 863895,
+      "identity": "pendente",
+      "format": "texto-dou-v1"
+    }
+  }
+]

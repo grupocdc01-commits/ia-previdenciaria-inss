@@ -1,21 +1,11 @@
-// Official source candidates are references, not approved executable rules.
-export const officialSourceCandidates = [
-  {
-    key: "lei-8213",
-    url: "https://www.planalto.gov.br/ccivil_03/leis/l8213cons.htm",
-    status: "pending_human_review",
-  },
-  {
-    key: "loas",
-    url: "https://www.planalto.gov.br/ccivil_03/leis/l8742.htm",
-    status: "pending_human_review",
-  },
-  {
-    key: "ec-103",
-    url: "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc103.htm",
-    status: "pending_human_review",
-  },
-] as const;
+import { latestLegalRecords } from "./legal/catalog";
+
+// Compatibility list now shares the canonical, explicitly unreleased catalog.
+export const officialSourceCandidates = latestLegalRecords().map((record) => ({
+  key: record.id,
+  url: record.url,
+  status: "pending_human_review" as const,
+}));
 export type VerifiedPeriod = { start: number; end: number };
 // Neutral interval arithmetic only. Not contribution time, carência, or eligibility.
 export function unionPeriodDays(periods: VerifiedPeriod[]) {

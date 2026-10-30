@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-30",
+  "base_commit": "f02abfa33e4c6716d60a0a6f93b0d5f212d0914e",
+  "branch": "codex/previdenciario-4-modulos",
+  "module_status": "technical_implementation_only_not_legally_homologated",
+  "main_expected": "a445b20e7be9f4e2b1f1b68d72033a596530423a",
+  "typescript_tests": {
+    "passed": 160,
+    "failed": 0,
+    "skipped": 0,
+    "files": 17
+  },
+  "python_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "levels": {
+    "simple": {
+      "passed": 4,
+      "failed": 0,
+      "excluded_by_filter": 30
+    },
+    "medium": {
+      "passed": 28,
+      "failed": 0,
+      "excluded_by_filter": 6
+    },
+    "high_local": {
+      "passed": 2,
+      "failed": 0,
+      "excluded_by_filter": 32,
+      "catalog_records": 5000,
+      "promise_all_reads": 200
+    }
+  },
+  "stress": {
+    "concurrent_processes": 3,
+    "runs": [
+      {
+        "run": 1,
+        "exit_code": 0,
+        "passed": 160,
+        "seconds": 28.55
+      },
+      {
+        "run": 2,
+        "exit_code": 0,
+        "passed": 160,
+        "seconds": 28.48
+      },
+      {
+        "run": 3,
+        "exit_code": 0,
+        "passed": 160,
+        "seconds": 27.3
+      },
+      {
+        "run": 4,
+        "exit_code": 0,
+        "passed": 160,
+        "seconds": 25.86
+      },
+      {
+        "run": 5,
+        "exit_code": 0,
+        "passed": 160,
+        "seconds": 25.03
+      },
+      {
+        "run": 6,
+        "exit_code": 0,
+        "passed": 160,
+        "seconds": 25.24
+      }
+    ]
+  },
+  "typecheck_exit": 0,
+  "lint": {
+    "exit_code": 0,
+    "errors": 0,
+    "warnings": 16
+  },
+  "build_exit": 0,
+  "official_fetches": {
+    "attempted": 6,
+    "captured_pending": 1,
+    "http_503": 5,
+    "reviewed": 0
+  },
+  "files_changed": [
+    ".gitignore",
+    "README.md",
+    "docs/MODULO-1-BASE-JURIDICA.md",
+    "docs/evidencias-modulo-1.json",
+    "docs/fontes-oficiais/README.md",
+    "docs/fontes-oficiais/capturas.json",
+    "docs/fontes-oficiais/in-128-9b710de04719d96deefd68ef132a342053a702c0228840da44ce8448b176e81f.txt",
+    "scripts/capture-legal-sources.py",
+    "scripts/legal-capture-targets.json",
+    "scripts/test_capture_legal_sources.py",
+    "src/components/investigation-shell.tsx",
+    "src/components/legal-library-page.tsx",
+    "src/components/legal-library.tsx",
+    "src/lib/api/cloud-adapter.ts",
+    "src/lib/api/legal-library.functions.ts",
+    "src/lib/legal-registry.ts",
+    "src/lib/legal/capture-data.json",
+    "src/lib/legal/catalog-schema.ts",
+    "src/lib/legal/catalog-updates.json",
+    "src/lib/legal/catalog.ts",
+    "src/lib/legal/engine.ts",
+    "src/lib/legal/report.ts",
+    "src/lib/legal/routing.ts",
+    "src/lib/legal/source-data.ts",
+    "src/lib/legal/sources.ts",
+    "src/routeTree.gen.ts",
+    "src/routes/biblioteca.tsx",
+    "src/test/app-routing.test.tsx",
+    "src/test/legal-catalog.test.ts",
+    "src/test/legal-library-page.test.tsx",
+    "src/test/legal-library-view.test.tsx"
+  ],
+  "log_sha256": {
+    "module1-stress-2.log": "1db78f493ae529678d3c2456815fbdd93a012ff845d87cab95a027b72b2fd119",
+    "module1-stress-1.log": "18fb6029947642f5532ff18083f2a5694173412b15a5ee9d273854d8a265de58",
+    "module1-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "module1-lint-fix.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "module1-tests.log": "758ea1eeb3ed64b70562b8c8d0fe9e88722c956c34dd37193a2dddc1baa0faab",
+    "module1-build.log": "e8d87e57cf0a72387737e1dabbec77f0185d420a400fc8c9429ccf0edc58008a",
+    "module1-stress-6.log": "7d194baa2f266ee9fac7bec0be30c9a1496c8b1c178c60ca3cc2ae7c2ae96ecd",
+    "module1-stress-4.log": "fca4e94a987f0ed446472e649e23ac3e612de11102095e5e391668908760357b",
+    "module1-lint.log": "575d3a24ca5b0a3abdf516b54c778999a0594257249a703849352a472f305c52",
+    "module1-stress-5.log": "9d72435917bef92d4f48b4d71ad0a6fdad8d263363863eb1f1d1bb2014276b58",
+    "module1-high.log": "e24e8691f959e571d746f46c96723e6f9b214691ccd5849eb48cf54243a01175",
+    "module1-stress-3.log": "4483052bacfc4fdd5a578c037d4cdfc3c7a1f4677829ab6d8c120f98a8f37d1c",
+    "module1-simple.log": "2d4ac6417b8fdeea12c599b6743a9bc083c067ef74324ab36905a436226c293d",
+    "module1-python-tests.log": "e586fc0f3bb2a05f4c80f07d1b4c6171e830592f6c7aaf70d4af3b0aa3ebd072",
+    "module1-medium.log": "d5b50145b2b3b463fbd5c85d403735eb10e00d8a6615e02c35494bb7386b93f1",
+    "module1-lint-final-fix.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

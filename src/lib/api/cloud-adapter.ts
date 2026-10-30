@@ -1,6 +1,7 @@
 import { DefaultChatTransport } from "ai";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
+import { getLegalLibrary } from "./legal-library.functions";
 import {
   listInvestigations,
   createInvestigation,
@@ -21,6 +22,7 @@ import {
 
 export class CloudCaseAdapter implements CaseAdapter {
   readonly mode = "cloud" as const;
+  legalLibrary = getLegalLibrary;
   list = listInvestigations;
   create = createInvestigation;
   get = getInvestigation;

@@ -18,7 +18,7 @@ import { routeTree } from "@/routeTree.gen";
 // Match routes without running loaders or rendering: loaders may need a server or
 // network the test run lacks, and jsdom never loads the stylesheets React waits on.
 describe("App routing", () => {
-  it.each(["/questionario", "/perguntas", "/documentos", "/exemplos", "/auth"])(
+  it.each(["/questionario", "/perguntas", "/documentos", "/exemplos", "/auth", "/biblioteca"])(
     "matches %s without Supabase configuration or network calls",
     (path) => {
       const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });

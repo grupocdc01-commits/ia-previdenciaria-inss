@@ -1,4 +1,4 @@
-import { isSourceTrusted, sourceById } from "./sources";
+import { isCitationTrusted } from "./sources";
 import { summarizePeriods, type WorkPeriod } from "./periods";
 
 // Motor determinístico de requisitos. Nunca conclui elegibilidade: com regras não
@@ -41,6 +41,7 @@ export type ModuleId =
   | "incapacidade_permanente"
   | "aposentadoria_idade";
 export type ModuleResult = {
+  referenceDate?: string;
   module: ModuleId;
   title: string;
   requirements: Requirement[];
@@ -191,15 +192,21 @@ function build(
   title: string,
   requirements: Requirement[],
   extra: string[] = [],
+  referenceDate = "",
 ): ModuleResult {
-  const ids = [...new Set(requirements.flatMap((r) => r.basis.map((b) => b.sourceId)))];
+  const citations = requirements.flatMap((r) => r.basis);
   return {
     module,
     title,
     requirements,
     overall: combine(requirements),
     preliminary: true,
-    sourcesTrusted: ids.every((id) => isSourceTrusted(sourceById(id))),
+    referenceDate,
+    sourcesTrusted:
+      citations.length > 0 &&
+      citations.every((citation) =>
+        isCitationTrusted(citation.sourceId, citation.article, referenceDate),
+      ),
     caveats: [CAVEAT, ...extra],
   };
 }
@@ -290,6 +297,7 @@ export function evaluate(f: Facts): ModuleResult[] {
       "BPC/LOAS — pessoa idosa",
       [ageReq(f, () => 65, [{ sourceId: "loas", article: "art. 20, caput" }]), incomeReq(f)],
       ex,
+      f.referenceDate,
     ),
     build(
       "bpc_deficiencia",
@@ -307,18 +315,21 @@ export function evaluate(f: Facts): ModuleResult[] {
         incomeReq(f),
       ],
       ex,
+      f.referenceDate,
     ),
     build(
       "incapacidade_temporaria",
       "Auxílio por incapacidade temporária",
       [incap("temporaria"), segurado, carencia12(), medical],
       ex,
+      f.referenceDate,
     ),
     build(
       "incapacidade_permanente",
       "Aposentadoria por incapacidade permanente",
       [incap("permanente"), segurado, carencia12(), medical],
       ex,
+      f.referenceDate,
     ),
     build(
       "aposentadoria_idade",
@@ -343,6 +354,7 @@ export function evaluate(f: Facts): ModuleResult[] {
             ]),
       ],
       [...ex, "Regras de transição (pontos, pedágio) ainda não implementadas."],
+      f.referenceDate,
     ),
   ];
 }

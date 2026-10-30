@@ -52,3 +52,7 @@ service-account*.json
 *.kdbx
 .htpasswd
 .npmrc
+
+# Local maintenance script bytecode
+__pycache__/
+*.py[cod]

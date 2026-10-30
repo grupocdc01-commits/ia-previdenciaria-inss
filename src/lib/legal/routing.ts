@@ -1,4 +1,4 @@
-import { isSourceTrusted, sourceById } from "./sources";
+import { isCitationTrusted, sourceById } from "./sources";
 
 // Classificação de encaminhamento. Nunca promete concessão, nunca declara ação
 // obrigatória/procedente, nunca exige advogado em todos os casos.
@@ -37,14 +37,22 @@ export type RoutingResult = {
   notices: string[];
 };
 
-const b = (sourceId: string, reference: string) => {
+const sourceBasis = (sourceId: string, reference: string, onDate: string) => {
   const s = sourceById(sourceId);
-  return { sourceId, reference, title: s.title, url: s.url, trusted: isSourceTrusted(s) };
+  return {
+    sourceId,
+    reference,
+    title: s.title,
+    url: s.url,
+    trusted: isCitationTrusted(sourceId, reference, onDate),
+  };
 };
 const daysBetween = (a: string, c: string) =>
   Math.floor((Date.parse(c) - Date.parse(a)) / 86_400_000);
 
 export function classifyRouting(f: RoutingFacts): RoutingResult {
+  const b = (sourceId: string, reference: string) =>
+    sourceBasis(sourceId, reference, f.referenceDate);
   const r: Recommendation[] = [];
   const add = (x: Recommendation) => r.push(x);
 
