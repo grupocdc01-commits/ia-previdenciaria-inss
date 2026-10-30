@@ -19,12 +19,20 @@ import { Button } from "@/components/ui/button";
 import { cloudAdapter } from "@/lib/api/cloud-adapter";
 import { BENEFITS, interviewQuestions, scopeNotice } from "@/lib/investigation";
 import type { getInvestigation } from "@/lib/api/investigation.functions";
+import { StructuredInterview } from "./structured-interview";
 import { InvestigationAudio } from "./investigation-audio";
 import { InvestigationDocuments } from "./investigation-documents";
 import agentImage from "@/assets/assistente-exemplos.jpg";
 
 type Thread = Awaited<ReturnType<typeof getInvestigation>>;
 export function InvestigationChat({ thread }: { thread: Thread }) {
+  return thread.facts.interviewVersion === 2 ? (
+    <StructuredInterview thread={thread} />
+  ) : (
+    <LegacyInvestigationChat thread={thread} />
+  );
+}
+function LegacyInvestigationChat({ thread }: { thread: Thread }) {
   const transport = useMemo(() => cloudAdapter.transport(thread.id), [thread.id]);
   const client = useQueryClient();
   const textarea = useRef<HTMLTextAreaElement | null>(null);

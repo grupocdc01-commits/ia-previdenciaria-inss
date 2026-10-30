@@ -25,11 +25,17 @@ export interface Answers {
   dataNegativa?: string;
   comunicacaoExigencia?: string;
   adaptadas: Record<string, string>;
+  adaptadasStatus?: Record<string, "confirmado" | "nao_sei" | "pulado">;
   docStatus: Record<string, DocStatus>;
   trabalhos?: string[];
   contexto?: Record<
     string,
-    { status: "confirmado" | "nao_sei" | "pulado"; values?: string[]; step: string }
+    {
+      status: "confirmado" | "nao_sei" | "pulado";
+      values?: string[] | undefined;
+      step: string;
+      trigger?: string | undefined;
+    }
   >;
 }
 
@@ -199,6 +205,43 @@ export function adaptedQuestions(a: Answers): AdaptedQuestion[] {
     });
   }
   return q;
+}
+
+export function recordAdaptedResponse(
+  a: Answers,
+  id: string,
+  status: "confirmado" | "nao_sei" | "pulado",
+  value = "",
+): Answers {
+  if (
+    !adaptedQuestions(a).some((question) => question.id === id) ||
+    !["confirmado", "nao_sei", "pulado"].includes(status)
+  )
+    throw new Error("Pergunta não corresponde ao caso atual.");
+  const adaptadas = { ...a.adaptadas };
+  if (status === "confirmado") {
+    if (!value.trim() || value.length > 4000)
+      throw new Error("Informe uma resposta de até 4000 caracteres.");
+    adaptadas[id] = value.trim();
+  } else delete adaptadas[id];
+  return { ...a, adaptadas, adaptadasStatus: { ...a.adaptadasStatus, [id]: status } };
+}
+export function reconcileAdaptedAnswers(previous: Answers, next: Answers): Answers {
+  const oldQuestions = adaptedQuestions(previous);
+  const keep = new Set(
+    adaptedQuestions(next)
+      .filter((question) =>
+        oldQuestions.some((old) => old.id === question.id && old.pergunta === question.pergunta),
+      )
+      .map((question) => question.id),
+  );
+  return {
+    ...next,
+    adaptadas: Object.fromEntries(Object.entries(next.adaptadas).filter(([id]) => keep.has(id))),
+    adaptadasStatus: Object.fromEntries(
+      Object.entries(next.adaptadasStatus ?? {}).filter(([id]) => keep.has(id)),
+    ),
+  };
 }
 
 export interface DocItem {

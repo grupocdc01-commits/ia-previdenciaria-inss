@@ -36,6 +36,13 @@
       "when": 1793229057401,
       "tag": "0004_restrict_expired_document_reads",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793392875937,
+      "tag": "0005_atomic_anamnesis_turns",
+      "breakpoints": true
     }
   ]
 }

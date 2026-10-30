@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Page } from "@/components/shell";
 import { useCase } from "@/lib/case-store";
-import { documentList, LABELS, missingInfo } from "@/lib/case-model";
+import { documentList, LABELS, missingInfo, adaptedQuestions } from "@/lib/case-model";
+import { ContextualSummary } from "@/components/contextual-summary";
 
 export const Route = createFileRoute("/conferencia")({
   head: () => ({
@@ -73,6 +74,26 @@ function Conferencia() {
           to="/documentos"
         />
       </dl>
+      <ContextualSummary input={a} />
+      {Object.keys(a.adaptadasStatus ?? {}).length > 0 && (
+        <section className="mt-5">
+          <h2 className="text-xl font-bold">Respostas complementares</h2>
+          <ul>
+            {adaptedQuestions(a)
+              .filter((question) => a.adaptadasStatus?.[question.id])
+              .map((question) => (
+                <li key={question.id}>
+                  <strong>{question.pergunta}</strong>:{" "}
+                  {a.adaptadasStatus?.[question.id] === "confirmado"
+                    ? a.adaptadas[question.id]
+                    : a.adaptadasStatus?.[question.id] === "nao_sei"
+                      ? "Não sei"
+                      : "Pulado"}
+                </li>
+              ))}
+          </ul>
+        </section>
+      )}
       {falta.length > 0 && (
         <section className="mt-6 rounded-xl bg-warning p-5 text-warning-foreground">
           <h2 className="text-xl font-semibold">⚠ Informações que ainda faltam</h2>

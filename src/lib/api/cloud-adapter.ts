@@ -2,6 +2,7 @@ import { DefaultChatTransport } from "ai";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { getLegalLibrary } from "./legal-library.functions";
+import type { InterviewRequest } from "@/lib/anamnesis-schema";
 import {
   listInvestigations,
   createInvestigation,
@@ -23,6 +24,17 @@ import {
 export class CloudCaseAdapter implements CaseAdapter {
   readonly mode = "cloud" as const;
   legalLibrary = getLegalLibrary;
+  async submitAnamnesis(input: InterviewRequest) {
+    const response = await fetch("/api/anamnese", {
+      method: "POST",
+      headers: { ...(await this.headers()), "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    });
+    const result = (await response.json()) as { ok?: boolean; duplicate?: boolean; error?: string };
+    if (!response.ok || !result.ok)
+      throw new Error(result.error ?? "Não foi possível salvar sua resposta.");
+    return result;
+  }
   list = listInvestigations;
   create = createInvestigation;
   get = getInvestigation;

@@ -47,6 +47,9 @@ export const Route = createFileRoute("/api/investigation-chat")({
           .eq("user_id", auth.userId)
           .single();
         if (thread.error) return new Response("Investigação não encontrada.", { status: 404 });
+        const facts = parseFacts(thread.data.facts);
+        if (facts.interviewVersion === 2)
+          return new Response("Use a anamnese estruturada desta investigação.", { status: 409 });
         const saved = await auth.client.from("investigation_messages").insert({
           investigation_id: thread.data.id,
           client_id: last.id,
@@ -58,7 +61,6 @@ export const Route = createFileRoute("/api/investigation-chat")({
             "A mensagem não pôde ser salva. Atualize a conversa antes de tentar novamente.",
             { status: 409 },
           );
-        const facts = parseFacts(thread.data.facts);
         if (facts.storyStatus === "collecting") {
           const updated = collectStory(facts, text, parsed.data.finishStory === true);
           const savedFacts = await auth.client

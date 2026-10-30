@@ -31,3 +31,5 @@ npm run dev
 # Base jurídica em desenvolvimento
 
 A rota `/biblioteca` apresenta referências e pendências de conferência. A base não está homologada para conclusões sobre benefícios. Consulte [o relatório do Módulo 1](docs/MODULO-1-BASE-JURIDICA.md) para origem dos dados, revisão e testes executados.
+
+O [Módulo 2](docs/MODULO-2-ANAMNESE.md) acrescenta complementos validados ao formulário e uma anamnese privada estruturada optativa. O fluxo privado novo permanece desabilitado por padrão e exige revisão da migração e validação em homologação antes da habilitação.

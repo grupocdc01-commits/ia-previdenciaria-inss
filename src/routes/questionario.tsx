@@ -3,9 +3,18 @@ import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { ChoiceList, Page, Progress } from "@/components/shell";
 import { useCase } from "@/lib/case-store";
-import { LABELS, TRABALHO_LABELS, UFS, type Answers, type DocInicial } from "@/lib/case-model";
+import {
+  LABELS,
+  TRABALHO_LABELS,
+  UFS,
+  emptyAnswers,
+  reconcileAdaptedAnswers,
+  type Answers,
+  type DocInicial,
+} from "@/lib/case-model";
+import { legalDateSchema, legalToday } from "@/lib/legal/catalog-schema";
 import { ContextProbe } from "@/components/context-probe";
-import { probeForStep, recordProbe } from "@/lib/legal/contextual";
+import { probeForStep, recordProbe, pruneContext } from "@/lib/legal/contextual";
 
 export const Route = createFileRoute("/questionario")({
   head: () => ({
@@ -22,20 +31,25 @@ export const Route = createFileRoute("/questionario")({
 });
 
 interface Step {
-  key?: string;
+  key: string;
   title: string;
   render: () => ReactNode;
   ok: boolean;
 }
 
 function Questionario() {
-  const { answers: a, setAnswers } = useCase();
+  const { answers: a, setAnswers, questionnaireStep, setQuestionnaireStep } = useCase();
   const nav = useNavigate();
-  const [i, setI] = useState(0);
-  const up = (p: Partial<Answers>) => setAnswers((x) => ({ ...x, ...p }));
+  const up = (patch: Partial<Answers>) =>
+    setAnswers((previous) => {
+      if (patch.paraQuem && previous.paraQuem && patch.paraQuem !== previous.paraQuem)
+        return { ...emptyAnswers(), paraQuem: patch.paraQuem };
+      return pruneContext(reconcileAdaptedAnswers(previous, { ...previous, ...patch }));
+    });
 
   const steps: Step[] = [
     {
+      key: "paraQuem",
       title: "Para quem é o atendimento?",
       ok: !!a.paraQuem,
       render: () => (
@@ -79,8 +93,11 @@ function Questionario() {
   ];
   if (a.situacao === "negado")
     steps.push({
+      key: "dataNegativa",
       title: "Quando você recebeu a comunicação da negativa?",
-      ok: true,
+      ok:
+        !a.dataNegativa ||
+        (legalDateSchema.safeParse(a.dataNegativa).success && a.dataNegativa <= legalToday()),
       render: () => (
         <div className="grid gap-3">
           <label htmlFor="dn" className="font-bold">
@@ -89,6 +106,7 @@ function Questionario() {
           <input
             id="dn"
             type="date"
+            max={legalToday()}
             value={a.dataNegativa ?? ""}
             onChange={(e) => up({ dataNegativa: e.target.value })}
             className="h-14 rounded-xl border-2 border-input bg-card px-4 text-lg"
@@ -101,6 +119,7 @@ function Questionario() {
     });
   if (a.situacao === "exigencia")
     steps.push({
+      key: "exigencia",
       title: "O que diz a comunicação de exigência?",
       ok: true,
       render: () => (
@@ -122,8 +141,13 @@ function Questionario() {
       ),
     });
   steps.push({
+    key: "idade",
     title: "Idade da pessoa e estado onde mora",
-    ok: !!a.idade && !!a.uf,
+    ok:
+      !!a.idade &&
+      (a.idade === "Não sei" || (/^\d{1,3}$/.test(a.idade) && Number(a.idade) <= 120)) &&
+      !!a.uf &&
+      UFS.includes(a.uf),
     render: () => (
       <div className="grid gap-5">
         <div className="grid gap-2">
@@ -191,6 +215,7 @@ function Questionario() {
     ),
   });
   steps.push({
+    key: "docs",
     title: "Quais documentos você possui?",
     ok: a.docs.length > 0,
     render: () => (
@@ -213,30 +238,63 @@ function Questionario() {
     ),
   });
 
-  const idx = Math.min(i, steps.length - 1);
+  const idx = Math.max(
+    0,
+    steps.findIndex((step) => step.key === questionnaireStep),
+  );
   const s = steps[idx]!;
   const last = idx === steps.length - 1;
   const [probing, setProbing] = useState(false);
   const probe = s.key ? probeForStep(a, s.key) : undefined;
-  const advance = () => (last ? nav({ to: "/perguntas" }) : setI(idx + 1));
+  const advance = () =>
+    last ? nav({ to: "/perguntas" }) : setQuestionnaireStep(steps[idx + 1]!.key);
   const next = () => (probe ? setProbing(true) : advance());
 
   return (
     <Page step="Questionário inicial">
       <Progress current={idx + 1} total={steps.length} />
       <h1 className="mb-6 text-3xl font-semibold">{s.title}</h1>
-      {s.render()}
+      <fieldset disabled={probing}>{s.render()}</fieldset>
+      {s.key === "paraQuem" && a.paraQuem && (
+        <p className="mt-2 text-sm">
+          Mudar a pessoa atendida reinicia as respostas deste questionário de demonstração.
+        </p>
+      )}
       {probing && probe && (
         <ContextProbe
           key={probe.id}
           probe={probe}
           onDone={(st, v) => {
-            setAnswers((x) => recordProbe(x, probe, st, v));
-            setProbing(false);
-            advance();
+            const updated = recordProbe(a, probe, st, v);
+            setAnswers(() => updated);
+            if (!probeForStep(updated, s.key)) {
+              setProbing(false);
+              advance();
+            }
           }}
         />
       )}
+      {!probing &&
+        a.contexto &&
+        Object.values(a.contexto).some((entry) => entry.step === s.key) && (
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => {
+              setAnswers((previous) => ({
+                ...previous,
+                contexto: Object.fromEntries(
+                  Object.entries(previous.contexto ?? {}).filter(
+                    ([, entry]) => entry.step !== s.key,
+                  ),
+                ),
+              }));
+              setProbing(true);
+            }}
+          >
+            Rever complementos desta etapa
+          </Button>
+        )}
       <p className="mt-6 text-sm text-muted-foreground">
         Estas informações são declaradas por você e não estão comprovadas.
       </p>
@@ -247,7 +305,7 @@ function Questionario() {
           disabled={idx === 0}
           onClick={() => {
             setProbing(false);
-            setI(idx - 1);
+            setQuestionnaireStep(steps[idx - 1]!.key);
           }}
         >
           ← Voltar

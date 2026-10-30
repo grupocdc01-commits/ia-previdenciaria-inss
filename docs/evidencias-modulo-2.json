@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-30",
+  "base_commit": "a542ca7f6b17484e6f024112af36d037eb2787c2",
+  "branch": "codex/previdenciario-4-modulos",
+  "private_v2_enabled_in_real_environment": false,
+  "real_database_migration_applied": false,
+  "module_3_started": false,
+  "main_expected": "a445b20e7be9f4e2b1f1b68d72033a596530423a",
+  "tests": {
+    "vitest": {
+      "passed": 224,
+      "failed": 0,
+      "skipped": 0,
+      "files": 22
+    },
+    "legacy_python": {
+      "passed": 7,
+      "failed": 0
+    },
+    "local_postgres": {
+      "passed": 10,
+      "failed": 0,
+      "image": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab",
+      "network": "none",
+      "published_ports": false,
+      "fixture_auth_only": true,
+      "container_removed": true
+    }
+  },
+  "levels": {
+    "simple": 5,
+    "medium": 25,
+    "high_local": 2
+  },
+  "parallel_stability": {
+    "concurrent_processes": 3,
+    "runs": [
+      {
+        "run": 1,
+        "exit_code": 0,
+        "passed": 224,
+        "seconds": 64.64
+      },
+      {
+        "run": 2,
+        "exit_code": 0,
+        "passed": 224,
+        "seconds": 65.14
+      },
+      {
+        "run": 3,
+        "exit_code": 0,
+        "passed": 224,
+        "seconds": 66.9
+      },
+      {
+        "run": 4,
+        "exit_code": 0,
+        "passed": 224,
+        "seconds": 42.35
+      },
+      {
+        "run": 5,
+        "exit_code": 0,
+        "passed": 224,
+        "seconds": 42.42
+      },
+      {
+        "run": 6,
+        "exit_code": 0,
+        "passed": 224,
+        "seconds": 41.52
+      }
+    ]
+  },
+  "typecheck_exit": 0,
+  "lint": {
+    "exit_code": 0,
+    "errors": 0,
+    "warnings": 16
+  },
+  "build_exit": 0,
+  "files_changed": [
+    "README.md",
+    "docs/MODULO-2-ANAMNESE.md",
+    "docs/evidencias-modulo-2-resultados.txt",
+    "docs/evidencias-modulo-2.json",
+    "drizzle/migrations/0005_atomic_anamnesis_turns.sql",
+    "drizzle/migrations/meta/_journal.json",
+    "scripts/check_anamnesis_database.py",
+    "src/components/context-probe.tsx",
+    "src/components/contextual-summary.tsx",
+    "src/components/investigation-chat.tsx",
+    "src/components/structured-interview.tsx",
+    "src/integrations/supabase/types.ts",
+    "src/lib/anamnesis-schema.ts",
+    "src/lib/anamnesis.ts",
+    "src/lib/api/anamnesis.server.ts",
+    "src/lib/api/cloud-adapter.ts",
+    "src/lib/api/investigation.functions.ts",
+    "src/lib/case-model.ts",
+    "src/lib/case-store.tsx",
+    "src/lib/investigation.ts",
+    "src/lib/legal/contextual.ts",
+    "src/routeTree.gen.ts",
+    "src/routes/_authenticated/investigacao.$threadId.painel.tsx",
+    "src/routes/api/anamnese.ts",
+    "src/routes/api/investigation-chat.ts",
+    "src/routes/conferencia.tsx",
+    "src/routes/perguntas.tsx",
+    "src/routes/questionario.tsx",
+    "src/test/anamnesis-api.test.ts",
+    "src/test/anamnesis.test.ts",
+    "src/test/context-probe-ui.test.tsx",
+    "src/test/contextual-probe.test.ts",
+    "src/test/questionnaire-context.test.tsx",
+    "src/test/structured-interview-ui.test.tsx"
+  ],
+  "log_sha256": {
+    "module2-tests.log": "189f6e0b73f9902b882fcd0f1b2333ebc5b55a55cbd843c498fcb72afb9e8154",
+    "module2-python-tests.log": "0d6653413f55f7cf64dbfab59b6b29c640ade8e63585414ab2a44a0892a5ed0a",
+    "module2-database.log": "f3381ee03e56d403b0b809aa6c79e715b6f4f4590e2eef552af67d97c426b4bd",
+    "module2-simple.log": "62f71d95e6145abc5ead3340c0242d6281003b714a280b20969eb162ee7ffc89",
+    "module2-medium.log": "12846100420079102efe6d5796bb2c656e83082bdaa06df564440b5d692094a8",
+    "module2-high.log": "0a7f6abe337f0f380b705fabb798f3d528f92401fc32cc696dba31d5fafa8f31",
+    "module2-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "module2-lint.log": "d6cb7a87222a5ad89dd87202d195ff3eb95144c36173afe46077b405fbc1679c",
+    "module2-build.log": "aea8ee05c048e95570cd13fddbfe49ecfdfc6682bbff2f64bfb53f0d2e32f7dd",
+    "module2-stress-1.log": "a21c5fb39112fd50fde49c2982c905fbed58fa357d5cf17418c6269c31fabc74",
+    "module2-stress-2.log": "5770fa68ea8d4100a31fbf93bf615d1985d9af4822f687718e0a4b1fc91e39e6",
+    "module2-stress-3.log": "72e9ffd6136919c3772ce24cea95b276a9eb4e9a8ae512b5860264bbab55bac3",
+    "module2-stress-4.log": "eafd94eb15effc088e6be784bd712a93ebd96e92285a8d86c102a4d99115fbda",
+    "module2-stress-5.log": "59f710e046d9005f2cca9f910811eaa6952696e64f556208db2e088afb3fa8c7",
+    "module2-stress-6.log": "937d5229fff33b03db5d9e56993a4f86a7ddd4cab6375a297e349fa531030013"
+  }
+}

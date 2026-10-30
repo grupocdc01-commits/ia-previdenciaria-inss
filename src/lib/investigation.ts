@@ -1,16 +1,10 @@
 import { z } from "zod";
 import type { UIMessage } from "ai";
+import type { InterviewFacts } from "./anamnesis-schema";
 
-export const BENEFITS = [
-  "Aposentadoria",
-  "Benefício por incapacidade",
-  "BPC/LOAS",
-  "Pensão por morte",
-  "Salário-maternidade",
-  "Auxílio-reclusão",
-  "Outro benefício",
-  "Não sei informar",
-] as const;
+import { BENEFITS, factsSchema, parseInterviewFacts } from "./anamnesis-schema";
+export { BENEFITS, factsSchema } from "./anamnesis-schema";
+export type { InterviewFacts } from "./anamnesis-schema";
 export const INSUFFICIENT = "Ainda não temos informações suficientes para concluir a investigação.";
 export const STORY_OPENING =
   "Olá! Estou aqui para ajudar a entender por que seu benefício foi negado pelo INSS.\n\nVocê pode me contar sua história por áudio ou texto.\n\nFale com calma, no seu tempo. Primeiro vou ouvir tudo o que aconteceu. Depois farei algumas perguntas para investigar melhor sua situação.";
@@ -18,22 +12,13 @@ export const MODULES = BENEFITS.map((name) => ({ name, status: "not_validated" a
 export function canInvestigateFully(benefit: string, validated: boolean) {
   return benefit === "Aposentadoria" && validated;
 }
-export const factsSchema = z.object({
-  answers: z.record(z.string()).default({}),
-  awaiting: z.string().default("benefit"),
-  documentsSkipped: z.boolean().default(false),
-  storyStatus: z.enum(["collecting", "complete"]).default("complete"),
-  story: z.array(z.string()).default([]),
-});
-export type InterviewFacts = z.infer<typeof factsSchema>;
 export const textPartsSchema = z.array(z.object({ type: z.literal("text"), text: z.string() }));
 export type InvestigationMessage = UIMessage;
 export function messageText(message: UIMessage): string {
   return message.parts.flatMap((part) => (part.type === "text" ? [part.text] : [])).join("\n");
 }
 export function parseFacts(value: unknown): InterviewFacts {
-  const parsed = factsSchema.safeParse(value);
-  return parsed.success ? parsed.data : factsSchema.parse({});
+  return parseInterviewFacts(value);
 }
 export function collectStory(facts: InterviewFacts, text: string, confirmed: boolean) {
   return {

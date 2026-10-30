@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { newInvestigationFacts, readAnamnesis } from "@/lib/anamnesis";
 import {
   parseFacts,
   textPartsSchema,
@@ -26,7 +27,10 @@ export const createInvestigation = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const { data, error } = await context.supabase
       .from("investigations")
-      .insert({ user_id: context.userId, facts: { storyStatus: "collecting", story: [] } })
+      .insert({
+        user_id: context.userId,
+        facts: newInvestigationFacts(process.env["ANAMNESIS_V2_ENABLED"] === "true"),
+      })
       .select("id")
       .single();
     if (error) throw new Error("Não foi possível iniciar a investigação.");
@@ -61,6 +65,7 @@ export const getInvestigation = createServerFn({ method: "POST" })
     return {
       ...data,
       facts,
+      anamnesis: facts.interviewVersion === 2 ? readAnamnesis(data.benefit, facts) : null,
       messages: history.data.map((row) => ({
         id: row.client_id,
         role: row.role === "user" ? ("user" as const) : ("assistant" as const),
@@ -106,9 +111,16 @@ export const getInvestigationPanel = createServerFn({ method: "POST" })
       benefit: result.data.benefit,
       reason: facts.answers["reason"] ?? null,
       scope: scopeNotice(result.data.benefit),
-      declarations: interviewQuestions(result.data.benefit).flatMap((q) =>
-        facts.answers[q.key] ? [{ question: q.label, answer: facts.answers[q.key] }] : [],
-      ),
+      declarations:
+        facts.interviewVersion === 2
+          ? readAnamnesis(result.data.benefit, facts).declarations.map((item) => ({
+              question: item.question,
+              answer: item.answer,
+            }))
+          : interviewQuestions(result.data.benefit).flatMap((q) =>
+              facts.answers[q.key] ? [{ question: q.label, answer: facts.answers[q.key] }] : [],
+            ),
+      anamnesis: facts.interviewVersion === 2 ? readAnamnesis(result.data.benefit, facts) : null,
       confirmed: [] as string[],
       inconsistencies: [] as string[],
       verifiedSources: [] as string[],

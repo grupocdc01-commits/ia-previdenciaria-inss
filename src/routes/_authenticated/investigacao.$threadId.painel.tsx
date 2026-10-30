@@ -3,6 +3,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { cloudAdapter } from "@/lib/api/cloud-adapter";
 import { InvestigationShell } from "@/components/investigation-shell";
 import { InvestigationDocuments } from "@/components/investigation-documents";
+import { ContextualItems } from "@/components/contextual-summary";
 import { Button } from "@/components/ui/button";
 const panelQuery = (id: string) =>
   queryOptions({
@@ -119,6 +120,16 @@ function Panel() {
               ))}
             </dl>
           </section>
+        )}
+        {data.anamnesis && (
+          <>
+            <ContextualItems items={data.anamnesis.contextual} />
+            {data.anamnesis.notices.map((notice) => (
+              <p role="status" key={notice}>
+                {notice}
+              </p>
+            ))}
+          </>
         )}
         <section className="mt-5 rounded-2xl border border-border bg-card p-5">
           <h2 className="text-xl font-bold">6. Documentos que podem ajudar</h2>

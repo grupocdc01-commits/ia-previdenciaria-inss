@@ -8,6 +8,38 @@ export type Database = {
   };
   public: {
     Tables: {
+      anamnesis_turns: {
+        Row: {
+          investigation_id: string;
+          request_id: string;
+          user_id: string;
+          request_hash: string;
+          created_at: string;
+        };
+        Insert: {
+          investigation_id: string;
+          request_id: string;
+          user_id: string;
+          request_hash: string;
+          created_at?: string;
+        };
+        Update: {
+          investigation_id?: string;
+          request_id?: string;
+          user_id?: string;
+          request_hash?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "anamnesis_turns_investigation_id_fkey";
+            columns: ["investigation_id"];
+            isOneToOne: false;
+            referencedRelation: "investigations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       investigation_messages: {
         Row: {
           client_id: string;
@@ -281,6 +313,19 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      commit_anamnesis_turn: {
+        Args: {
+          p_investigation: string;
+          p_request: string;
+          p_expected_updated_at: string;
+          p_request_hash: string;
+          p_facts: Json;
+          p_benefit: string | null;
+          p_user_text: string;
+          p_assistant_text: string;
+        };
+        Returns: Json;
+      };
       reserve_private_ai_usage: {
         Args: {
           p_document?: string;

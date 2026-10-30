@@ -11,9 +11,9 @@ const rural = () => ({ ...emptyAnswers(), trabalhos: ["rural", "insalubre"] });
 describe("investigação contextual", () => {
   it("detecta trabalho rural na etapa de trabalho", () =>
     expect(probeForStep(rural(), "trabalho")?.id).toBe("rural"));
-  it("no máximo uma interrupção por etapa", () => {
+  it("não repete um complemento respondido e passa ao próximo tipo de trabalho", () => {
     const a = recordProbe(rural(), probeForStep(rural(), "trabalho")!, "pulado");
-    expect(probeForStep(a, "trabalho")).toBeUndefined();
+    expect(probeForStep(a, "trabalho")?.id).toBe("insalubre");
   });
   it("pular ou não sei não grava fatos", () => {
     const a = recordProbe(rural(), probeForStep(rural(), "trabalho")!, "nao_sei", ["ccir_itr"]);
