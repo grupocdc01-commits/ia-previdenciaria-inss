@@ -1,3 +1,4 @@
+import { calendarDate } from "@/lib/document-dossier-schema";
 import { unionPeriodDays } from "@/lib/legal-registry";
 
 // Períodos informados pela pessoa ("declarado") ou lidos de documento revisado ("comprovado").
@@ -12,6 +13,7 @@ export type WorkPeriod = {
 
 const DAY = 86_400_000;
 export function toDay(iso: string) {
+  calendarDate.parse(iso);
   const t = Date.parse(iso + "T00:00:00Z");
   if (Number.isNaN(t)) throw new Error(`Data inválida: ${iso}`);
   return Math.floor(t / DAY);

@@ -29,7 +29,7 @@ class AnamnesisDatabaseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.container = os.environ.get("ANAMNESIS_TEST_CONTAINER", "")
-        if not re.fullmatch(r"inss-module2-[a-z0-9-]+", cls.container):
+        if not re.fullmatch(r"inss-module[23]-[a-z0-9-]+", cls.container):
             raise RuntimeError("Explicit disposable local test container required")
         info = json.loads(subprocess.check_output([*DOCKER, "inspect", cls.container], text=True))[0]
         if info["HostConfig"]["NetworkMode"] != "none" or info["HostConfig"].get("PortBindings"):

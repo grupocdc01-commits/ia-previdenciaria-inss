@@ -56,13 +56,14 @@ function Panel() {
     },
     {
       title: "3. Informações confirmadas",
-      text: "Nenhum fato foi confirmado por documento até agora.",
+      text: "Nenhum fato foi validado como prova jurídica. A conferência de campos pelo titular é registrada separadamente nos documentos.",
       kind: "nao_verificado",
-      uncertainty: "Documentos lidos ficam como “para revisar” até sua conferência.",
+      uncertainty:
+        "Conferir um campo não valida a autenticidade ou o valor probatório do documento.",
     },
     {
       title: "4. Possíveis inconsistências",
-      text: "Nenhuma inconsistência foi apontada, pois as regras legais ainda não foram aprovadas.",
+      text: "Divergências de datas e sobreposição de intervalos podem ser organizadas no relatório administrativo dos documentos. Requisitos jurídicos continuam sem conclusão.",
       kind: "sem_fonte",
       uncertainty: "Depende de revisão jurídica humana.",
     },

@@ -24,6 +24,7 @@ import { Route as ResultadoRouteImport } from './routes/resultado'
 import { Route as AuthenticatedInvestigacoesRouteImport } from './routes/_authenticated/investigacoes'
 import { Route as AuthenticatedPrivacidadeRouteImport } from './routes/_authenticated/privacidade'
 import { Route as ApiAnamneseRouteImport } from './routes/api/anamnese'
+import { Route as ApiDocumentDossierRouteImport } from './routes/api/document-dossier'
 import { Route as ApiInvestigationChatRouteImport } from './routes/api/investigation-chat'
 import { Route as ApiInvestigationTranscriptionRouteImport } from './routes/api/investigation-transcription'
 import { Route as ApiPrivateDocumentUploadRouteImport } from './routes/api/private-document-upload'
@@ -107,6 +108,11 @@ const ApiAnamneseRoute = ApiAnamneseRouteImport.update({
   path: '/api/anamnese',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiDocumentDossierRoute = ApiDocumentDossierRouteImport.update({
+  id: '/api/document-dossier',
+  path: '/api/document-dossier',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiInvestigationChatRoute = ApiInvestigationChatRouteImport.update({
   id: '/api/investigation-chat',
   path: '/api/investigation-chat',
@@ -158,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/investigacoes': typeof AuthenticatedInvestigacoesRoute
   '/privacidade': typeof AuthenticatedPrivacidadeRoute
   '/api/anamnese': typeof ApiAnamneseRoute
+  '/api/document-dossier': typeof ApiDocumentDossierRoute
   '/api/investigation-chat': typeof ApiInvestigationChatRoute
   '/api/investigation-transcription': typeof ApiInvestigationTranscriptionRoute
   '/api/private-document-upload': typeof ApiPrivateDocumentUploadRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/investigacoes': typeof AuthenticatedInvestigacoesRoute
   '/privacidade': typeof AuthenticatedPrivacidadeRoute
   '/api/anamnese': typeof ApiAnamneseRoute
+  '/api/document-dossier': typeof ApiDocumentDossierRoute
   '/api/investigation-chat': typeof ApiInvestigationChatRoute
   '/api/investigation-transcription': typeof ApiInvestigationTranscriptionRoute
   '/api/private-document-upload': typeof ApiPrivateDocumentUploadRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/_authenticated/investigacoes': typeof AuthenticatedInvestigacoesRoute
   '/_authenticated/privacidade': typeof AuthenticatedPrivacidadeRoute
   '/api/anamnese': typeof ApiAnamneseRoute
+  '/api/document-dossier': typeof ApiDocumentDossierRoute
   '/api/investigation-chat': typeof ApiInvestigationChatRoute
   '/api/investigation-transcription': typeof ApiInvestigationTranscriptionRoute
   '/api/private-document-upload': typeof ApiPrivateDocumentUploadRoute
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/investigacoes'
     | '/privacidade'
     | '/api/anamnese'
+    | '/api/document-dossier'
     | '/api/investigation-chat'
     | '/api/investigation-transcription'
     | '/api/private-document-upload'
@@ -250,6 +260,7 @@ export interface FileRouteTypes {
     | '/investigacoes'
     | '/privacidade'
     | '/api/anamnese'
+    | '/api/document-dossier'
     | '/api/investigation-chat'
     | '/api/investigation-transcription'
     | '/api/private-document-upload'
@@ -273,6 +284,7 @@ export interface FileRouteTypes {
     | '/_authenticated/investigacoes'
     | '/_authenticated/privacidade'
     | '/api/anamnese'
+    | '/api/document-dossier'
     | '/api/investigation-chat'
     | '/api/investigation-transcription'
     | '/api/private-document-upload'
@@ -295,6 +307,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResultadoRoute: typeof ResultadoRoute
   ApiAnamneseRoute: typeof ApiAnamneseRoute
+  ApiDocumentDossierRoute: typeof ApiDocumentDossierRoute
   ApiInvestigationChatRoute: typeof ApiInvestigationChatRoute
   ApiInvestigationTranscriptionRoute: typeof ApiInvestigationTranscriptionRoute
   ApiPrivateDocumentUploadRoute: typeof ApiPrivateDocumentUploadRoute
@@ -408,6 +421,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnamneseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/document-dossier': {
+      id: '/api/document-dossier'
+      path: '/api/document-dossier'
+      fullPath: '/api/document-dossier'
+      preLoaderRoute: typeof ApiDocumentDossierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/investigation-chat': {
       id: '/api/investigation-chat'
       path: '/api/investigation-chat'
@@ -498,6 +518,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   ResultadoRoute: ResultadoRoute,
   ApiAnamneseRoute: ApiAnamneseRoute,
+  ApiDocumentDossierRoute: ApiDocumentDossierRoute,
   ApiInvestigationChatRoute: ApiInvestigationChatRoute,
   ApiInvestigationTranscriptionRoute: ApiInvestigationTranscriptionRoute,
   ApiPrivateDocumentUploadRoute: ApiPrivateDocumentUploadRoute,

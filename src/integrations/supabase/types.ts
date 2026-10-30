@@ -150,8 +150,49 @@ export type Database = {
         };
         Relationships: [];
       };
+      document_field_reviews: {
+        Row: {
+          document_id: string;
+          revision: number;
+          user_id: string;
+          sha256: string;
+          extraction_version: string;
+          decisions: Json;
+          created_at: string;
+        };
+        Insert: {
+          document_id: string;
+          revision: number;
+          user_id: string;
+          sha256: string;
+          extraction_version: string;
+          decisions: Json;
+          created_at?: string;
+        };
+        Update: {
+          document_id?: string;
+          revision?: number;
+          user_id?: string;
+          sha256?: string;
+          extraction_version?: string;
+          decisions?: Json;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "document_field_reviews_document_id_fkey";
+            columns: ["document_id"];
+            isOneToOne: false;
+            referencedRelation: "previdenciary_documents";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       previdenciary_documents: {
         Row: {
+          review_revision: number;
+          administrative_review: Json | null;
+          reviewed_at: string | null;
           byte_size: number;
           created_at: string;
           delete_after: string | null;
@@ -171,6 +212,9 @@ export type Database = {
           user_id: string;
         };
         Insert: {
+          review_revision?: number;
+          administrative_review?: Json | null;
+          reviewed_at?: string | null;
           byte_size: number;
           created_at?: string;
           delete_after?: string | null;
@@ -190,6 +234,9 @@ export type Database = {
           user_id: string;
         };
         Update: {
+          review_revision?: number;
+          administrative_review?: Json | null;
+          reviewed_at?: string | null;
           byte_size?: number;
           created_at?: string;
           delete_after?: string | null;
@@ -313,6 +360,17 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      review_document_fields: {
+        Args: {
+          p_document: string;
+          p_sha256: string;
+          p_extraction_version: string;
+          p_expected_revision: number;
+          p_extraction: Json;
+          p_decisions: Json;
+        };
+        Returns: Json;
+      };
       commit_anamnesis_turn: {
         Args: {
           p_investigation: string;

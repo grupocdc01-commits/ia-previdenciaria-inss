@@ -1,3 +1,5 @@
+import type { ReviewRequest, DossierRequest } from "@/lib/document-dossier-schema";
+import type { DocumentDossier } from "./document-dossier.server";
 import { DefaultChatTransport } from "ai";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
@@ -12,6 +14,7 @@ import {
 } from "./investigation.functions";
 import { ApiError, type CaseAdapter, type Analysis, type Job } from "./types";
 import {
+  documentModuleStatus,
   privateProcessingStatus,
   saveProcessingPreferences,
   validateGeminiModels,
@@ -35,11 +38,27 @@ export class CloudCaseAdapter implements CaseAdapter {
       throw new Error(result.error ?? "Não foi possível salvar sua resposta.");
     return result;
   }
+  async documentModule(input: ReviewRequest | DossierRequest) {
+    const response = await fetch("/api/document-dossier", {
+      method: "POST",
+      headers: { ...(await this.headers()), "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    });
+    const result = (await response.json()) as {
+      ok?: boolean;
+      dossier?: DocumentDossier;
+      error?: string;
+    };
+    if (!response.ok || !result.ok)
+      throw new Error(result.error ?? "Não foi possível concluir a conferência.");
+    return result;
+  }
   list = listInvestigations;
   create = createInvestigation;
   get = getInvestigation;
   panel = getInvestigationPanel;
   skipDocuments = skipDocuments;
+  documentModuleStatus = documentModuleStatus;
   processingStatus = privateProcessingStatus;
   savePreferences = saveProcessingPreferences;
   validateModels = validateGeminiModels;

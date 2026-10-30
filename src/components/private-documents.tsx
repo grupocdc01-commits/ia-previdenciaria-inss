@@ -1,3 +1,5 @@
+import { DocumentFieldReview } from "./document-field-review";
+import { DocumentDossier } from "./document-dossier";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 import { Eye, Trash2, FileSearch, Paperclip } from "lucide-react";
@@ -15,7 +17,14 @@ export function PrivateDocuments({ threadId }: { threadId: string }) {
     queryKey: ["previdenciary-documents", threadId],
     queryFn: () => cloudAdapter.privateDocuments({ data: { id: threadId } }),
   });
+  const moduleStatus = useQuery({
+    queryKey: ["document-module-status"],
+    queryFn: () => cloudAdapter.documentModuleStatus(),
+  });
+  const running = useRef(false);
   const action = async (fn: () => Promise<unknown>) => {
+    if (running.current) return;
+    running.current = true;
     setBusy(true);
     setNotice("");
     try {
@@ -24,6 +33,7 @@ export function PrivateDocuments({ threadId }: { threadId: string }) {
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível concluir.");
     } finally {
+      running.current = false;
       setBusy(false);
     }
   };
@@ -71,7 +81,12 @@ export function PrivateDocuments({ threadId }: { threadId: string }) {
       {query.error && <p role="alert">Não foi possível carregar os novos documentos.</p>}
       <ul className="mt-3 divide-y divide-border">
         {query.data?.map((doc) => {
-          const parsed = doc.extraction ? safeExtraction(doc.extraction) : null;
+          let parsed: ReturnType<typeof safeExtraction> | null = null;
+          try {
+            parsed = doc.extraction ? safeExtraction(doc.extraction) : null;
+          } catch {
+            /* Malformed legacy extraction stays unavailable. */
+          }
           return (
             <li key={doc.id} className="py-3">
               <div className="flex flex-wrap items-center gap-2">
@@ -122,7 +137,7 @@ export function PrivateDocuments({ threadId }: { threadId: string }) {
                   Exclusão prevista: {new Date(doc.delete_after).toLocaleDateString("pt-BR")}
                 </p>
               )}
-              {!parsed && (
+              {!doc.extraction && (
                 <Button
                   variant="outline"
                   className="mt-2"
@@ -138,6 +153,12 @@ export function PrivateDocuments({ threadId }: { threadId: string }) {
                   <FileSearch />
                   Ler dados administrativos
                 </Button>
+              )}
+              {doc.extraction && !parsed && (
+                <p role="alert">
+                  Extração inválida; conferência indisponível. O arquivo original permanece
+                  separado.
+                </p>
               )}
               {parsed && (
                 <details className="mt-2">
@@ -165,10 +186,28 @@ export function PrivateDocuments({ threadId }: { threadId: string }) {
                   ))}
                 </details>
               )}
+              {parsed && moduleStatus.data?.enabled && (
+                <DocumentFieldReview
+                  key={`${doc.id}-${doc.review_revision}`}
+                  document={doc}
+                  onSaved={() =>
+                    client.invalidateQueries({ queryKey: ["previdenciary-documents", threadId] })
+                  }
+                />
+              )}
             </li>
           );
         })}
       </ul>
+      {moduleStatus.data?.enabled && query.data && (
+        <DocumentDossier key={threadId} threadId={threadId} documents={query.data} />
+      )}
+      {!moduleStatus.data?.enabled && (
+        <p className="mt-3 text-sm">
+          Conferência e relatório administrativo aguardam habilitação neste ambiente. O envio
+          continua opcional.
+        </p>
+      )}
       {notice && (
         <p role="status" className="mt-3">
           {notice}

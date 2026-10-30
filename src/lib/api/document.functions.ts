@@ -9,6 +9,10 @@ import {
 } from "@/lib/document-policy";
 
 const idSchema = z.object({ id: z.string().uuid() });
+export const documentModuleStatus = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async () => ({ enabled: process.env["DOCUMENT_DOSSIER_ENABLED"] === "true" }));
+
 export const privateProcessingStatus = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
